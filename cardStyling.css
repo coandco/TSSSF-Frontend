@@ -1,0 +1,80 @@
+@font-face {
+    font-family: Barthowheel;
+    src:resources/fonts/Barth_Regular.ttf;
+}
+
+@font-face {
+    font-family: LinLibertine;
+    src:resources/fonts/LinLibertine_RI.ttf;
+}
+
+@font-face {
+    font-family: Ubahn-newpony;
+    src: Ubahn_newpony.ttf;
+}
+
+.card {
+    width:calc(788px / 3);
+    height:calc(1088px / 3);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position:relative;
+}
+
+.card.pony {
+    background-image:url('resources/templates/Blank-Pony.png');    
+}
+
+.card .icon1,.card .icon2 {
+    position:absolute;
+    left: calc(100% * 58/788);
+    top:  calc(100% * 56/1088);
+    width: calc(100% * 104/778);
+    height: calc(100% * 104/1088);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.card.pony .icon1 option{
+    line-height:1em;
+    background-size:1em 1em;
+    background-repeat:no-repeat;
+}
+
+.card.pony .icon1 option[Value=Female], .card.pony.female .icon1{
+    background-image:url('resources/symbols/Symbol-Female.png');
+}
+
+.card.pony .icon1 option[Value=Male] {
+    background-image:url('resources/symbols/Symbol-male.png');
+}
+
+.card.pony .icon1 option[Value=MaleFemale] {
+    background-image:url('resources/symbols/Symbol-MaleFemale.png');
+}
+
+.card .icon2 {
+    top:  calc(100% * 160/1088);
+}
+.card.pony.unicorn .icon2 {
+    background-image:url('resources/symbols/Symbol-Unicorn.png');
+}
+.card.pony.earthPony .icon2 {
+    background-image:url('resources/symbols/Symbol-Earth-Pony.png');
+}
+.card.pony.pegasus .icon2 {
+    background-image:url('resources/symbols/Symbol-Pegasus.png');
+}
+.card.pony.alicorn .icon2 {
+    background-image:url('resources/symbols/Symbol-Aliconrn.png');
+}
+
+.card .image {
+    position:absolute;
+    left: calc(100% * 127/788);
+    top:  calc(100% * 165/1088);
+    width: calc(100% * 600/778);
+    height: calc(100% * 442/1088);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
