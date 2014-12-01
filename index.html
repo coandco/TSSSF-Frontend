@@ -1,23 +1,41 @@
 <html>
     <head>
         <title>TSSSFF Card Generator</title>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="cardStyling.css" rel="stylesheet">
+
+        <script>
+            $(document).ready(function(){
+                $("input").change(function(){
+                    $("input[name="+$(this).attr("name")+"]").each(function(){
+                        $(".card").removeClass($(this).attr("value"));
+                    })
+                    $(".card").addClass($(this).attr("value"));
+                });
+            });
+        </script>
+
     </head>
     <body>
-        
         <header>
         </header>
         <main>
             <div class="card pony female unicorn">
                 <div class="image"></div>
-                <select class="icon1">
-                    <option value="Male"></option>
-                    <option value="Female"></option>
-                    <option value="MaleFemale"></option>
-                </select>
+                <div class="icon1"></div>
                 <div class="icon2"></div>
+            </div>
+            <div>
+                <label><input type="radio" name="gender" value="female" checked="true"/>Female</label>
+                <label><input type="radio" name="gender" value="male"/>Male</label>
+                <label><input type="radio" name="gender" value="malefemale"/>Male &amp; Female</label>
+                </br>
+                <label><input type="radio" name="race" value="unicorn"/>Unicorn</label>
+                <label><input type="radio" name="race" value="pegasus"/>Pegasus</label>
+                <label><input type="radio" name="race" value="earthpony"/>Earth Pony</label>
+                <label><input type="radio" name="race" value="alicorn"/>Alicorn</label>
+                
             </div>
         </main>
         <footer>

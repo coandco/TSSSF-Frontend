@@ -35,21 +35,16 @@
     background-repeat: no-repeat;
 }
 
-.card.pony .icon1 option{
-    line-height:1em;
-    background-size:1em 1em;
-    background-repeat:no-repeat;
-}
 
-.card.pony .icon1 option[Value=Female], .card.pony.female .icon1{
+.card.pony.female .icon1{
     background-image:url('resources/symbols/Symbol-Female.png');
 }
 
-.card.pony .icon1 option[Value=Male] {
+.card.pony.male .icon1 {
     background-image:url('resources/symbols/Symbol-male.png');
 }
 
-.card.pony .icon1 option[Value=MaleFemale] {
+.card.pony.maleFemale .icon1 {
     background-image:url('resources/symbols/Symbol-MaleFemale.png');
 }
 
@@ -66,7 +61,7 @@
     background-image:url('resources/symbols/Symbol-Pegasus.png');
 }
 .card.pony.alicorn .icon2 {
-    background-image:url('resources/symbols/Symbol-Aliconrn.png');
+    background-image:url('resources/symbols/Symbol-Alicorn.png');
 }
 
 .card .image {
