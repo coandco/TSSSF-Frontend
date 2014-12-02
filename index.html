@@ -53,10 +53,15 @@
                     $(".card .effect").val(decodeURIComponent(inputValues[3]))
                     $(".card .flavour").val(decodeURIComponent(inputValues[4]))
                     $("#image").val(decodeURIComponent(inputValues[5]))
+
+                    $("input[type=radio]").change();
+                    $("#image").change();
                 }
 
                 $(window).resize();
                 $(".card textarea").change();
+                
+
             });
         </script>
 
