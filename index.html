@@ -7,12 +7,56 @@
 
         <script>
             $(document).ready(function(){
-                $("input").change(function(){
+                $("input[type=radio]").change(function(){
                     $("input[name="+$(this).attr("name")+"]").each(function(){
                         $(".card").removeClass($(this).attr("value"));
                     })
                     $(".card").addClass($(this).attr("value"));
                 });
+
+                $(window).resize(function(){
+                    var f = Math.min(($(window).height()-16)/1088,($(window).width()-16)/788);
+                    $(".card").css("-webkit-transform","scale("+f+")")
+                    $(".cardwrapper").width(788*f);
+                });
+
+                $(".card textarea").on("change keyup paste",function(){
+                    var t = $(this),
+                        o = $(".cardHelper ." + t.attr("class"));
+                    o.text(t.val());
+                    t.height(o.height());
+                });
+
+                $("#image").change(function(){
+                    $(".card .image").css("background-image","url('"+$(this).val()+"')")
+                })
+
+                $("input textarea").change(function(){
+                    document.location.hash =
+                        encodeURIComponent($(".card").attr("class").replace(/card ?/,""))+"/"+
+                        encodeURIComponent($(".card .name").val())+"/"+
+                        encodeURIComponent($(".card .attrs").val())+"/"+
+                        encodeURIComponent($(".card .effect").val())+"/"+
+                        encodeURIComponent($(".card .flavour").val())+"/"+
+                        encodeURIComponent($("#image").val())
+                })
+
+                var inputValues = document.location.hash.substr("1").split("/");
+                console.log(inputValues);
+
+                if (inputValues.length == 6){
+                    $.each(decodeURIComponent(inputValues[0]).split(" "),function(i,n){
+                        $("input[value="+n+"]").prop("checked",true);
+                    })
+                    $(".card .name").val(decodeURIComponent(inputValues[1]))
+                    $(".card .attrs").val(decodeURIComponent(inputValues[2]))
+                    $(".card .effect").val(decodeURIComponent(inputValues[3]))
+                    $(".card .flavour").val(decodeURIComponent(inputValues[4]))
+                    $("#image").val(decodeURIComponent(inputValues[5]))
+                }
+
+                $(window).resize();
+                $(".card textarea").change();
             });
         </script>
 
@@ -29,18 +73,27 @@
                     "></div>
                     <div class="icon1"></div>
                     <div class="icon2"></div>
-                    <textarea class="effect">Different Socks (Special): This card counts as * for all goals and ; for all other card effects. If gender swapped this card counts as * for both.</textarea>
+                    <input type="text" class="attrs" value="BG Pony, Transgender, Snails"/>
+                    <textarea class="effect">Different Socks (Special): This card counts as * for all goals and ; for all other card effects. Whilst gender swapped this card counts as * for both.</textarea>
+                    <textarea class="flavour">I am different... It's like I'm wearing two different socks: one orange, one purple. My biggest secret is sometimes like to put a purple sock on over the orange. It's nice because I can smile at myself, but at the same time I know I'm just covering the orange one.
+- Matching</textarea>
                 </div>
+            </div>
+            <div class="cardHelper">
+                <div class="effect"></div>
+                <div class="flavour"></div>
             </div>
             <div class="controls">
                 <label><input type="radio" name="gender" value="female"/>Female</label>
                 <label><input type="radio" name="gender" value="male"/>Male</label>
                 <label><input type="radio" name="gender" value="malefemale" checked="true"/>Male &amp; Female</label>
-                </br>
+                <br/>
                 <label><input type="radio" name="race" value="unicorn" checked="true"/>Unicorn</label>
                 <label><input type="radio" name="race" value="pegasus"/>Pegasus</label>
                 <label><input type="radio" name="race" value="earthpony"/>Earth Pony</label>
                 <label><input type="radio" name="race" value="alicorn"/>Alicorn</label>
+                <br/>
+                <input type="text" id="image"/>
             </div>
         </main>
         <footer>
