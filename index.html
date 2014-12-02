@@ -12,7 +12,9 @@
                     $("input[name="+$(this).attr("name")+"]").each(function(){
                         $(".card").removeClass($(this).attr("value"));
                     })
-                    $(".card").addClass($(this).attr("value"));
+                    if ($(this).prop("checked")){
+                        $(".card").addClass($(this).attr("value"));
+                    }
                 });
 
                 $(window).resize(function(){
@@ -56,7 +58,7 @@
                     $(".card .flavour").val(decodeURIComponent(inputValues[4]))
                     $("#image").val(decodeURIComponent(inputValues[5]))
 
-                    $("input[type=radio]").change();
+                    $("input[type=radio]:checked").change();
                     $("#image").change();
                 }
 
@@ -72,7 +74,7 @@
         
         <main>
             <div class="cardwrapper">
-                <div class="card pony malefemale unicorn">
+                <div class="card pony maleFemale unicorn">
                     <input type="text" class="name" value="Glitter Shell"/>
                     <div class="image" style="
                         background-image: url('https://derpicdn.net/img/2013/9/30/438807/large.png');
@@ -97,14 +99,14 @@
                 </header>
                 <label><input type="radio" name="gender" value="female"/>Female</label>
                 <label><input type="radio" name="gender" value="male"/>Male</label>
-                <label><input type="radio" name="gender" value="malefemale" checked="true"/>Male &amp; Female</label>
+                <label><input type="radio" name="gender" value="maleFemale" checked="true"/>Male &amp; Female</label>
                 <br/>
                 <label><input type="radio" name="race" value="unicorn" checked="true"/>Unicorn</label>
                 <label><input type="radio" name="race" value="pegasus"/>Pegasus</label>
-                <label><input type="radio" name="race" value="earthpony"/>Earth Pony</label>
+                <label><input type="radio" name="race" value="earthPony"/>Earth Pony</label>
                 <label><input type="radio" name="race" value="alicorn"/>Alicorn</label>
                 <br/>
-                <label>Image (URL)<input type="text" id="image" value="https://derpicdn.net/img/2013/9/30/438807/large.png"/></label>
+                <label>Image (URL): <input type="text" id="image" value="https://derpicdn.net/img/2013/9/30/438807/large.png"/></label>
             </div>
         </main>
         <footer>
