@@ -13,6 +13,16 @@
     src: url('resources/fonts/Ubahn_newpony.ttf');
 }
 
+html,body{
+    overflow-x:hidden;
+}
+
+.clearAfter::after {
+    content:"";
+    display:block;
+    clear:both;
+}
+
 .card input[type=text], .card textarea{
     margin:0;
     padding:0;

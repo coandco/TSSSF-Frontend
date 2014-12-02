@@ -5,6 +5,7 @@
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="cardStyling.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script>
             $(document).ready(function(){
@@ -18,8 +19,18 @@
                 });
 
                 $(window).resize(function(){
-                    var f = Math.min(($(window).height()-16)/1088,($(window).width()-16)/788);
+                    var hf = ($(window).height()-16)/1088,
+                        wf = ($(window).width()-516)/788
+                        f = Math.min(wf,hf);
+                    
+                    console.log(wf,hf);
+                    if (wf < 0.3){
+                        hf = ($(window).height()-216)/1088;
+                        wf = ($(window).width()-16)/788;
+                        f = Math.min(wf,hf);
+                    }
                     $(".card").css("transform","scale("+f+")")
+                    
                     $(".cardwrapper").width(788*f);
                     $(".cardwrapper").height(1088*f);
                 });
@@ -72,7 +83,7 @@
     </head>
     <body>
         
-        <main>
+        <main class="clearAfter">
             <div class="cardwrapper">
                 <div class="card pony maleFemale unicorn">
                     <input type="text" class="name" value="Glitter Shell"/>
