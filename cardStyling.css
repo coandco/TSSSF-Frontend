@@ -1,24 +1,43 @@
 @font-face {
     font-family: Barthowheel;
-    src:resources/fonts/Barth_Regular.ttf;
+    src: url('resources/fonts/Barth_Regular.ttf');
 }
 
 @font-face {
     font-family: LinLibertine;
-    src:resources/fonts/LinLibertine_RI.ttf;
+    src: url('resources/fonts/LinLibertine_RI.ttf');
 }
 
 @font-face {
     font-family: Ubahn-newpony;
-    src: Ubahn_newpony.ttf;
+    src: url('resources/fonts/Ubahn_newpony.ttf');
+}
+
+.card input[type=text], .card textarea{
+    margin:0;
+    padding:0;
+    border:none;
+    background:transparent;
+}
+
+.cardWrapper {
+    width: calc(788px / 3);
+    height: calc(1088px / 3);
+    float:left;
+}
+
+.controls {
+    float:left;
 }
 
 .card {
-    width:calc(788px / 3);
-    height:calc(1088px / 3);
+    width: 788px;
+    height: 1088px;
     background-size: contain;
     background-repeat: no-repeat;
     position:relative;
+    -webkit-transform-origin:0 0;
+    /*-webkit-transform:scale(0.3);*/
 }
 
 .card.pony {
@@ -27,10 +46,10 @@
 
 .card .icon1,.card .icon2 {
     position:absolute;
-    left: calc(100% * 58/788);
-    top:  calc(100% * 56/1088);
-    width: calc(100% * 104/778);
-    height: calc(100% * 104/1088);
+    left: 58px;
+    top: 56px;
+    width: 104px;
+    height: 104px;
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -49,7 +68,7 @@
 }
 
 .card .icon2 {
-    top:  calc(100% * 160/1088);
+    top: 160px;
 }
 .card.pony.unicorn .icon2 {
     background-image:url('resources/symbols/Symbol-Unicorn.png');
@@ -66,10 +85,36 @@
 
 .card .image {
     position:absolute;
-    left: calc(100% * 127/788);
-    top:  calc(100% * 165/1088);
-    width: calc(100% * 600/778);
-    height: calc(100% * 442/1088);
-    background-size: contain;
+    left: 123px;
+    top:  164px;
+    width: 600px;
+    height: 442px;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
+}
+
+.card .name {
+    position:absolute;
+    bottom: 952px;
+    right: 66px;
+    font-family: Barthowheel;
+    text-align: right;
+    font-size:55px;
+    color:#462c89;
+}
+
+.card .effect {
+    position: absolute;
+    top: 679px;
+    left: 50px;
+    width: 688px;
+    height: 5em;
+    font-family: Ubahn-newpony;
+    text-align: center;
+    font-size: 41px;
+    color: #462c89;
+    line-height: 44px;
+    overflow:hidden;
+    resize:vertical;
 }

@@ -21,21 +21,26 @@
         <header>
         </header>
         <main>
-            <div class="card pony female unicorn">
-                <div class="image"></div>
-                <div class="icon1"></div>
-                <div class="icon2"></div>
+            <div class="cardwrapper">
+                <div class="card pony malefemale unicorn">
+                    <input type="text" class="name" value="Glitter Shell"/>
+                    <div class="image" style="
+                        background-image: url('https://derpicdn.net/img/2013/9/30/438807/large.png');
+                    "></div>
+                    <div class="icon1"></div>
+                    <div class="icon2"></div>
+                    <textarea class="effect">Different Socks (Special): This card counts as * for all goals and ; for all other card effects. If gender swapped this card counts as * for both.</textarea>
+                </div>
             </div>
-            <div>
-                <label><input type="radio" name="gender" value="female" checked="true"/>Female</label>
+            <div class="controls">
+                <label><input type="radio" name="gender" value="female"/>Female</label>
                 <label><input type="radio" name="gender" value="male"/>Male</label>
-                <label><input type="radio" name="gender" value="malefemale"/>Male &amp; Female</label>
+                <label><input type="radio" name="gender" value="malefemale" checked="true"/>Male &amp; Female</label>
                 </br>
-                <label><input type="radio" name="race" value="unicorn"/>Unicorn</label>
+                <label><input type="radio" name="race" value="unicorn" checked="true"/>Unicorn</label>
                 <label><input type="radio" name="race" value="pegasus"/>Pegasus</label>
                 <label><input type="radio" name="race" value="earthpony"/>Earth Pony</label>
                 <label><input type="radio" name="race" value="alicorn"/>Alicorn</label>
-                
             </div>
         </main>
         <footer>
