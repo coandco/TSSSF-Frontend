@@ -21,14 +21,20 @@
     resize: none;
 }
 
-.cardWrapper {
-    width: calc(788px / 3);
-    height: calc(1088px / 3);
+.cardwrapper {
     float:left;
+    margin-right:8px;
 }
 
 .controls {
     float:left;
+    font-family: LinLibertine;
+}
+
+header {
+    font-weight:bold;
+    font-family: Barthowheel;
+    font-size:1.5em;
 }
 
 .card {
@@ -38,7 +44,8 @@
     background-repeat: no-repeat;
     position:relative;
     -webkit-transform-origin:0 0;
-    -webkit-transform:scale(0.3);
+    -ms-transform-origin:0 0;
+    transform-origin:0 0;
 }
 
 .card.pony {

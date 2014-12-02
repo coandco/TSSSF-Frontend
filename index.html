@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
     <head>
         <title>TSSSFF Card Generator</title>
@@ -16,8 +17,9 @@
 
                 $(window).resize(function(){
                     var f = Math.min(($(window).height()-16)/1088,($(window).width()-16)/788);
-                    $(".card").css("-webkit-transform","scale("+f+")")
+                    $(".card").css("transform","scale("+f+")")
                     $(".cardwrapper").width(788*f);
+                    $(".cardwrapper").height(1088*f);
                 });
 
                 $(".card textarea").on("change keyup paste",function(){
@@ -67,8 +69,7 @@
 
     </head>
     <body>
-        <header>
-        </header>
+        
         <main>
             <div class="cardwrapper">
                 <div class="card pony malefemale unicorn">
@@ -89,6 +90,11 @@
                 <div class="flavour"></div>
             </div>
             <div class="controls">
+                <header>
+                    This tool is still in beta.</br>
+                    Report all bugs to <a href="https://twitter.com/Ripp_">@Ripp_</a></br>
+                    Feel free to check out the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a>
+                </header>
                 <label><input type="radio" name="gender" value="female"/>Female</label>
                 <label><input type="radio" name="gender" value="male"/>Male</label>
                 <label><input type="radio" name="gender" value="malefemale" checked="true"/>Male &amp; Female</label>
@@ -98,7 +104,7 @@
                 <label><input type="radio" name="race" value="earthpony"/>Earth Pony</label>
                 <label><input type="radio" name="race" value="alicorn"/>Alicorn</label>
                 <br/>
-                <input type="text" id="image"/>
+                <label>Image (URL)<input type="text" id="image" value="https://derpicdn.net/img/2013/9/30/438807/large.png"/></label>
             </div>
         </main>
         <footer>
