@@ -37,7 +37,7 @@
     background-repeat: no-repeat;
     position:relative;
     -webkit-transform-origin:0 0;
-    /*-webkit-transform:scale(0.3);*/
+    -webkit-transform:scale(0.3);
 }
 
 .card.pony {
