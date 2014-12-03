@@ -58,11 +58,7 @@ header {
     transform-origin:0 0;
 }
 
-.card.pony {
-    background-image:url('resources/templates/Blank-Pony.png');    
-}
-
-.card .icon1,.card .icon2 {
+.card .iconGender,.card .iconRace,.card .iconShip {
     position:absolute;
     left: 58px;
     top: 56px;
@@ -72,33 +68,61 @@ header {
     background-repeat: no-repeat;
 }
 
+/*Pony Cards*/
+.card.pony {
+    background-image:url('resources/templates/Blank-Pony.png');    
+}
 
-.card.pony.female .icon1{
+.card.pony.female .iconGender{
     background-image:url('resources/symbols/Symbol-Female.png');
 }
 
-.card.pony.male .icon1 {
+.card.pony.male .iconGender {
     background-image:url('resources/symbols/Symbol-male.png');
 }
 
-.card.pony.maleFemale .icon1 {
+.card.pony.maleFemale .iconGender {
     background-image:url('resources/symbols/Symbol-MaleFemale.png');
 }
 
-.card .icon2 {
+.card .iconRace {
     top: 160px;
 }
-.card.pony.unicorn .icon2 {
+.card.pony.unicorn .iconRace {
     background-image:url('resources/symbols/Symbol-Unicorn.png');
 }
-.card.pony.earthPony .icon2 {
+.card.pony.earthPony .iconRace {
     background-image:url('resources/symbols/Symbol-Earth-Pony.png');
 }
-.card.pony.pegasus .icon2 {
+.card.pony.pegasus .iconRace {
     background-image:url('resources/symbols/Symbol-Pegasus.png');
 }
-.card.pony.alicorn .icon2 {
+.card.pony.alicorn .iconRace {
     background-image:url('resources/symbols/Symbol-Alicorn.png');
+}
+.card.pony .name,.card.pony .effect {
+    color:#462c89
+}
+.card.pony .flavour {
+    color: #190233;
+}
+
+/*Ship Cards*/
+.card.ship {
+    background-image:url('resources/templates/Blank-Ship.png');    
+}
+.card.ship .name,.card.ship .effect {
+    color:#ce1b69;
+}
+.card.ship .flavour {
+    color: #811935;
+}
+.card.ship .attrs {
+    display:none;
+}
+.card.ship .iconShip { /*This is bad form*/
+    top:86px;
+    background-image:url('resources/symbols/Symbol-Ship.png');
 }
 
 .card .image {
@@ -119,7 +143,6 @@ header {
     font-family: Barthowheel;
     text-align: right;
     font-size:55px;
-    color:#462c89;
     width:555px;
 }
 
@@ -143,7 +166,6 @@ header {
     font-family: Ubahn-newpony;
     text-align: center;
     font-size: 41px;
-    color: #462c89;
     line-height: 44px;
     overflow:hidden;
 }
@@ -168,7 +190,6 @@ header {
     font-family: LinLibertine;
     text-align: center;
     font-size: 29px;
-    color: #190233;
     line-height: 32px;
     overflow: hidden;
 }
