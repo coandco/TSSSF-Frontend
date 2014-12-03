@@ -58,7 +58,7 @@ header {
     transform-origin:0 0;
 }
 
-.card .iconGender,.card .iconRace,.card .iconShip {
+.card .iconGender,.card .iconRace,.card .iconCard {
     position:absolute;
     left: 58px;
     top: 56px;
@@ -67,37 +67,40 @@ header {
     background-size: contain;
     background-repeat: no-repeat;
 }
+.card .iconCard{
+    top:86px;
+}
 
-/*Pony Cards*/
+/*Pony/Start Cards*/
 .card.pony {
     background-image:url('resources/templates/Blank-Pony.png');    
 }
 
-.card.pony.female .iconGender{
+.card.pony.female .iconGender, .card.start.female .iconGender {
     background-image:url('resources/symbols/Symbol-Female.png');
 }
 
-.card.pony.male .iconGender {
+.card.pony.male .iconGender, .card.start.male .iconGender {
     background-image:url('resources/symbols/Symbol-male.png');
 }
 
-.card.pony.maleFemale .iconGender {
+.card.pony.maleFemale .iconGender, .card.start.maleFemale .iconGender {
     background-image:url('resources/symbols/Symbol-MaleFemale.png');
 }
 
 .card .iconRace {
     top: 160px;
 }
-.card.pony.unicorn .iconRace {
+.card.pony.unicorn .iconRace, .card.start.unicorn .iconRace {
     background-image:url('resources/symbols/Symbol-Unicorn.png');
 }
-.card.pony.earthPony .iconRace {
+.card.pony.earthPony .iconRace, .card.start.earthPony .iconRace {
     background-image:url('resources/symbols/Symbol-Earth-Pony.png');
 }
-.card.pony.pegasus .iconRace {
+.card.pony.pegasus .iconRace, .card.start.pegasus .iconRace {
     background-image:url('resources/symbols/Symbol-Pegasus.png');
 }
-.card.pony.alicorn .iconRace {
+.card.pony.alicorn .iconRace, .card.start.alicorn .iconRace {
     background-image:url('resources/symbols/Symbol-Alicorn.png');
 }
 .card.pony .name,.card.pony .effect {
@@ -106,6 +109,21 @@ header {
 .card.pony .flavour {
     color: #190233;
 }
+
+/*Start Cards*/
+.card.start {
+    background-image:url('resources/templates/Blank-Start.png');    
+}
+.card.start .name,.card.ship .effect {
+    color:#3a3235;
+}
+.card.start .flavour {
+    color: #211b1d;
+}
+.card.start .attrs {
+    color: #edefee;
+}
+
 
 /*Ship Cards*/
 .card.ship {
@@ -120,10 +138,30 @@ header {
 .card.ship .attrs {
     display:none;
 }
-.card.ship .iconShip { /*This is bad form*/
-    top:86px;
+.card.ship .iconCard {
     background-image:url('resources/symbols/Symbol-Ship.png');
 }
+
+/*Goal Cards*/
+.card.goal {
+    background-image:url('resources/templates/Blank-Goal.png'); 
+}
+.card.goal .name,.card.goal .effect {
+    color:#123962;
+}
+.card.goal .attrs {
+    display:none;
+}
+.card.goal .flavour {
+    color:#172640;
+}
+.card.goal .iconCard {
+    background-image:url('resources/symbols/Symbol-Goal.png');
+}
+
+/*Start Cards*/
+
+
 
 .card .image {
     position:absolute;
