@@ -39,12 +39,17 @@ html,body{
 .controls {
     float:left;
     font-family: LinLibertine;
+    margin-bottom:1em;
 }
 
 header {
     font-weight:bold;
     font-family: Barthowheel;
     font-size:1.5em;
+}
+
+footer {
+    font-size:0.7em;
 }
 
 .card {
