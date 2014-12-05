@@ -8,6 +8,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script>
+            function load(id){
+                $.get("https://sucs.org/~ripp_/TSSSFF-Generator/dbInterface.php",{"id":id},function(r){
+                    console.log("LOAD:",r);
+                })
+            }
+            
+            function save(id){
+                $.get("https://sucs.org/~ripp_/TSSSFF-Generator/dbInterface.php",{
+                    classes:$(".card").attr("class"),
+                    name:$(".card .name").val(),
+                    attr:$(".card .attr").val(),
+                    effect:$(".card .effect").val(),
+                    flavour:$(".card .flavour").val(),
+                    image:$("#image").val()
+                },function(r){
+                    console.log("SAVE:",r);
+                })
+            }
+            
+            
             $(document).ready(function(){
                 $("input[type=radio]").change(function(){
                     $("input[name="+$(this).attr("name")+"]").each(function(){
