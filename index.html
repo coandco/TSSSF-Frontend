@@ -9,13 +9,25 @@
 
         <script>
             function load(id){
-                $.get("https://sucs.org/~ripp_/TSSSFF-Generator/dbInterface.php",{"id":id},function(r){
-                    console.log("LOAD:",r);
+                $.get("dbInterface.php",{"id":id},function(r){
+                    var d = JSON.parse(r);
+                    $.each(d[1].split(" "),function(i,n){
+                        $("input[value="+n+"]").prop("checked",true);
+                    })
+                    $(".card .name").val(d[2]);
+                    $(".card .attrs").val(d[3]);
+                    $(".card .effect").val(d[4]);
+                    $(".card .flavour").val(d[5]);
+                    $("#image").val(d[6]);
+                    
+                    $("input[type=radio]:checked").change();
+                    $("#image").change();
+                    $(".card textarea").change();
                 })
             }
             
             function save(id){
-                $.get("https://sucs.org/~ripp_/TSSSFF-Generator/dbInterface.php",{
+                $.post("dbInterface.php",{
                     classes:$(".card").attr("class"),
                     name:$(".card .name").val(),
                     attr:$(".card .attr").val(),
@@ -23,7 +35,9 @@
                     flavour:$(".card .flavour").val(),
                     image:$("#image").val()
                 },function(r){
-                    console.log("SAVE:",r);
+                    var d = JSON.parse(r);
+                    document.location.hash = d[0]
+                    $("#saveUrl").val(document.location);
                 })
             }
             
@@ -65,36 +79,15 @@
                 $("#image").change(function(){
                     $(".card .image").css("background-image","url('"+$(this).val()+"')")
                 })
-
-                /*$("input, textarea").change(function(){
-                    document.location.hash =
-                        encodeURIComponent($(".card").attr("class").replace(/card ?/,""))+"/"+
-                        encodeURIComponent($(".card .name").val())+"/"+
-                        encodeURIComponent($(".card .attrs").val())+"/"+
-                        encodeURIComponent($(".card .effect").val())+"/"+
-                        encodeURIComponent($(".card .flavour").val())+"/"+
-                        encodeURIComponent($("#image").val())
-                })
-
-                var inputValues = document.location.hash.substr("1").split("/");
-                console.log(inputValues);
-
-                if (inputValues.length == 6){
-                    $.each(decodeURIComponent(inputValues[0]).split(" "),function(i,n){
-                        $("input[value="+n+"]").prop("checked",true);
-                    })
-                    $(".card .name").val(decodeURIComponent(inputValues[1]))
-                    $(".card .attrs").val(decodeURIComponent(inputValues[2]))
-                    $(".card .effect").val(decodeURIComponent(inputValues[3]))
-                    $(".card .flavour").val(decodeURIComponent(inputValues[4]))
-                    $("#image").val(decodeURIComponent(inputValues[5]))
-
-                    $("input[type=radio]:checked").change();
-                    $("#image").change();
-                }*/
-
+                
+                $("#save").click(save)
+                
                 $(window).resize();
                 $(".card textarea").change();
+                
+                if(document.location.hash){
+                    load(document.location.hash.substr(1));
+                }
             });
         </script>
 
@@ -148,6 +141,23 @@
                 <label><input type="radio" name="score" value="s3"/>3 Points</label>
                 <br/>
                 <label>Image (URL): <input type="text" id="image" value="https://derpicdn.net/img/2013/9/30/438807/large.png"/></label>
+                <br/>
+                <input type="button" id="save" value="Save"/>
+                <input type="text" id="saveUrl" placeholder="share URL"/><br/>
+                Saving and loading only works at current when not accessed through the vhost.</br>
+                Have fun working out where it's hosted.
+                <div style="margin-left:1em;margin-top:1em">
+                Symbol guide:</br>
+                8 - Unicorn</br>
+                9 - Pegasus</br>
+                % - Earth Pony</br>
+                @ - Alicorn</br>
+                # - Goal</br>
+                $ - Of Ponies and Peril</br>
+                * - Female</br>
+                ; - Male</br>
+                &lt; - Ship</br>
+                </div>
             </div>
         </main>
         <footer>

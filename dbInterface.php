@@ -31,9 +31,10 @@
         
         $query = "INSERT INTO tsssff_savedcards VALUES (
             default,E'$classes',E'$name',E'$attr',E'$effect',E'$flavour',E'$image'
-        );";
+        ) RETURNING cardid;";
         
-        pg_query($query) or die('Query failed: ' . pg_last_error());
-        var_dump($row);
+        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+        $row = pg_fetch_row($result);
+        print json_encode($row);
     }
 ?>
