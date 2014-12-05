@@ -46,7 +46,7 @@
                     $(".card .image").css("background-image","url('"+$(this).val()+"')")
                 })
 
-                $("input, textarea").change(function(){
+                /*$("input, textarea").change(function(){
                     document.location.hash =
                         encodeURIComponent($(".card").attr("class").replace(/card ?/,""))+"/"+
                         encodeURIComponent($(".card .name").val())+"/"+
@@ -71,12 +71,10 @@
 
                     $("input[type=radio]:checked").change();
                     $("#image").change();
-                }
+                }*/
 
                 $(window).resize();
                 $(".card textarea").change();
-                
-
             });
         </script>
 
