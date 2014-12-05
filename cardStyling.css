@@ -58,7 +58,7 @@ header {
     transform-origin:0 0;
 }
 
-.card .iconGender,.card .iconRace,.card .iconCard {
+.card .iconGender,.card .iconRace,.card .iconCard,.card .iconGoal {
     position:absolute;
     left: 58px;
     top: 56px;
@@ -158,8 +158,33 @@ header {
 .card.goal .iconCard {
     background-image:url('resources/symbols/Symbol-Goal.png');
 }
-
-/*Start Cards*/
+.card.goal.s0 .iconGoal {
+    width:94px;
+    height:115px;
+    top: 550px;
+    margin-left:13px;
+    background-image:url('resources/symbols/symbol-0.png');
+}
+.card.goal.s1 .iconGoal {
+    width:79px;
+    height:105px;
+    top: 550px;
+    margin-left:15px;
+    background-image:url('resources/symbols/symbol-1.png');
+}
+.card.goal.s2 .iconGoal {
+    width:120px;
+    height:92px;
+    top: 550px;
+    background-image:url('resources/symbols/symbol-2.png');
+}
+.card.goal.s3 .iconGoal {
+    width:113px;
+    height:107px;
+    top: 550px;
+    margin-left:3px;
+    background-image:url('resources/symbols/symbol-3.png');
+}
 
 
 
