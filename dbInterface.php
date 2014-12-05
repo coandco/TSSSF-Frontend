@@ -1,4 +1,21 @@
 <?php
+    if ($_SERVER["SERVER_NAME"] == "ripppo.me"){
+        $URL_BASE = "https://sucs.org/~ripp_/TSSSFF-Generator/dbInterface.php";
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+            curl_setopt($ch,CURLOPT_URL,$URL_BASE);
+            curl_setopt($ch,CURLOPT_POST,true);
+            curl_setopt($ch,CURLOPT_POSTFIELDS,$_POST);
+        } else {
+            $saveId = urlencode($_GET["id"]);
+            curl_setopt($ch,CURLOPT_URL,$URL_BASE."?id=".$saveId);
+        }
+        curl_exec($ch);
+        die();
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'GET'){ #Get a card from the database
         $conn = pg_connect("host=/var/run/postgresql/ dbname=ripp_ user=ripp_");
         if(!$conn)
