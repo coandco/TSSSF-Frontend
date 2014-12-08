@@ -40,6 +40,7 @@ html,body{
     float:left;
     font-family: LinLibertine;
     margin-bottom:1em;
+    width: 450px;
 }
 
 header {
@@ -230,12 +231,12 @@ footer {
     top: 679px;
     left: 50px;
     width: 688px;
-    height: 5em;
     font-family: Ubahn-newpony;
     text-align: center;
     font-size: 41px;
     line-height: 44px;
     overflow:hidden;
+    white-space:pre-line;
 }
 .cardHelper .effect {
     position:absolute;
@@ -254,12 +255,12 @@ footer {
     bottom: 50px;
     left: 50px;
     width: 688px;
-    height: 5em;
     font-family: LinLibertine;
     text-align: center;
     font-size: 29px;
     line-height: 32px;
     overflow: hidden;
+    white-space:pre-line;
 }
 .cardHelper .flavour {
     position:absolute;

@@ -3,7 +3,6 @@
     <head>
         <title>TSSSFF Card Generator</title>
         <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="cardStyling.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -96,19 +95,16 @@
         
         <main class="clearAfter">
             <div class="cardwrapper">
-                <div class="card pony maleFemale unicorn">
-                    <input type="text" class="name" value="Glitter Shell"/>
-                    <div class="image" style="
-                        background-image: url('https://derpicdn.net/img/2013/9/30/438807/large.png');
-                    "></div>
+                <div class="card pony maleFemale unicorn s0">
+                    <input type="text" class="name" placeholder="Card Name"/>
+                    <div class="image"></div>
                     <div class="iconGender"></div>
                     <div class="iconRace"></div>
                     <div class="iconCard"></div>
                     <div class="iconGoal"></div>
-                    <input type="text" class="attrs" value="BG Pony, Transgender, Snails"/>
-                    <textarea class="effect">Different Socks (Special): This card counts as * for all goals and ; for all other card effects. Whilst gender swapped this card counts as * for both.</textarea>
-                    <textarea class="flavour">I am different... It's like I'm wearing two different socks: one orange, one purple. My biggest secret is sometimes like to put a purple sock on over the orange. It's nice because I can smile at myself, but at the same time I know I'm just covering the orange one.
-- Matching</textarea>
+                    <input type="text" class="attrs" placeholder="Attributes"/>
+                    <textarea class="effect" placeholder="Effect"></textarea>
+                    <textarea class="flavour" placeholder="Flavour Text"></textarea>
                 </div>
             </div>
             <div class="cardHelper">
@@ -140,7 +136,7 @@
                 <label><input type="radio" name="score" value="s2"/>2 Points</label>
                 <label><input type="radio" name="score" value="s3"/>3 Points</label>
                 <br/>
-                <label>Image (URL): <input type="text" id="image" value="https://derpicdn.net/img/2013/9/30/438807/large.png"/></label>
+                <label>Image (URL): <input type="text" id="image" placeholder="Card Image"/></label>
                 <br/>
                 <input type="button" id="save" value="Save"/>
                 <input type="text" id="saveUrl" placeholder="share URL"/><br/>

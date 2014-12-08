@@ -16,6 +16,8 @@
         die();
     }
 
+    //TODO ADOdb
+
     if ($_SERVER['REQUEST_METHOD'] === 'GET'){ #Get a card from the database
         $conn = pg_connect("host=/var/run/postgresql/ dbname=ripp_ user=ripp_");
         if(!$conn)
@@ -31,6 +33,12 @@
         $query = "SELECT * FROM tsssff_savedcards WHERE cardid = $id";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
         $row = pg_fetch_row($result);
+        
+        if (!$row){
+            $query = "SELECT * FROM tsssff_savedcards WHERE cardid = -1";
+            $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+            $row = pg_fetch_row($result);
+        }
         
         print json_encode($row);
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){ #Save a card to the database
