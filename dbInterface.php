@@ -1,4 +1,6 @@
 <?php
+    error_reporting(0);
+
     if ($_SERVER["SERVER_NAME"] == "ripppo.me"){
         $URL_BASE = "https://sucs.org/~ripp_/TSSSFF-Generator/dbInterface.php";
         
@@ -22,30 +24,43 @@
         $conn = pg_connect("host=/var/run/postgresql/ dbname=ripp_ user=ripp_");
         if(!$conn)
         {
-            die ("Error connecting to PostGresSQL: " . pg_last_error());
+            die (json_encode(Array(
+                "error"=>"Error connecting to PostGresSQL",
+		        "details"=>pg_last_error()
+		    )));
         }
         
         if(!array_key_exists("id",$_GET)){
-            die ("No Id given");
+            die (json_encode(Array(
+                "error"=>"No Id given"
+            )));
         }
         
         $id = pg_escape_string($_GET["id"]);
         $query = "SELECT * FROM tsssff_savedcards WHERE cardid = $id";
-        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+        $result = pg_query($query) or die(json_encode(Array(
+            "error"=>'Query failed: ',
+            "details"=>pg_last_error()
+        )));
         $row = pg_fetch_row($result);
         
         if (!$row){
             $query = "SELECT * FROM tsssff_savedcards WHERE cardid = -1";
-            $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+            $result = pg_query($query) or die(json_encode(Array(
+                "error"=>'Query failed: ',
+                "details"=>pg_last_error()
+            )));
             $row = pg_fetch_row($result);
         }
         
         print json_encode($row);
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){ #Save a card to the database
         $conn = pg_connect("host=/var/run/postgresql/ dbname=ripp_ user=ripp_");
-        if(!$conn)
-        {
-            die ("Error connecting to PostGresSQL: " . pg_last_error());
+        if(!$conn){
+            die(json_encode(Array(
+                "error"=>"Error connecting to PostGresSQL",
+                "details"=>pg_last_error()
+            )));
         }
         $classes = pg_escape_string($_POST["classes"]);
         $name = pg_escape_string($_POST["name"]);
@@ -58,7 +73,10 @@
             default,E'$classes',E'$name',E'$attr',E'$effect',E'$flavour',E'$image'
         ) RETURNING cardid;";
         
-        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+        $result = pg_query($query) or $result = pg_query($query) or die(json_encode(Array(
+            "error"=>'Query failed: ',
+            "details"=>pg_last_error()
+        )));
         $row = pg_fetch_row($result);
         print json_encode($row);
     }
