@@ -8,24 +8,24 @@
 
         <script>
             function load(id){
-                $.get("dbInterface.php",{"id":id},function(r){
+                $.get("dbInterface.php",{"view":id},function(r){
                     var d = JSON.parse(r);
-                    $.each(d[1].split(" "),function(i,n){
+                    $.each(d.classes.split(" "),function(i,n){
                         $("input[value="+n+"]").prop("checked",true);
                     })
-                    $(".card .name").val(d[2]);
-                    $(".card .attrs").val(d[3]);
-                    $(".card .effect").val(d[4]);
-                    $(".card .flavour").val(d[5]);
-                    $("#image").val(d[6]);
-                    $(".card .copyright").val(d[7]);
-                    
+                    $(".card .name").val(d.name);
+                    $(".card .attrs").val(d.attrs);
+                    $(".card .effect").val(d.effect);
+                    $(".card .flavour").val(d.flavour);
+                    $("#image").val(d.image);
+                    $(".card .copyright").val(d.copyright);
+
                     $("input[type=radio]:checked").change();
                     $("#image").change();
                     $(".card textarea").change();
                 })
             }
-            
+
             function save(id){
                 $.post("dbInterface.php",{
                     classes:$(".card").attr("class"),
@@ -41,8 +41,8 @@
                     $("#saveUrl").val(document.location);
                 })
             }
-            
-            
+
+
             $(document).ready(function(){
                 $("input[type=radio]").change(function(){
                     $("input[name="+$(this).attr("name")+"]").each(function(){
@@ -57,7 +57,7 @@
                     var hf = ($(window).height()-16)/1088,
                         wf = ($(window).width()-516)/788
                         f = Math.min(wf,hf);
-                    
+
                     console.log(wf,hf);
                     if (wf < 0.3){
                         hf = ($(window).height()-216)/1088;
@@ -65,7 +65,7 @@
                         f = Math.min(wf,hf);
                     }
                     $(".card").css("transform","scale("+f+")")
-                    
+
                     $(".cardwrapper").width(788*f);
                     $(".cardwrapper").height(1088*f);
                 });
@@ -80,12 +80,12 @@
                 $("#image").change(function(){
                     $(".card .image").css("background-image","url('"+$(this).val()+"')")
                 })
-                
+
                 $("#save").click(save)
-                
+
                 $(window).resize();
                 $(".card textarea").change();
-                
+
                 if(document.location.hash){
                     load(document.location.hash.substr(1));
                 }
@@ -94,7 +94,7 @@
 
     </head>
     <body>
-        
+
         <main class="clearAfter">
             <div class="cardwrapper">
                 <div class="card pony maleFemale unicorn s0">
