@@ -72,10 +72,14 @@
 
             $(document).ready(function(){
                 $(".card button").click(function(){
-                    $(this).parent().children("button").each(function(){
-                        $(".card").removeClass($(this).attr("value"));
-                    })
-                    $(".card").addClass($(this).attr("value"));
+                    if ($(this).attr("value") == "changeling"){
+                        $(".card").toggleClass($(this).attr("value"));
+                    } else {
+                        $(this).parent().children("button").each(function(){
+                            $(".card").removeClass($(this).attr("value"));
+                        })
+                        $(".card").addClass($(this).attr("value"));
+                    }
                 })
 
                 $(window).resize(function(){
@@ -186,6 +190,7 @@
                         <button value="pegasus"></button>
                         <button value="earthPony"></button>
                         <button value="alicorn"></button>
+                        <button value="changeling"></button>
                     </div>
                     <div class="iconCard"></div>
                     <div class="iconGoal">

@@ -54,13 +54,6 @@ html,body{
     margin-right:8px;
 }
 
-.controls {
-    float:left;
-    font-family: Klinic;
-    margin-bottom:1em;
-    width: 450px;
-}
-
 .card {
     width: 788px;
     height: 1088px;
@@ -190,6 +183,20 @@ button[value=start]::before{
 .card.pony.alicorn .iconRace, .card.start.alicorn .iconRace, button[value=alicorn] {
     background-image:url('resources/symbols/Symbol-Alicorn.png');
 }
+    /*Changelings*/
+.card.pony.unicorn.changeling .iconRace, .card.start.unicorn.changeling .iconRace {
+    background-image:url('resources/symbols/Symbol-ChangelingUnicorn.png');
+}
+.card.pony.earthPony.changeling .iconRace, .card.start.earthPony.changeling .iconRace, button[value=changeling] {
+    background-image:url('resources/symbols/Symbol-ChangelingEarthPony.png');
+}
+.card.pony.pegasus.changeling .iconRace, .card.start.pegasus.changeling .iconRace {
+    background-image:url('resources/symbols/Symbol-ChangelingPegasus.png');
+}
+.card.pony.alicorn.changeling .iconRace, .card.start.alicorn.changeling .iconRace {
+    background-image:url('resources/symbols/Symbol-ChangelingAlicorn.png');
+}
+
 .card.pony .name,.card.pony .effect {
     color:#462c89
 }
