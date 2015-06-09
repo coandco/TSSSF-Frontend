@@ -20,9 +20,10 @@
 
     function getCard($mode,$key){
         $key = pg_escape_string($key);
-        $query = "SELECT * FROM tsssff_savedcards WHERE ${mode}Key = $key";
-        $result = $pg_query($query) or dieError("Query error getting card",pg_last_error());
-        return pg_fetch_array($result,PGSQL_ASSOC)
+        $query = "SELECT * FROM tsssff_savedcards2 WHERE 1 = 1 or ${mode}Key = '$key';";
+        $result = pg_query($query) or dieError("Query error getting card",pg_last_error());
+        $card = pg_fetch_assoc($result);
+        return $card;
     }
 
     function putCard($editkey,$classes,$name,$attr,$effect,$flavour,$image){
@@ -38,7 +39,7 @@
 
         if($viewKey){
             $query =
-                "INSERT INTO tsssff_savedcards VALUES (
+                "INSERT INTO tsssff_savedcards2 VALUES (
                     E'$editKey',E'$viewKey',E'$classes',E'$name',E'$attr',E'$effect',E'$flavour',E'$image'
                 ) RETURNING (
                     editKey,viewKey
@@ -46,25 +47,21 @@
         } else {
             $query =
                 "UPDATE tsssff_savedcards2 SET
-                    classes = '$classes',
-                    name = '$name',
-                    attr = '$attr',
-                    effect = '$effect',
-                    flavour = '$flavour',
-                    image = '$image'
+                    classes = E'$classes',
+                    name = E'$name',
+                    attr = E'$attr',
+                    effect = E'$effect',
+                    flavour = E'$flavour',
+                    image = E'$image'
                 WHERE
-                    editKey = '$editKey'
-                RETURNING (editKey,viewKey);"
-                ;""
+                    editKey = E'$editKey'
+                RETURNING (editKey,viewKey);";
         }
-
         $result = pg_query($query) or die(json_encode(Array(
             "error"=>'Putting card failed',
             "details"=>pg_last_error()
         )));
         return pg_fetch_array($result,PGSQL_ASSOC);
-
-
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET'){ #Get a card from the database
@@ -83,8 +80,11 @@
             }
             $mode = "view";
         }
+        if(!$mode){
+            dieError("Invalid request","One of edit or view paramaters must be given");
+        }
 
-        $card = getCard($mode,$_GET[$mode]) or getCard($view,"SPC-404");
+        $card = getCard($mode,$_GET[$mode]) or getCard("view","SPC-404");
         print json_encode($card);
 
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){ #Save a card to the database
