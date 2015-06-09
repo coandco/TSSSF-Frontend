@@ -14,7 +14,7 @@
                         $("input[value="+n+"]").prop("checked",true);
                     })
                     $(".card .name").val(d.name);
-                    $(".card .attrs").val(d.attrs);
+                    $(".card .attrs").val(d.attr);
                     $(".card .effect").val(d.effect);
                     $(".card .flavour").val(d.flavour);
                     $("#image").val(d.image);
@@ -30,7 +30,7 @@
                 $.post("dbInterface.php",{
                     classes:$(".card").attr("class"),
                     name:$(".card .name").val(),
-                    attr:$(".card .attr").val(),
+                    attr:$(".card .attrs").val(),
                     effect:$(".card .effect").val(),
                     flavour:$(".card .flavour").val(),
                     copyright:$(".card .copyright").val(),

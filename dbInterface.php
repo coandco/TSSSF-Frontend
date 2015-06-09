@@ -1,13 +1,11 @@
 <?php
-    error_reporting(E_ALL ^ E_WARNING);
-
     function uniqueKey($start,$field){
-        $key = substr(hash("sha2",start),0,32);
+        $key = substr(md5($start),0,32);
         $tries = 0;
-        while(pg_query("SELECT COUNT(1) FROM tsssff_savedcards2 WHERE $field='$key'")){
-            $key = substr(hash("sha2",start+$tries),0,32);
-            $tries++;
-        }
+        #while(pg_fetch_row(pg_query("SELECT COUNT(1) FROM tsssff_savedcards2 WHERE $field='$key'"))){
+        #    $key = substr(hash("sha2",$start+$tries),0,32);
+        #    $tries++;
+        #}
         return $key;
     }
 
@@ -26,9 +24,9 @@
         return $card;
     }
 
-    function putCard($editkey,$classes,$name,$attr,$effect,$flavour,$image){
+    function putCard($editkey,$classes,$name,$attr,$effect,$flavour,$image,$copyright){
         if (is_null($editkey)){
-            $editKey = uniqueKey(serialize($_POST),"editKey");
+            $editKey = uniqueKey(rand(),"editKey");
             $viewKey = uniqueKey($editKey,"viewKey");
         } else {
             if (!preg_match("/^[0-9a-fA-F]{1,32}$/")){
@@ -40,10 +38,8 @@
         if($viewKey){
             $query =
                 "INSERT INTO tsssff_savedcards2 VALUES (
-                    E'$editKey',E'$viewKey',E'$classes',E'$name',E'$attr',E'$effect',E'$flavour',E'$image'
-                ) RETURNING (
-                    editKey,viewKey
-                );";
+                    E'$editKey',E'$viewKey',E'$classes',E'$name',E'$attr',E'$effect',E'$flavour',E'$image',E'$copyright'
+                ) RETURNING editKey, viewKey;";
         } else {
             $query =
                 "UPDATE tsssff_savedcards2 SET
@@ -55,13 +51,13 @@
                     image = E'$image'
                 WHERE
                     editKey = E'$editKey'
-                RETURNING (editKey,viewKey);";
+                RETURNING editKey,viewKey;";
         }
         $result = pg_query($query) or die(json_encode(Array(
             "error"=>'Putting card failed',
             "details"=>pg_last_error()
         )));
-        return pg_fetch_array($result,PGSQL_ASSOC);
+        return pg_fetch_assoc($result);
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET'){ #Get a card from the database
@@ -99,13 +95,15 @@
         $effect = pg_escape_string($_POST["effect"]);
         $flavour = pg_escape_string($_POST["flavour"]);
         $image = pg_escape_string($_POST["image"]);
+        $copyright = pg_escape_string($_POST["copyright"]);
 
-        if(!array_key_exists("saveAs",$_POST)){
+        if(array_key_exists("saveAs",$_POST)){
             $editKey = pg_escape_string($_POST["editKey"]);
         } else {
             $editKey = null;
         }
 
-        print json_encode(putCard($editKey,$classes,$name,$attr,$effect,$flavour,$image));
+        print json_encode(putCard($editKey,$classes,$name,$attr,$effect,$flavour,$image,$copyright));
+        print pg_last_error();
     }
 ?>
