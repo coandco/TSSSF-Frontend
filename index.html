@@ -7,9 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script>
-            function load(id){
-                $.get("dbInterface.php",{"view":id},function(r){
+            function load(kind,id){
+                var o={};o[kind]=id
+                $.get("dbInterface.php",o,function(r){
                     var d = JSON.parse(r);
+                    if (d.error){
+                        alert(d.error);
+                        return;
+                    }
                     $(".card button").each(function(){
                         $(".card").removeClass($(this).attr("value"))
                     })
@@ -85,7 +90,13 @@
                 $(".card textarea").change();
 
                 if(document.location.hash){
-                    load(document.location.hash.substr(1));
+                    hs = document.location.hash.substr(1).split(":")
+                    if (hs.length==2 && (hs[0] == "view" || hs[0] == "edit")){
+                        load(hs[0],hs[1]);
+                    } else {
+                        document.location.hash = ""
+                    }
+
                 }
             });
         </script>

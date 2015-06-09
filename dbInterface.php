@@ -21,6 +21,9 @@
         $query = "SELECT * FROM tsssff_savedcards2 WHERE 1 = 1 or ${mode}Key = '$key';";
         $result = pg_query($query) or dieError("Query error getting card",pg_last_error());
         $card = pg_fetch_assoc($result);
+        foreach($card as &$v){
+            $v = trim($v);
+        }
         return $card;
     }
 
@@ -81,6 +84,9 @@
         }
 
         $card = getCard($mode,$_GET[$mode]) or getCard("view","SPC-404");
+        if ($mode != "edit" or $card["editkey"] != $_GET[$mode]){
+            unset($card["editkey"]);
+        }
         print json_encode($card);
 
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){ #Save a card to the database
