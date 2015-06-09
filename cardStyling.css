@@ -43,16 +43,6 @@ html,body{
     width: 450px;
 }
 
-header {
-    font-weight:bold;
-    font-family: Barthowheel;
-    font-size:1.5em;
-}
-
-footer {
-    font-size:0.7em;
-}
-
 .card {
     width: 788px;
     height: 1088px;

@@ -18,22 +18,24 @@
 
     function getCard($mode,$key){
         $key = pg_escape_string($key);
-        $query = "SELECT * FROM tsssff_savedcards2 WHERE 1 = 1 or ${mode}Key = '$key';";
+        $query = "SELECT * FROM tsssff_savedcards2 WHERE ${mode}Key = '$key';";
         $result = pg_query($query) or dieError("Query error getting card",pg_last_error());
         $card = pg_fetch_assoc($result);
-        foreach($card as &$v){
-            $v = trim($v);
+        if ($card){
+            foreach($card as &$v){
+                $v = trim($v);
+            }
         }
         return $card;
     }
 
-    function putCard($editkey,$classes,$name,$attr,$effect,$flavour,$image,$copyright){
-        if (is_null($editkey)){
-            $editKey = uniqueKey(rand(),"editKey");
-            $viewKey = uniqueKey($editKey,"viewKey");
+    function putCard($editKey,$classes,$name,$attr,$effect,$flavour,$image,$copyright){
+        if (is_null($editKey)){
+            $editKey = uniqueKey(rand(),"editkey");
+            $viewKey = uniqueKey($editKey,"viewkey");
         } else {
-            if (!preg_match("/^[0-9a-fA-F]{1,32}$/")){
-                dieError("Invalid paramater","editKey was not valid or is a restricted key");
+            if (!preg_match("/^[0-9a-f]+$/",$editKey)){
+                dieError("Invalid paramater","editKey ($editKey) was not valid or is a reserved key");
             }
             $editKey = pg_escape_string($editKey);
         }
@@ -83,7 +85,10 @@
             dieError("Invalid request","One of edit or view paramaters must be given");
         }
 
-        $card = getCard($mode,$_GET[$mode]) or getCard("view","SPC-404");
+        $card = getCard($mode,$_GET[$mode]);
+        if (!$card){
+            $card = getCard("view","SPC-404");
+        }
         if ($mode != "edit" or $card["editkey"] != $_GET[$mode]){
             unset($card["editkey"]);
         }
@@ -103,8 +108,8 @@
         $image = pg_escape_string($_POST["image"]);
         $copyright = pg_escape_string($_POST["copyright"]);
 
-        if(array_key_exists("saveAs",$_POST)){
-            $editKey = pg_escape_string($_POST["editKey"]);
+        if(array_key_exists("editkey",$_POST)){
+            $editKey = pg_escape_string($_POST["editkey"]);
         } else {
             $editKey = null;
         }

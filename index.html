@@ -7,10 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script>
+            var EDIT_KEY = null;
             function load(kind,id){
                 var o={};o[kind]=id
                 $.get("dbInterface.php",o,function(r){
                     var d = JSON.parse(r);
+                    EDIT_KEY = null;
                     if (d.error){
                         alert(d.error);
                         return;
@@ -29,11 +31,23 @@
                     $("input[type=radio]:checked").change();
                     $("#image").change();
                     $(".card textarea").change();
+                    document.location.hash = ""
+
+                    $("#shareUrl").val(document.location+"view:"+d["viewkey"]);
+                    if(d.editkey){
+                        $("#editUrl").val(document.location+"edit:"+d["editkey"]);
+                        document.location.hash = "edit:"+d["editkey"]
+                        EDIT_KEY = d["editkey"];
+                    } else {
+                        $("#editUrl").val("Cannot edit");
+                        document.location.hash = "view:"+d["viewkey"]
+                    }
                 })
             }
 
             function save(id){
                 $.post("dbInterface.php",{
+                    editkey:EDIT_KEY,
                     classes:$(".card").attr("class"),
                     name:$(".card .name").val(),
                     attr:$(".card .attrs").val(),
@@ -43,11 +57,18 @@
                     image:$("#image").val()
                 },function(r){
                     var d = JSON.parse(r);
-                    document.location.hash = d[0]
-                    $("#saveUrl").val(document.location);
+                    if (d.error){
+                        alert(d.error);
+                        return;
+                    }
+                    document.location.hash = "."
+                    document.location.hash = ""
+                    $("#editUrl").val(document.location+"edit:"+d["editkey"]);
+                    $("#shareUrl").val(document.location+"view:"+d["viewkey"]);
+                    EDIT_KEY = d["editkey"];
+                    document.location.hash = "edit:"+d["editkey"]
                 })
             }
-
 
             $(document).ready(function(){
                 $(".card button").click(function(){
@@ -100,7 +121,21 @@
                 }
             });
         </script>
-
+        <style>
+        input[type=text] {
+            display: block;
+            width: 100%;
+            margin-left: 2em;
+        }
+        header {
+            font-weight:bold;
+            font-family: Barthowheel;
+            font-size:1.5em;
+        }
+        footer {
+            font-size:0.7em;
+        }
+        </style>
     </head>
     <body>
 
@@ -114,7 +149,6 @@
                         <button value="ship"></button>
                         <button value="goal"></button>
                         <button value="start"></button>
-
                     </div>
                     <div class="iconGender">
                         <button value="female"></button>
@@ -137,7 +171,7 @@
                     <input type="text" class="attrs" placeholder="Attributes"/>
                     <textarea class="effect" placeholder="Effect" required></textarea>
                     <textarea class="flavour" placeholder="Flavour Text" required></textarea>
-                    <input type="text" class="copyright" placeholder="Copyright & Artist infomation" required/>
+                    <input type="text" class="copyright" placeholder="Copyright &amp; Artist infomation" required/>
                 </div>
             </div>
             <div class="cardHelper">
@@ -151,9 +185,11 @@
                     Feel free to check out the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a>
                 </header>
                 <label>Image (URL): <input type="text" id="image" placeholder="Card Image" required/></label>
-                <br/>
-                <input type="button" id="save" value="Save"/>
-                <input type="text" id="saveUrl" placeholder="share URL"/><br/>
+
+                </br>
+                <input type="button" id="save" value="Save"/></br>
+                <label>Edit link: (lets you modify this copy of the card, keep secret)<input type="text" id="editUrl" placeholder="share URL"/></label>
+                <label>Share link:<input type="text" id="shareUrl" placeholder="share URL"/></label>
                 <div style="margin-left:1em;margin-top:1em">
                 Symbol guide:</br>
                 8 - Unicorn</br>
