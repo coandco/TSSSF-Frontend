@@ -273,3 +273,13 @@ footer {
     visibility: hidden;
     min-height:1em;
 }
+.card .copyright {
+    font-family: Ubahn-newpony;
+    color: #eadcec;
+    bottom: 14px;
+    position: absolute;
+    width: 712px;
+    font-size: 18px;
+    text-align: right;
+    right: 38px;
+}

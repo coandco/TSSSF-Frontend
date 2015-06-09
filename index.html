@@ -18,6 +18,7 @@
                     $(".card .effect").val(d[4]);
                     $(".card .flavour").val(d[5]);
                     $("#image").val(d[6]);
+                    $(".card .copyright").val(d[7]);
                     
                     $("input[type=radio]:checked").change();
                     $("#image").change();
@@ -32,6 +33,7 @@
                     attr:$(".card .attr").val(),
                     effect:$(".card .effect").val(),
                     flavour:$(".card .flavour").val(),
+                    copyright:$(".card .copyright").val(),
                     image:$("#image").val()
                 },function(r){
                     var d = JSON.parse(r);
@@ -96,15 +98,16 @@
         <main class="clearAfter">
             <div class="cardwrapper">
                 <div class="card pony maleFemale unicorn s0">
-                    <input type="text" class="name" placeholder="Card Name"/>
+                    <input type="text" class="name" placeholder="Card Name" required/>
                     <div class="image"></div>
                     <div class="iconGender"></div>
                     <div class="iconRace"></div>
                     <div class="iconCard"></div>
                     <div class="iconGoal"></div>
                     <input type="text" class="attrs" placeholder="Attributes"/>
-                    <textarea class="effect" placeholder="Effect"></textarea>
-                    <textarea class="flavour" placeholder="Flavour Text"></textarea>
+                    <textarea class="effect" placeholder="Effect" required></textarea>
+                    <textarea class="flavour" placeholder="Flavour Text" required></textarea>
+                    <input type="text" class="copyright" placeholder="Copyright & Artist infomation" required/>
                 </div>
             </div>
             <div class="cardHelper">
@@ -136,7 +139,7 @@
                 <label><input type="radio" name="score" value="s2"/>2 Points</label>
                 <label><input type="radio" name="score" value="s3"/>3 Points</label>
                 <br/>
-                <label>Image (URL): <input type="text" id="image" placeholder="Card Image"/></label>
+                <label>Image (URL): <input type="text" id="image" placeholder="Card Image" required/></label>
                 <br/>
                 <input type="button" id="save" value="Save"/>
                 <input type="text" id="saveUrl" placeholder="share URL"/><br/>
