@@ -10,9 +10,10 @@
             function load(id){
                 $.get("dbInterface.php",{"view":id},function(r){
                     var d = JSON.parse(r);
-                    $.each(d.classes.split(" "),function(i,n){
-                        $("input[value="+n+"]").prop("checked",true);
+                    $(".card button").each(function(){
+                        $(".card").removeClass($(this).attr("value"))
                     })
+                    $(".card").addClass(d.classes);
                     $(".card .name").val(d.name);
                     $(".card .attrs").val(d.attr);
                     $(".card .effect").val(d.effect);
@@ -44,21 +45,18 @@
 
 
             $(document).ready(function(){
-                $("input[type=radio]").change(function(){
-                    $("input[name="+$(this).attr("name")+"]").each(function(){
+                $(".card button").click(function(){
+                    $(this).parent().children("button").each(function(){
                         $(".card").removeClass($(this).attr("value"));
                     })
-                    if ($(this).prop("checked")){
-                        $(".card").addClass($(this).attr("value"));
-                    }
-                });
+                    $(".card").addClass($(this).attr("value"));
+                })
 
                 $(window).resize(function(){
                     var hf = ($(window).height()-16)/1088,
                         wf = ($(window).width()-516)/788
                         f = Math.min(wf,hf);
 
-                    console.log(wf,hf);
                     if (wf < 0.3){
                         hf = ($(window).height()-216)/1088;
                         wf = ($(window).width()-16)/788;
@@ -100,10 +98,31 @@
                 <div class="card pony maleFemale unicorn s0">
                     <input type="text" class="name" placeholder="Card Name" required/>
                     <div class="image"></div>
-                    <div class="iconGender"></div>
-                    <div class="iconRace"></div>
+                    <div class="type">
+                        <button value="pony"></button>
+                        <button value="ship"></button>
+                        <button value="goal"></button>
+                        <button value="start"></button>
+
+                    </div>
+                    <div class="iconGender">
+                        <button value="female"></button>
+                        <button value="male"></button>
+                        <button value="maleFemale"></button>
+                    </div>
+                    <div class="iconRace">
+                        <button value="unicorn"></button>
+                        <button value="pegasus"></button>
+                        <button value="earthPony"></button>
+                        <button value="alicorn"></button>
+                    </div>
                     <div class="iconCard"></div>
-                    <div class="iconGoal"></div>
+                    <div class="iconGoal">
+                        <button value="s0"></button>
+                        <button value="s1"></button>
+                        <button value="s2"></button>
+                        <button value="s3"></button>
+                    </div>
                     <input type="text" class="attrs" placeholder="Attributes"/>
                     <textarea class="effect" placeholder="Effect" required></textarea>
                     <textarea class="flavour" placeholder="Flavour Text" required></textarea>
@@ -120,25 +139,6 @@
                     Report all bugs to <a href="https://twitter.com/Ripp_">@Ripp_</a></br>
                     Feel free to check out the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a>
                 </header>
-                <label><input type="radio" name="cardType" value="pony" checked="true"/>Pony</label>
-                <label><input type="radio" name="cardType" value="ship"/>Ship</label>
-                <label><input type="radio" name="cardType" value="goal"/>Goal</label>
-                <label><input type="radio" name="cardType" value="start"/>Start</label>
-                <br/>
-                <label><input type="radio" name="gender" value="female"/>Female</label>
-                <label><input type="radio" name="gender" value="male"/>Male</label>
-                <label><input type="radio" name="gender" value="maleFemale" checked="true"/>Male &amp; Female</label>
-                <br/>
-                <label><input type="radio" name="race" value="unicorn" checked="true"/>Unicorn</label>
-                <label><input type="radio" name="race" value="pegasus"/>Pegasus</label>
-                <label><input type="radio" name="race" value="earthPony"/>Earth Pony</label>
-                <label><input type="radio" name="race" value="alicorn"/>Alicorn</label>
-                <br/>
-                <label><input type="radio" name="score" value="s0" checked="true"/>0 Points</label>
-                <label><input type="radio" name="score" value="s1"/>1 Point</label>
-                <label><input type="radio" name="score" value="s2"/>2 Points</label>
-                <label><input type="radio" name="score" value="s3"/>3 Points</label>
-                <br/>
                 <label>Image (URL): <input type="text" id="image" placeholder="Card Image" required/></label>
                 <br/>
                 <input type="button" id="save" value="Save"/>

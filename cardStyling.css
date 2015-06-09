@@ -68,45 +68,117 @@ footer {
     position:absolute;
     left: 58px;
     top: 56px;
-    width: 104px;
+    width:104px;
     height: 104px;
     background-size: contain;
     background-repeat: no-repeat;
+    overflow:hidden;
+    pointer-events: none;
+}
+.card.pony .iconGender, .card.pony .iconRace,
+.card.start .iconGender, .card.start .iconRace,
+.card.ship .iconCard, .card.goal .iconGoal {
+    pointer-events: all;
 }
 .card .iconCard{
     top:86px;
 }
+.card .iconGender:hover,.card .iconRace:hover,.card .iconCard:hover,.card .iconGoal:hover{
+    width:540px!important;
+}
+
+/*Icon Selections*/
+.card button{
+    width:80px;
+    height:80px;
+    margin:12px;
+    padding:0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+    border:none;
+    cursor:pointer;
+}
+
+.card button:first-child{
+    margin-left:116px;
+}
+
+/*Card Type Selector*/
+.card .type{
+  position: absolute;
+  height: 75px;
+  width: 190px;
+  overflow: hidden;
+  transform: rotate(-90deg);
+  transform-origin: 0 0;
+  top: 485px;
+  left: 45px;
+}
+.card .type:hover{
+    height:390px;
+}
+.card .type button{
+    height:75px;
+    width:190px;
+    margin:0;
+}
+.card .type button:first-child{
+    margin-top:75px;
+}
+.card .type button::before{
+  font-size: 76px;
+  font-family: Barthowheel;
+  text-align: center;
+}
+button[value=pony]::before{
+    content:"Pony";
+    color:#4b2a83;
+}
+button[value=ship]::before{
+    content:"Ship";
+    color:#c3136b;
+}
+button[value=goal]::before{
+    content:"Goal";
+    color:#3d2360;
+}
+button[value=start]::before{
+    content:"Start";
+    color:#3c3538;
+}
 
 /*Pony/Start Cards*/
 .card.pony {
-    background-image:url('resources/templates/Blank-Pony.png');    
+    background-image:url('resources/templates/Blank-Pony.png');
 }
 
-.card.pony.female .iconGender, .card.start.female .iconGender {
+.card.pony.female .iconGender, .card.start.female .iconGender, button[value=female] {
     background-image:url('resources/symbols/Symbol-Female.png');
 }
 
-.card.pony.male .iconGender, .card.start.male .iconGender {
+.card.pony.male .iconGender, .card.start.male .iconGender, button[value=male] {
     background-image:url('resources/symbols/Symbol-male.png');
 }
 
-.card.pony.maleFemale .iconGender, .card.start.maleFemale .iconGender {
+.card.pony.maleFemale .iconGender, .card.start.maleFemale .iconGender, button[value=maleFemale] {
     background-image:url('resources/symbols/Symbol-MaleFemale.png');
 }
 
 .card .iconRace {
     top: 160px;
 }
-.card.pony.unicorn .iconRace, .card.start.unicorn .iconRace {
+.card.pony.unicorn .iconRace, .card.start.unicorn .iconRace, button[value=unicorn] {
     background-image:url('resources/symbols/Symbol-Unicorn.png');
 }
-.card.pony.earthPony .iconRace, .card.start.earthPony .iconRace {
+.card.pony.earthPony .iconRace, .card.start.earthPony .iconRace, button[value=earthPony] {
     background-image:url('resources/symbols/Symbol-Earth-Pony.png');
 }
-.card.pony.pegasus .iconRace, .card.start.pegasus .iconRace {
+.card.pony.pegasus .iconRace, .card.start.pegasus .iconRace, button[value=pegasus] {
     background-image:url('resources/symbols/Symbol-Pegasus.png');
 }
-.card.pony.alicorn .iconRace, .card.start.alicorn .iconRace {
+.card.pony.alicorn .iconRace, .card.start.alicorn .iconRace, button[value=alicorn] {
     background-image:url('resources/symbols/Symbol-Alicorn.png');
 }
 .card.pony .name,.card.pony .effect {
@@ -118,7 +190,7 @@ footer {
 
 /*Start Cards*/
 .card.start {
-    background-image:url('resources/templates/Blank-Start.png');    
+    background-image:url('resources/templates/Blank-Start.png');
 }
 .card.start .name,.card.ship .effect {
     color:#3a3235;
@@ -133,7 +205,7 @@ footer {
 
 /*Ship Cards*/
 .card.ship {
-    background-image:url('resources/templates/Blank-Ship.png');    
+    background-image:url('resources/templates/Blank-Ship.png');
 }
 .card.ship .name,.card.ship .effect {
     color:#ce1b69;
@@ -150,7 +222,7 @@ footer {
 
 /*Goal Cards*/
 .card.goal {
-    background-image:url('resources/templates/Blank-Goal.png'); 
+    background-image:url('resources/templates/Blank-Goal.png');
 }
 .card.goal .name,.card.goal .effect {
     color:#123962;
@@ -189,6 +261,21 @@ footer {
     height:107px;
     top: 550px;
     margin-left:3px;
+    background-image:url('resources/symbols/symbol-3.png');
+}
+.card .iconGoal:not(:hover) button{
+    display:none;
+}
+.card button[value=s0]{
+    background-image:url('resources/symbols/symbol-0.png');
+}
+.card button[value=s1]{
+    background-image:url('resources/symbols/symbol-1.png');
+}
+.card button[value=s2]{
+    background-image:url('resources/symbols/symbol-2.png');
+}
+.card button[value=s3]{
     background-image:url('resources/symbols/symbol-3.png');
 }
 
