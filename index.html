@@ -76,7 +76,9 @@
                         $(".card").toggleClass($(this).attr("value"));
                     } else {
                         $(this).parent().children("button").each(function(){
-                            $(".card").removeClass($(this).attr("value"));
+                            if ($(this).attr("value") != "changeling"){
+                                $(".card").removeClass($(this).attr("value"));
+                            }
                         })
                         $(".card").addClass($(this).attr("value"));
                     }
