@@ -1,16 +1,34 @@
+/* Old fonts
 @font-face {
     font-family: Barthowheel;
     src: url('resources/fonts/Barth_Regular.ttf');
 }
 
 @font-face {
-    font-family: LinLibertine;
-    src: url('resources/fonts/LinLibertine_RI.ttf');
+    font-family: Ubahn_newpony;
+    src: url('resources/fonts/Ubahn_newpony.ttf');
 }
 
 @font-face {
-    font-family: Ubahn-newpony;
-    src: url('resources/fonts/Ubahn_newpony.ttf');
+    font-family: LinLibertine;
+    src: url('resources/fonts/LinLibertine_RI.ttf');
+}
+*/
+
+/* New fonts */
+@font-face {
+    font-family: Bartholowmew;
+    src: url('resources/fonts/TSSSFBartholomew-Bold.otf');
+}
+
+@font-face {
+    font-family: Cabin;
+    src: url('resources/fonts/TSSSFCabin-Medium.ttf');
+}
+
+@font-face {
+    font-family: Klinic;
+    src: url('resources/fonts/KlinicSlabBookIt.otf');
 }
 
 html,body{
@@ -38,7 +56,7 @@ html,body{
 
 .controls {
     float:left;
-    font-family: LinLibertine;
+    font-family: Klinic;
     margin-bottom:1em;
     width: 450px;
 }
@@ -74,7 +92,7 @@ html,body{
     top:86px;
 }
 .card .iconGender:hover,.card .iconRace:hover,.card .iconCard:hover,.card .iconGoal:hover{
-    width:540px!important;
+    width:auto!important;
 }
 
 /*Icon Selections*/
@@ -120,7 +138,7 @@ html,body{
 }
 .card .type button::before{
   font-size: 76px;
-  font-family: Barthowheel;
+  font-family: Bartholowmew;
   text-align: center;
 }
 button[value=pony]::before{
@@ -142,7 +160,7 @@ button[value=start]::before{
 
 /*Pony/Start Cards*/
 .card.pony {
-    background-image:url('resources/templates/Blank-Pony.png');
+    background-image:url('resources/templates/BLEED-Blank-Pony-cropped.png');
 }
 
 .card.pony.female .iconGender, .card.start.female .iconGender, button[value=female] {
@@ -181,7 +199,7 @@ button[value=start]::before{
 
 /*Start Cards*/
 .card.start {
-    background-image:url('resources/templates/Blank-Start.png');
+    background-image:url('resources/templates/BLEED-Blank-Start-cropped.png');
 }
 .card.start .name,.card.ship .effect {
     color:#3a3235;
@@ -196,7 +214,7 @@ button[value=start]::before{
 
 /*Ship Cards*/
 .card.ship {
-    background-image:url('resources/templates/Blank-Ship.png');
+    background-image:url('resources/templates/BLEED-Blank-Ship-cropped.png');
 }
 .card.ship .name,.card.ship .effect {
     color:#ce1b69;
@@ -213,7 +231,7 @@ button[value=start]::before{
 
 /*Goal Cards*/
 .card.goal {
-    background-image:url('resources/templates/Blank-Goal.png');
+    background-image:url('resources/templates/BLEED-Blank-Goal-cropped.png');
 }
 .card.goal .name,.card.goal .effect {
     color:#123962;
@@ -287,19 +305,19 @@ button[value=start]::before{
     position:absolute;
     bottom: 952px;
     right: 66px;
-    font-family: Barthowheel;
+    font-family: Bartholowmew;
     text-align: right;
-    font-size:55px;
-    width:555px;
+    font-size: 55px;
+    width: 555px;
 }
 
 .card .attrs {
     position: absolute;
     bottom: 437px;
     right: 66px;
-    font-family: Ubahn-newpony;
+    font-family: Cabin;
     text-align: right;
-    font-size: 41px;
+    font-size: 38px;
     color: #eadcec;
     width:580px;
 }
@@ -309,19 +327,17 @@ button[value=start]::before{
     top: 679px;
     left: 50px;
     width: 688px;
-    font-family: Ubahn-newpony;
+    font-family: Cabin;
     text-align: center;
-    font-size: 41px;
-    line-height: 44px;
+    font-size: 35px;
     overflow:hidden;
     white-space:pre-line;
 }
 .cardHelper .effect {
     position:absolute;
     width: 688px;
-    font-family: Ubahn-newpony;
-    font-size: 41px;
-    line-height: 44px;
+    font-family: Cabin;
+    font-size: 35px;
     white-space: pre-wrap;
     word-wrap: break-word;
     visibility: hidden;
@@ -333,26 +349,24 @@ button[value=start]::before{
     bottom: 50px;
     left: 50px;
     width: 688px;
-    font-family: LinLibertine;
+    font-family: Klinic;
     text-align: center;
-    font-size: 29px;
-    line-height: 32px;
+    font-size: 28px;
     overflow: hidden;
     white-space:pre-line;
 }
 .cardHelper .flavour {
     position:absolute;
     width: 688px;
-    font-family: LinLibertine;
-    font-size: 29px;
-    line-height: 32px;
+    font-family: Klinic;
+    font-size: 28px;
     white-space: pre-wrap;
     word-wrap: break-word;
     visibility: hidden;
     min-height:1em;
 }
 .card .copyright {
-    font-family: Ubahn-newpony;
+    font-family: Cabin;
     color: #eadcec;
     bottom: 14px;
     position: absolute;

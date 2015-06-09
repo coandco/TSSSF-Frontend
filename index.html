@@ -101,6 +101,26 @@
                     t.height(o.height());
                 });
 
+                var SPECIAL_REGEX = /\\(unicorn|pegasus|earth|alicorn|goal|time|female|male|malefemale|ship)/g
+                var SPECIAL_REPLACE = {
+                    "\\male":"\u2642",
+                    "\\female":"\u2640",
+                    "\\malefemale":"\u26A4",
+                    "\\ship":"\u2764",
+                    "\\earth":"\uE000",
+                    "\\unicorn":"\uE001",
+                    "\\pegasus":"\uE002",
+                    "\\alicorn":"\uE003",
+                    "\\time":"\uE004"
+                }
+                $(".card input[type=text], .card textarea").on("change",function(){
+                    var txt = $(this).val();
+                    txt = txt.replace(SPECIAL_REGEX,function(t){
+                        return SPECIAL_REPLACE[t];
+                    });
+                    $(this).val(txt)
+                })
+
                 $("#image").change(function(){
                     $(".card .image").css("background-image","url('"+$(this).val()+"')")
                 })
@@ -134,6 +154,12 @@
         }
         footer {
             font-size:0.7em;
+        }
+        .controls {
+            float:left;
+            font-family: cabin;
+            margin-bottom:1em;
+            width: 450px;
         }
         </style>
     </head>
@@ -192,15 +218,16 @@
                 <label>Share link:<input type="text" id="shareUrl" placeholder="share URL"/></label>
                 <div style="margin-left:1em;margin-top:1em">
                 Symbol guide:</br>
-                8 - Unicorn</br>
-                9 - Pegasus</br>
-                % - Earth Pony</br>
-                @ - Alicorn</br>
-                # - Goal</br>
-                $ - Of Ponies and Peril</br>
-                * - Female</br>
-                ; - Male</br>
-                &lt; - Ship</br>
+                \male &#x2642;</br>
+                \female &#x2640;</br>
+                \malefemale &#x26A4;</br>
+                \ship &#x2764;</br>
+                \earth &#xE000;</br>
+                \unicorn &#xE001;</br>
+                \pegasus &#xE002;</br>
+                \alicorn &#xE003;</br>
+                \time &#xE004;</br>
+                (Symbols update when you deselect the field)
                 </div>
                 <footer>
                     This project is not associated with or nessesery endorsed by HORRIBLE PEOPLE PRODUCTIONS the creators of Twilight Sparkle's Secret Shipfic Folder <br/>

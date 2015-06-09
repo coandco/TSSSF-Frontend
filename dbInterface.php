@@ -30,7 +30,7 @@
     }
 
     function putCard($editKey,$classes,$name,$attr,$effect,$flavour,$image,$copyright){
-        if (is_null($editKey)){
+        if (is_null($editKey) or $editKey == ''){
             $editKey = uniqueKey(rand(),"editkey");
             $viewKey = uniqueKey($editKey,"viewkey");
         } else {
