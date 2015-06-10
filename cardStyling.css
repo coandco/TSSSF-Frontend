@@ -70,6 +70,7 @@ html,body{
     left: 58px;
     top: 56px;
     width:104px;
+    min-width:104px;
     height: 104px;
     background-size: contain;
     background-repeat: no-repeat;
