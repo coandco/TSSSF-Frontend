@@ -29,6 +29,8 @@ function load(kind,id){
 
         document.location.hash = ""
 
+        $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
+
         $("#shareUrl").val(document.location+"view:"+d["viewkey"]);
         if(d.editkey){
             $("#editUrl").val(document.location+"edit:"+d["editkey"]);
@@ -62,12 +64,13 @@ function save(id){
         document.location.hash = ""
         $("#editUrl").val(document.location+"edit:"+d["editkey"]);
         $("#shareUrl").val(document.location+"view:"+d["viewkey"]);
+        $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
         EDIT_KEY = d["editkey"];
         document.location.hash = "edit:"+d["editkey"]
     })
 }
 
-$(document).ready(function(){
+function cardSetup(){
     //On card button clicks, remove other classes and add new ones.
     //Unless it is changeling, special case, just toggle.
     $(".card button").click(function(){
@@ -144,4 +147,4 @@ $(document).ready(function(){
             document.location.hash = ""
         }
     }
-});
+};
