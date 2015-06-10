@@ -107,7 +107,7 @@
                     t.height(o.height());
                 });
 
-                var SPECIAL_REGEX = /\\(unicorn|pegasus|earth|alicorn|goal|time|female|male|malefemale|ship)/g
+                var SPECIAL_REGEX = /\\(malefemale|unicorn|pegasus|earth|alicorn|goal|time|female|male|ship)/g
                 var SPECIAL_REPLACE = {
                     "\\male":"\u2642",
                     "\\female":"\u2640",
@@ -176,16 +176,12 @@
                 <div class="card pony maleFemale unicorn s0">
                     <input type="text" class="name" placeholder="Card Name" required/>
                     <div class="image"></div>
-                    <div class="type">
-                        <button value="pony"></button>
-                        <button value="ship"></button>
-                        <button value="goal"></button>
-                        <button value="start"></button>
-                    </div>
+                    <div class="iconCard"></div>
                     <div class="iconGender">
                         <button value="female"></button>
                         <button value="male"></button>
                         <button value="maleFemale"></button>
+                        <button value=""></button>
                     </div>
                     <div class="iconRace">
                         <button value="unicorn"></button>
@@ -193,8 +189,14 @@
                         <button value="earthPony"></button>
                         <button value="alicorn"></button>
                         <button value="changeling"></button>
+                        <button value=""></button>
                     </div>
-                    <div class="iconCard"></div>
+                    <div class="type">
+                        <button value="pony"></button>
+                        <button value="ship"></button>
+                        <button value="goal"></button>
+                        <button value="start"></button>
+                    </div>
                     <div class="iconGoal">
                         <button value="s0"></button>
                         <button value="s1"></button>
@@ -215,7 +217,8 @@
                 <header>
                     This tool is still in beta.</br>
                     Report all bugs to <a href="https://twitter.com/Ripp_">@Ripp_</a></br>
-                    Feel free to check out the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a>
+                    Feel free to check out and fork the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a>
+                    Cards may be lost but I will try not to let that happen.
                 </header>
                 <label>Image (URL): <input type="text" id="image" placeholder="Card Image" required/></label>
 
