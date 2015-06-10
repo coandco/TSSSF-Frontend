@@ -49,11 +49,6 @@ html,body{
     resize: none;
 }
 
-.cardwrapper {
-    float:left;
-    margin-right:8px;
-}
-
 .card {
     width: 788px;
     height: 1088px;
@@ -70,7 +65,7 @@ html,body{
     left: 58px;
     top: 56px;
     width:0;
-    max-width:320px;
+    max-width:422px;
     padding-left:104px;
     height:0;
     min-height: 104px;
@@ -118,12 +113,13 @@ html,body{
   left: 45px;
 }
 .card .type:hover{
-    height:390px;
+    height:auto;
 }
 .card .type button{
-    height:75px;
+    height:88px;
     width:190px;
     margin:0;
+    position:relative;
     background-color: rgba(255,255,255,0.4);
 }
 .card .type button:first-child{
@@ -133,6 +129,10 @@ html,body{
   font-size: 76px;
   font-family: Bartholowmew;
   text-align: center;
+  position:absolute;
+  top:-20px;
+  left:0;
+  right:0;
 }
 .card button[value=pony]::before{
     content:"Pony";
@@ -263,6 +263,7 @@ html,body{
 .card.goal.s0 .iconGoal {
     width:94px;
     height:115px;
+    background-size:94px 115px;
     top: 550px;
     margin-left:13px;
     background-image:url('resources/symbols/symbol-0.png');
@@ -270,6 +271,7 @@ html,body{
 .card.goal.s1 .iconGoal {
     width:79px;
     height:105px;
+    background-size:79px 105px;
     top: 550px;
     margin-left:15px;
     background-image:url('resources/symbols/symbol-1.png');
@@ -277,12 +279,14 @@ html,body{
 .card.goal.s2 .iconGoal {
     width:120px;
     height:92px;
+    background-size:120px 92px;
     top: 550px;
     background-image:url('resources/symbols/symbol-2.png');
 }
 .card.goal.s3 .iconGoal {
     width:113px;
     height:107px;
+    background-size:113px 107px;
     top: 550px;
     margin-left:3px;
     background-image:url('resources/symbols/symbol-3.png');
