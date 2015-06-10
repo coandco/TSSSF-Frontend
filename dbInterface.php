@@ -1,4 +1,6 @@
 <?php
+    error_reporting(0);
+
     function uniqueKey($start,$field){
         $key = substr(md5($start),0,32);
         $tries = 0;

@@ -43,8 +43,8 @@ CREATE TABLE tsssff_savedcards2 (
     CONSTRAINT image CHECK ((image <> ''::text)),
     CONSTRAINT copyright CHECK ((copyright <> ''::text)),
     CONSTRAINT name CHECK (((name)::text <> ''::text)),
-    CONSTRAINT classes CHECK (((classes)::text <> ''::text))
-    CONSTRAINT editkey CHECK (((editkey)::text <> ''::text))
+    CONSTRAINT classes CHECK (((classes)::text <> ''::text)),
+    CONSTRAINT editkey CHECK (((editkey)::text <> ''::text)),
     CONSTRAINT viewkey CHECK (((viewkey)::text <> ''::text))
 
 );
