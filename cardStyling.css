@@ -233,9 +233,6 @@ html,body{
 .card.ship .flavour {
     color: #811935;
 }
-.card.ship .attrs {
-    display:none;
-}
 .card.ship .iconCard {
     background-image:url('resources/symbols/Symbol-Ship.png');
 }
