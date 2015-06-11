@@ -20,8 +20,14 @@
                 <div class="col-md-12">
                     <div class="panel">
                         <div class="panel-body">
-                            <table id="viewTable" class="table table-hover">
-                                <tr><th>Name</th><th>Kinds</th><th>Attributes</th><th>Copyright</th></tr>
+                            <table id="viewTable" class="table table-hover" style="margin: 30px 0;">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Kinds</th>
+                                    <th>Attributes</th>
+                                    <th>Copyright</th>
+                                    <th>&nbsp;</th>
+                                    </tr>
                             </table>
                         </div>
                     </div>
@@ -42,7 +48,6 @@
                 },function(r){
                     var d = JSON.parse(r);
                     $.each(d,function(_,i){
-                        console.log(i)
                         var key = i.viewkey;
                         $("<tr>").append(
                             $("<td>").text(i.name)
@@ -52,6 +57,12 @@
                             $("<td>").text(i.attr)
                         ).append(
                             $("<td>").text(i.copyright)
+                        ).append(
+                            $("<td>").append($("<i class='fa fa-picture-o'>"))
+                            .attr("data-original-title","<img style='max-width:184px;' src='"+i.image.replace(/'/g,"")+"'/>")
+                            .attr("data-html","1")
+                            .attr("data-placement","left")
+                            .tooltip()
                         ).click(function(){
                             open("./#view:"+key)
                         }).appendTo("#viewTable")
