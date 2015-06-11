@@ -6,17 +6,17 @@
     68  Card Generics
     150 Icon Generics
     171 Card Type Icon & Buttons
-    234 Pony & Start Cards
-    253     Start Card specifics
-    266     Race Icon
-    273         Regular
-    286         Changelings
-    272     Gender Icon
-    317     Time Icon
-    325 Ship Cards
-    338 Goal Cards
-    355     Score Icons
-    386     Selection Buttons
+    235 Pony & Start Cards
+    254     Start Card specifics
+    267     Race Icon
+    274         Regular
+    287         Changelings
+    273     Gender Icon
+    318     Time Icon
+    326 Ship Cards
+    339 Goal Cards
+    356     Score Icons
+    387     Selection Buttons
 */
 
 /* Generic */
@@ -216,6 +216,7 @@
       overflow: hidden;
       transform: rotate(-90deg);
       transform-origin: 0 0;
+      top: 485px;
       left: 45px;
     }
     .card button[value=pony]::before{
