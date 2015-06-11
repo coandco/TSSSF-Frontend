@@ -161,13 +161,13 @@ function cardSetup(){
         "\\unicorn":"\uE001",
         "\\pegasus":"\uE002",
         "\\alicorn":"\uE003",
-        "\\time":"\uE004"
+        "\\time":"\uE004",
         "\\replace":"(Replace): While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.",
         "\\swap":"(Swap): You may swap 2 Pony cards on the shipping grid.",
         "\\draw":"(Draw): You may draw a card from the Ship or Pony deck.",
         "\\goal":"(New Goal): You may discard a Goal and draw a new one to replace it.",
         "\\search":"(Search): You may search the Ship or Pony discard pile for a card of your choice and play it.",
-        "\\copy":"(Copy): You may copy the power of any Pony card currently on the shipping grid, except for Changelings.",
+        "\\copy":"(Copy): You may copy the power of any Pony card currently on the shipping grid, except for Changelings."
     }
 
     //Replace special escape codes when an input is updated
@@ -177,6 +177,12 @@ function cardSetup(){
             return SPECIAL_REPLACE[t];
         });
         $(this).val(txt)
+    })
+
+    //Replace and create tooltip hints
+    $.each(SPECIAL_REPLACE,function(key,replace){
+        console.log([key,replace,"dt[data-original-title='\\"+key+"']",$("dt[data-original-title='\\"+key+"']")]);
+        $("dt[data-original-title='\\"+key+"']").attr("data-original-title",replace).tooltip();
     })
 
     //When a text editor is updated resize it's helper to clone back the height.
