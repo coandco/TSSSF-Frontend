@@ -4,19 +4,19 @@
     37      Clear After
     44  Card Helpers
     68  Card Generics
-    105 Icon Generics
+    150 Icon Generics
     171 Card Type Icon & Buttons
     234 Pony & Start Cards
     253     Start Card specifics
     266     Race Icon
-    270         Regular
-    283         Changelings
-    296     Gender Icon
-    309     Time Icon
-    317 Ship Cards
-    311 Goal Cards
-    347     Score Icons
-    379     Selection Buttons
+    273         Regular
+    286         Changelings
+    272     Gender Icon
+    317     Time Icon
+    325 Ship Cards
+    338 Goal Cards
+    355     Score Icons
+    386     Selection Buttons
 */
 
 /* Generic */
@@ -151,7 +151,6 @@
     .card .iconGender,.card .iconRace,.card .iconCard,.card .iconGoal,.card .iconTime {
         position:absolute;
         left: 58px;
-        top: 56px;
         width:0;
         max-width:422px;
         padding-left:104px;
@@ -265,6 +264,9 @@
         }
     /*Race Icon*/
         .card .iconRace {
+            top: 56px;
+        }
+        .card.pony.male .iconRace, .card.pony.female .iconRace, .card.pony.maleFemale .iconRace{
             top: 160px;
         }
         /*Regular*/
@@ -295,7 +297,12 @@
             }
     /*Gender Icon*/
         .card .iconGender {
-            top: 485px;
+            top: 160px;
+            z-index:100;
+        }
+        .card.pony.male .iconGender, .card.pony.female .iconGender, .card.pony.maleFemale .iconGender{
+            top: 56px;
+            z-index:0;
         }
         .card.pony.female .iconGender, .card.start.female .iconGender, button[value=female] {
             background-image:url('resources/symbols/Symbol-Female.png');
