@@ -70,6 +70,45 @@ function save(){
     })
 }
 
+function sanitize(str){
+    var SPECIAL_REGEX = /(\u2642|\u2640|\u26A4|\u2764|\uE000|\uE001|\uE002|\uE003|\uE004)/g;
+    var SPECIAL_REPLACE = {
+        "\u2642":"{male}",
+        "\u2640":"{female}",
+        "\u26A4":"{malefemale}",
+        "\u2764":"{ship}",
+        "\uE000":"{earthpony}",
+        "\uE001":"{unicorn}",
+        "\uE002":"{pegasus}",
+        "\uE003":"{alicorn}",
+        "\uE004":"{postapocalypse}"
+    };
+    return str.replace(SPECIAL_REGEX,function(t){
+        return SPECIAL_REPLACE[t];
+    });
+}
+
+function exportCard(id){
+    $.post("/TSSSF/ponyimage.php",{
+        classes:$(".card").attr("class"),
+        card_name:sanitize($(".card .name").val()),
+        card_keywords:sanitize($(".card .attrs").val()),
+        card_body:sanitize($(".card .effect").val()),
+        card_flavor:sanitize($(".card .flavour").val()),
+        card_set:sanitize($(".card .copyright").val()),
+        card_art:$("#image").val()
+    },function(r){
+        var d = JSON.parse(r);
+        if (d.error){
+            alert(d.error);
+            return;
+        }
+        $("#editUrl").val(d["img_url"]);
+        $("#shareUrl").val(d["card_str"]);
+    })
+}
+
+/*
 function exportCard(){
     $.post("../CardMachine/TSSSF/ponyimage.php",{
         classes:$(".card").attr("class"),
@@ -88,6 +127,7 @@ function exportCard(){
         }
     })
 }
+*/
 
 function cardSetup(){
     //On card button clicks, remove other classes and add new ones.
