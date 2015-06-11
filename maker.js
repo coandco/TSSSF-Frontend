@@ -151,7 +151,7 @@ function cardSetup(){
     });
 
     //Constant infomation for special escape code handling.
-    var SPECIAL_REGEX = /\\(malefemale|unicorn|pegasus|earth|alicorn|goal|time|female|male|ship)/g
+    var SPECIAL_REGEX = /\\(malefemale|unicorn|pegasus|earth|alicorn|goal|time|female|male|ship|replace|swap|draw|goal|search|copy)/g
     var SPECIAL_REPLACE = {
         "\\male":"\u2642",
         "\\female":"\u2640",
@@ -162,6 +162,12 @@ function cardSetup(){
         "\\pegasus":"\uE002",
         "\\alicorn":"\uE003",
         "\\time":"\uE004"
+        "\\replace":"(Replace): While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.",
+        "\\swap":"(Swap): You may swap 2 Pony cards on the shipping grid.",
+        "\\draw":"(Draw): You may draw a card from the Ship or Pony deck.",
+        "\\goal":"(New Goal): You may discard a Goal and draw a new one to replace it.",
+        "\\search":"(Search): You may search the Ship or Pony discard pile for a card of your choice and play it.",
+        "\\copy":"(Copy): You may copy the power of any Pony card currently on the shipping grid, except for Changelings.",
     }
 
     //Replace special escape codes when an input is updated
