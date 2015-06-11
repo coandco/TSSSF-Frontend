@@ -2,168 +2,165 @@
 <html>
     <head>
         <title>TSSSFF Card Generator</title>
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link href="cardStyling.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <script>
-            function load(id){
-                $.get("dbInterface.php",{"id":id},function(r){
-                    var d = JSON.parse(r);
-                    $.each(d[1].split(" "),function(i,n){
-                        $("input[value="+n+"]").prop("checked",true);
-                    })
-                    $(".card .name").val(d[2]);
-                    $(".card .attrs").val(d[3]);
-                    $(".card .effect").val(d[4]);
-                    $(".card .flavour").val(d[5]);
-                    $("#image").val(d[6]);
-                    $(".card .copyright").val(d[7]);
-                    
-                    $("input[type=radio]:checked").change();
-                    $("#image").change();
-                    $(".card textarea").change();
-                })
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/ripples.min.css" rel="stylesheet">
+        <link href="css/material-wfont.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="cardStyling.css" rel="stylesheet">
+        <style>
+            .controls {
+                font-family: cabin;
             }
-            
-            function save(id){
-                $.post("dbInterface.php",{
-                    classes:$(".card").attr("class"),
-                    name:$(".card .name").val(),
-                    attr:$(".card .attr").val(),
-                    effect:$(".card .effect").val(),
-                    flavour:$(".card .flavour").val(),
-                    copyright:$(".card .copyright").val(),
-                    image:$("#image").val()
-                },function(r){
-                    var d = JSON.parse(r);
-                    if (d.error){
-                        $("#saveUrl").val(d.details || d.error);
-                    } else {
-                        document.location.hash = d[0]
-                        $("#saveUrl").val(document.location);
-                    }
-                })
+            dt{
+                width:50%!important;
             }
-            
-            
-            $(document).ready(function(){
-                $("input[type=radio]").change(function(){
-                    $("input[name="+$(this).attr("name")+"]").each(function(){
-                        $(".card").removeClass($(this).attr("value"));
-                    })
-                    if ($(this).prop("checked")){
-                        $(".card").addClass($(this).attr("value"));
-                    }
-                });
-
-                $(window).resize(function(){
-                    var hf = ($(window).height()-16)/1088,
-                        wf = ($(window).width()-516)/788
-                        f = Math.min(wf,hf);
-                    
-                    console.log(wf,hf);
-                    if (wf < 0.3){
-                        hf = ($(window).height()-216)/1088;
-                        wf = ($(window).width()-16)/788;
-                        f = Math.min(wf,hf);
-                    }
-                    $(".card").css("transform","scale("+f+")")
-                    
-                    $(".cardwrapper").width(788*f);
-                    $(".cardwrapper").height(1088*f);
-                });
-
-                $(".card textarea").on("change keyup paste",function(){
-                    var t = $(this),
-                        o = $(".cardHelper ." + t.attr("class"));
-                    o.text(t.val());
-                    t.height(o.height());
-                });
-
-                $("#image").change(function(){
-                    $(".card .image").css("background-image","url('"+$(this).val()+"')")
-                })
-                
-                $("#save").click(save)
-                
-                $(window).resize();
-                $(".card textarea").change();
-                
-                if(document.location.hash){
-                    load(document.location.hash.substr(1));
-                }
-            });
-        </script>
-
+            dd{
+                margin-left: calc(50% + 20px)!important;
+            }
+        </style>
     </head>
     <body>
-        
-        <main class="clearAfter">
-            <div class="cardwrapper">
-                <div class="card pony maleFemale unicorn s0">
-                    <input type="text" class="name" placeholder="Card Name" required/>
-                    <div class="image"></div>
-                    <div class="iconGender"></div>
-                    <div class="iconRace"></div>
-                    <div class="iconCard"></div>
-                    <div class="iconGoal"></div>
-                    <input type="text" class="attrs" placeholder="Attributes"/>
-                    <textarea class="effect" placeholder="Effect" required></textarea>
-                    <textarea class="flavour" placeholder="Flavour Text" required></textarea>
-                    <input type="text" class="copyright" placeholder="Copyright & Artist infomation" required/>
+
+        <div class="cardHelper">
+            <div class="effect"></div>
+            <div class="flavour"></div>
+        </div>
+
+        <main class="clearAfter container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-body cardwrapper">
+                            <div class="card pony maleFemale unicorn s0">
+                                <input type="text" class="name" placeholder="Card Name" required/>
+                                <div class="image"></div>
+                                <div class="iconCard"></div>
+                                <div class="iconGender">
+                                    <button value="female"></button>
+                                    <button value="male"></button>
+                                    <button value="maleFemale"></button>
+                                    <button value=""></button>
+                                </div>
+                                <div class="iconRace">
+                                    <button value="unicorn"></button>
+                                    <button value="pegasus"></button>
+                                    <button value="earthPony"></button>
+                                    <button value="alicorn"></button>
+                                    <button value="changeling"></button>
+                                    <button value=""></button>
+                                </div>
+                                <div class="type">
+                                    <button value="pony"></button>
+                                    <button value="ship"></button>
+                                    <button value="goal"></button>
+                                    <button value="start"></button>
+                                </div>
+                                <input type="text" class="attrs" placeholder="Attributes"/>
+                                <textarea class="effect" placeholder="Effect" required></textarea>
+                                <textarea class="flavour" placeholder="Flavour Text" required></textarea>
+                                <div class="iconGoal">
+                                    <button value="s0"></button>
+                                    <button value="s1"></button>
+                                    <button value="s2"></button>
+                                    <button value="s3"></button>
+                                </div>
+                                <div class="iconTime">
+                                    <button value="time"></button>
+                                    <button value=""></button>
+                                </div>
+                                <input type="text" class="copyright" placeholder="Copyright &amp; Artist infomation" required/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="cardHelper">
-                <div class="effect"></div>
-                <div class="flavour"></div>
-            </div>
-            <div class="controls">
-                <header>
-                    This tool is still in beta.</br>
-                    Report all bugs to <a href="https://twitter.com/Ripp_">@Ripp_</a></br>
-                    Feel free to check out the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a>
-                </header>
-                <label><input type="radio" name="cardType" value="pony" checked="true"/>Pony</label>
-                <label><input type="radio" name="cardType" value="ship"/>Ship</label>
-                <label><input type="radio" name="cardType" value="goal"/>Goal</label>
-                <label><input type="radio" name="cardType" value="start"/>Start</label>
-                <br/>
-                <label><input type="radio" name="gender" value="female"/>Female</label>
-                <label><input type="radio" name="gender" value="male"/>Male</label>
-                <label><input type="radio" name="gender" value="maleFemale" checked="true"/>Male &amp; Female</label>
-                <br/>
-                <label><input type="radio" name="race" value="unicorn" checked="true"/>Unicorn</label>
-                <label><input type="radio" name="race" value="pegasus"/>Pegasus</label>
-                <label><input type="radio" name="race" value="earthPony"/>Earth Pony</label>
-                <label><input type="radio" name="race" value="alicorn"/>Alicorn</label>
-                <br/>
-                <label><input type="radio" name="score" value="s0" checked="true"/>0 Points</label>
-                <label><input type="radio" name="score" value="s1"/>1 Point</label>
-                <label><input type="radio" name="score" value="s2"/>2 Points</label>
-                <label><input type="radio" name="score" value="s3"/>3 Points</label>
-                <br/>
-                <label>Image (URL): <input type="text" id="image" placeholder="Card Image" required/></label>
-                <br/>
-                <input type="button" id="save" value="Save"/>
-                <input type="text" id="saveUrl" placeholder="share URL"/><br/>
-                <div style="margin-left:1em;margin-top:1em">
-                Symbol guide:</br>
-                8 - Unicorn</br>
-                9 - Pegasus</br>
-                % - Earth Pony</br>
-                @ - Alicorn</br>
-                # - Goal</br>
-                $ - Of Ponies and Peril</br>
-                * - Female</br>
-                ; - Male</br>
-                &lt; - Ship</br>
+                <div class="controls col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1>Twilight Sparkle Secret Ship-Fic Folder Card Generator</h1>
+                            <em>Beta</em> By <a href="https://twitter.com/Ripp_">@Ripp_</a>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                Feel free to check out and fork the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a><br/>
+                                Cards may be lost but I will try not to let that happen.
+                            </p>
+                            <div class="form-group">
+                                <input class="form-control floating-label" type="text" id="image" placeholder="Card Image" required/>
+                            </div>
+
+                            <button id="save" class="btn btn-success">Save</button>
+                            <button id="new" class="btn btn-primary">New</button>
+                            <button id="export" class="btn btn-warning">Export <em> Experimental </em></button>
+                            <!--<button id="exportTo" class="btn btn-warning">Export to shipbooru</button>-->
+                            <i id="working" class="fa fa-cog fa-spin fa-3x" style="display:none;vertical-align:middle;"></i>
+
+                            <div id="error" class="alert alert-danger" style="display:none">
+                                <strong></strong>
+                                <em></em>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control floating-label" type="text" id="editUrl" placeholder="Edit link: (lets you modify this copy of the card, keep secret)"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control floating-label" type="text" id="shareUrl" placeholder="Sharing Link:"/>
+                            </div>
+                            Symbols and Powers Guide:
+                            <div class=row>
+                                <div class="col-xs-6">
+                                    <dl class="dl-horizontal icon-list">
+                                        <dt>&#x2642;</dt> <dd>\male</dd>
+                                        <dt>&#x2640;</dt> <dd>\female</dd>
+                                        <dt>&#x26A4;</dt> <dd>\malefemale</dd>
+                                        <dt>&#x2764;</dt> <dd>\ship</dd>
+                                        <dt>&#xE000;</dt> <dd>\earth</dd>
+                                        <dt>&#xE001;</dt> <dd>\unicorn</dd>
+                                        <dt>&#xE002;</dt> <dd>\pegasus</dd>
+                                        <dt>&#xE003;</dt> <dd>\alicorn</dd>
+                                        <dt>&#xE004;</dt> <dd>\time</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-xs-6">
+                                    <dl class="dl-horizontal">
+                                        <!--We will replace the long unweild hints in code before setting them as tooltips-->
+                                        <dt data-original-title="\replace" data-placement="left">(Replace)</dt>
+                                            <dd>\replace</dd>
+                                        <dt data-original-title="\swap" data-placement="left">(Swap)</dt>
+                                            <dd>\swap</dd>
+                                        <dt data-original-title="\draw" data-placement="left">(Draw)</dt>
+                                            <dd>\draw</dd>
+                                        <dt data-original-title="\goal" data-placement="left">(New Goal)</dt>
+                                            <dd>\goal</dd>
+                                        <dt data-original-title="\search" data-placement="left">(Search)</dt>
+                                            <dd>\search</dd>
+                                        <dt data-original-title="\copy" data-placement="left">(Copy)</dt>
+                                            <dd>\copy</dd>
+                                        <dt data-original-title="\changeling" data-placement="left">Changeling</dt>
+                                            <dd>\changeling</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            (Symbols and powers update when you deselect the field. Powers add the whole description to the card. Hover over each power for it's full description.)
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        This project is not associated with or nessesery endorsed by HORRIBLE PEOPLE PRODUCTIONS the creators of Twilight Sparkle's Secret Shipfic Folder <br/>
+                        For more infomation on the project visit <a href="http://tsssf-tcg.tumblr.com/">The offical Twilight Sparkle's Secret Shipfic Folder site</a>
+                    </div>
                 </div>
-                <footer>
-                    This project is not associated with or nessesery endorsed by HORRIBLE PEOPLE PRODUCTIONS the creators of Twilight Sparkle's Secret Shipfic Folder <br/>
-                    For more infomation on the project visit <a href="http://tsssf-tcg.tumblr.com/">The offical Twilight Sparkle's Secret Shipfic Folder site</a>
-                </footer>
             </div>
         </main>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/ripples.min.js"></script>
+        <script src="js/material.min.js"></script>
+        <script src="maker.js"></script>
+        <script>
+            $(document).ready(function() {
+                $.material.init();
+                cardSetup()
+            });
+        </script>
     </body>
 </html>
