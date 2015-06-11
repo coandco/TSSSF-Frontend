@@ -151,7 +151,7 @@ function cardSetup(){
     });
 
     //Constant infomation for special escape code handling.
-    var SPECIAL_REGEX = /\\(malefemale|unicorn|pegasus|earth|alicorn|goal|time|female|male|ship|replace|swap|draw|goal|search|copy|changeling)/g
+    var SPECIAL_REGEX = /\\(malefemale|unicorn|pegasus|earth|alicorn|goal|time|female|male|ship|replace|swap|draw|newgoal|search|copy|changeling)/g
     var SPECIAL_REPLACE = {
         "\\male":"\u2642",
         "\\female":"\u2640",
@@ -165,10 +165,10 @@ function cardSetup(){
         "\\replace":"(Replace): While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.",
         "\\swap":"(Swap): You may swap 2 Pony cards on the shipping grid.",
         "\\draw":"(Draw): You may draw a card from the Ship or Pony deck.",
-        "\\goal":"(New Goal): You may discard a Goal and draw a new one to replace it.",
+        "\\newgoal":"(New Goal): You may discard a Goal and draw a new one to replace it.",
         "\\search":"(Search): You may search the Ship or Pony discard pile for a card of your choice and play it.",
         "\\copy":"(Copy): You may copy the power of any Pony card currently on the shipping grid, except for Changelings.",
-        "\\changeling":"Gains the name, keywords and symbols of any single [race] of your choice until the end of the turn. If this card is moved to a new place on the grid the current player must select a new disguise that will alst until the end of their turn, even if other cards say its power would not activate."
+        "\\changeling":"Gains the name, keywords and symbols of any single [race] of your choice until the end of the turn. If this card is moved to a new place on the grid, the current player must select a new disguise that will last until the end of their turn, even if other cards say its power would not activate."
     }
 
     //Replace special escape codes when an input is updated
