@@ -13,6 +13,12 @@
             .controls {
                 font-family: cabin;
             }
+            dt{
+                width:50%!important;
+            }
+            dd{
+                margin-left: calc(50% + 20px)!important;
+            }
         </style>
     </head>
     <body>
@@ -101,19 +107,42 @@
                             <div class="form-group">
                                 <input class="form-control floating-label" type="text" id="shareUrl" placeholder="Sharing Link:"/>
                             </div>
-                            Symbols Guide:
-                            <dl class="dl-horizontal">
-                                <dt>&#x2642;</dt> <dd>\male</dd>
-                                <dt>&#x2640;</dt> <dd>\female</dd>
-                                <dt>&#x26A4;</dt> <dd>\malefemale</dd>
-                                <dt>&#x2764;</dt> <dd>\ship</dd>
-                                <dt>&#xE000;</dt> <dd>\earth</dd>
-                                <dt>&#xE001;</dt> <dd>\unicorn</dd>
-                                <dt>&#xE002;</dt> <dd>\pegasus</dd>
-                                <dt>&#xE003;</dt> <dd>\alicorn</dd>
-                                <dt>&#xE004;</dt> <dd>\time</dd>
-                            </dl>
-                            (Symbols update when you deselect the field)
+                            Symbols and Powers Guide:
+                            <div class=row>
+                                <div class="col-xs-6">
+                                    <dl class="dl-horizontal icon-list">
+                                        <dt>&#x2642;</dt> <dd>\male</dd>
+                                        <dt>&#x2640;</dt> <dd>\female</dd>
+                                        <dt>&#x26A4;</dt> <dd>\malefemale</dd>
+                                        <dt>&#x2764;</dt> <dd>\ship</dd>
+                                        <dt>&#xE000;</dt> <dd>\earth</dd>
+                                        <dt>&#xE001;</dt> <dd>\unicorn</dd>
+                                        <dt>&#xE002;</dt> <dd>\pegasus</dd>
+                                        <dt>&#xE003;</dt> <dd>\alicorn</dd>
+                                        <dt>&#xE004;</dt> <dd>\time</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-xs-6">
+                                    <dl class="dl-horizontal">
+                                        <!--We will replace the long unweild hints in code before setting them as tooltips-->
+                                        <dt data-original-title="\replace" data-placement="left">(Replace)</dt>
+                                            <dd>\replace</dd>
+                                        <dt data-original-title="\swap" data-placement="left">(Swap)</dt>
+                                            <dd>\swap</dd>
+                                        <dt data-original-title="\draw" data-placement="left">(Draw)</dt>
+                                            <dd>\draw</dd>
+                                        <dt data-original-title="\goal" data-placement="left">(New Goal)</dt>
+                                            <dd>\goal</dd>
+                                        <dt data-original-title="\search" data-placement="left">(Search)</dt>
+                                            <dd>\search</dd>
+                                        <dt data-original-title="\copy" data-placement="left">(Copy)</dt>
+                                            <dd>\copy</dd>
+                                        <dt data-original-title="\changeling" data-placement="left">Changeling</dt>
+                                            <dd>\changeling</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            (Symbols and powers update when you deselect the field. Powers add the whole description to the card. Hover over each power for it's full description.)
                         </div>
                     </div>
                     <div class="panel-footer">
