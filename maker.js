@@ -1,6 +1,19 @@
 //After a page is updated this stores the edit key so we can modify it again
 var EDIT_KEY = null;
 
+//Blanks the cards
+function newCard(){
+    $(".card").attr("class","card pony maleFemale unicorn s0");
+    $(".card .name").val("");
+    $(".card .attrs").val("");
+    $(".card .effect").val("").change();
+    $(".card .flavour").val("").change();
+    $(".card .copyright").val("");
+    EDIT_KEY = null;
+    document.location.hash = "";
+    $("#editUrl,#shareUrl,#image").val("").change().addClass("empty")
+}
+
 //Loads a card
 function load(kind,id){
     var o={};o[kind]=id
@@ -21,12 +34,10 @@ function load(kind,id){
         $(".card .flavour").val(d.flavour);
         $("#image").val(d.image);
         $(".card .copyright").val(d.copyright);
-
-        $("input[type=radio]:checked").change();
         $("#image").change();
         $(".card textarea").change();
-        document.location.hash = ""
 
+        document.location.hash = "."
         document.location.hash = ""
 
         $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
@@ -150,10 +161,9 @@ function cardSetup(){
         $(".card .image").css("background-image","url('"+$(this).val()+"')")
     })
 
-    //Save button
+    //Save, New & Export buttons
     $("#save").click(save)
-
-    //Export Button
+    $("#new").click(newCard)
     $("#export").click(exportCard)
 
     //Inital call setup functions
