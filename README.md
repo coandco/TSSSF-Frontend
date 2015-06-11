@@ -10,6 +10,16 @@ The tool is hopefull self explanatory:
  * Card types can be changed by hovering the card type on the left of the card.
  * Special symbols can be added with escapes such as `\earth` A full list is given below and on the page.
 
+##Credits and thanks.
+ * Majority of code is Written by [Ripp_ AKA chao-master](https://github.com/chao-master)
+ * The backend system is modified off the offical code by
+   * [Horrible People](https://github.com/HorriblePeople)
+   * Based off a fork by [Coandco](https://github.com/coandco)
+   * With help from [Latent Logic](https://github.com/Latent-Logic)
+ * Special thanks also go to
+   * [Coandco](https://github.com/coandco) Again for helpful bug reports and
+   * [MrQuallzin](https://github.com/MrQuallzin) For bug reports and helping with the pony power quick inserts.
+
 ## Forking
 You are welcome to fork the project and run your own instance in terms with the LISENCE.
 
