@@ -349,6 +349,7 @@ html,body{
     font-family: Cabin;
     text-align: center;
     font-size: 35px;
+    line-height: 43px;
     overflow:hidden;
     white-space:pre-line;
 }
@@ -357,6 +358,7 @@ html,body{
     width: 688px;
     font-family: Cabin;
     font-size: 35px;
+    line-height: 43px;
     white-space: pre-wrap;
     word-wrap: break-word;
     visibility: hidden;
@@ -371,6 +373,7 @@ html,body{
     font-family: Klinic;
     text-align: center;
     font-size: 28px;
+    line-height: 35px;
     overflow: hidden;
     white-space:pre-line;
 }
@@ -379,6 +382,7 @@ html,body{
     width: 688px;
     font-family: Klinic;
     font-size: 28px;
+    line-height: 35px;
     white-space: pre-wrap;
     word-wrap: break-word;
     visibility: hidden;
