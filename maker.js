@@ -81,7 +81,7 @@ function save(){
     })
 }
 
-function exportCard(){
+function exportCard(toShipbooru){
     $.post("../CardMachine/TSSSF/ponyimage.php",{
         classes:$(".card").attr("class"),
         name:$(".card .name").val(),
@@ -95,7 +95,29 @@ function exportCard(){
         if (d.error){
             console.log(d.details);
         } else {
-            open(d.img_url);
+            /*if(toShipbooru){
+                var data = new FormData();
+                data.append("upload",new Blob([d.img_url],{type:"image/png"}))
+                data.append("title",$(".card .name").val());
+                data.append("attr",$(".card .attrs").val());
+                data.append("rating","q");
+                data.append("submit","Upload");
+                $.ajax({
+                    url:"http://secretshipfic.booru.org/index.php?page=post&s=list",
+                    type:"POST",
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    complete:function(n,c,d){
+                        console.log(n,c,d)
+                    }
+                })
+            } else {*/
+                open("data:image/png;base64,"+d.img_url);
+            //}
         }
     })
 }
@@ -165,6 +187,7 @@ function cardSetup(){
     $("#save").click(save)
     $("#new").click(newCard)
     $("#export").click(exportCard)
+    <!--$("#exportTo").click(function(){exportCard(1)})-->
 
     //Inital call setup functions
     $(window).resize();

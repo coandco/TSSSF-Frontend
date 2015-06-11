@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>TSSSFF Card Generator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/ripples.min.css" rel="stylesheet">
+        <link href="css/material-wfont.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+
+        <link href="cardStyling.css" rel="stylesheet">
+        <style>
+            .controls {
+                font-family: cabin;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <table id="viewTable" class="table table-hover">
+                                <tr><th>Name</th><th>Kinds</th><th>Attributes</th><th>Copyright</th></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/ripples.min.js"></script>
+        <script src="js/material.min.js"></script>
+        <script>
+            var LAST_KEY = ''
+            function loadMoreCards(){
+                $.get("dbInterface.php",{
+                    "view":LAST_KEY,
+                    "amount":50
+                },function(r){
+                    var d = JSON.parse(r);
+                    $.each(d,function(_,i){
+                        console.log(i)
+                        var key = i.viewkey;
+                        $("<tr>").append(
+                            $("<td>").text(i.name)
+                        ).append(
+                            $("<td>").text(i.classes)
+                        ).append(
+                            $("<td>").text(i.attr)
+                        ).append(
+                            $("<td>").text(i.copyright)
+                        ).click(function(){
+                            open("./#view:"+key)
+                        }).appendTo("#viewTable")
+                    })
+                })
+            }
+
+            $(document).ready(function() {
+                $.material.init();
+                loadMoreCards()
+            });
+        </script>
+    </body>

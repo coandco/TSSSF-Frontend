@@ -1,5 +1,6 @@
 <?php
-    error_reporting(0);
+    #error_reporting(0);
+    error_reporting(ALL);
 
     function uniqueKey($start,$field){
         $key = substr(md5($start),0,32);
@@ -29,6 +30,18 @@
             }
         }
         return $card;
+    }
+
+    function getRange($minViewKey,$amount){
+        $minViewKey = pg_escape_string($minViewId);
+        $amount = pg_escape_string($amount);
+        $query = "SELECT viewKey,classes,name,attr,image,copyright FROM tsssff_savedcards2 WHERE viewKey >= '$minViewKey' ORDER BY viewKey LIMIT $amount;";
+        $result = pg_query($query) or dieError("Query error getting cards",pg_last_error());
+        $cards = pg_fetch_all($result);
+        if (!$cards){
+            dieError("Query error getting cards",pg_last_error());
+        }
+        return $cards;
     }
 
     function putCard($editKey,$classes,$name,$attr,$effect,$flavour,$image,$copyright){
@@ -75,6 +88,7 @@
         }
 
         $mode="";
+
         if(array_key_exists("edit",$_GET)) {
             $mode = "edit";
         }
@@ -88,14 +102,22 @@
             dieError("Invalid request","One of edit or view paramaters must be given");
         }
 
-        $card = getCard($mode,$_GET[$mode]);
-        if (!$card){
-            $card = getCard("view","SPC-404");
+        if (array_key_exists("amount",$_GET)){
+            if ($mode == "view"){
+                print json_encode(getRange($view,$_GET["amount"]));
+            } else {
+                dieError("amount paramater only valid with view paramater");
+            }
+        } else {
+            $card = getCard($mode,$_GET[$mode]);
+            if (!$card){
+                $card = getCard("view","SPC-404");
+            }
+            if ($mode != "edit" or $card["editkey"] != $_GET[$mode]){
+                unset($card["editkey"]);
+            }
+            print json_encode($card);
         }
-        if ($mode != "edit" or $card["editkey"] != $_GET[$mode]){
-            unset($card["editkey"]);
-        }
-        print json_encode($card);
 
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){ #Save a card to the database
         $conn = pg_connect("host=/var/run/postgresql/ dbname=ripp_ user=ripp_");
