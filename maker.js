@@ -1,6 +1,18 @@
 //After a page is updated this stores the edit key so we can modify it again
 var EDIT_KEY = null;
 
+//Display error
+function mayError(errObj){
+    if (errObj.error){
+        $("#error strong").text(errObj.error);
+        $("#error em").text(errObj.details);
+        $("#error").show()
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 //Blanks the cards
 function newCard(){
     $(".card").attr("class","card pony maleFemale unicorn s0");
@@ -12,6 +24,7 @@ function newCard(){
     EDIT_KEY = null;
     document.location.hash = "";
     $("#editUrl,#shareUrl,#image").val("").change().addClass("empty")
+    $("#error").hide();
 }
 
 //Loads a card
@@ -20,10 +33,7 @@ function load(kind,id){
     $.get("dbInterface.php",o,function(r){
         var d = JSON.parse(r);
         EDIT_KEY = null;
-        if (d.error){
-            alert(d.error);
-            return;
-        }
+        if(mayError(d)) {return;}
         $(".card button").each(function(){
             $(".card").removeClass($(this).attr("value"))
         })
@@ -67,10 +77,7 @@ function save(){
         image:$("#image").val()
     },function(r){
         var d = JSON.parse(r);
-        if (d.error){
-            alert(d.error);
-            return;
-        }
+        if(mayError(d)) {return;}
         document.location.hash = "."
         document.location.hash = ""
         $("#editUrl").val(document.location+"edit:"+d["editkey"]);
@@ -92,33 +99,30 @@ function exportCard(toShipbooru){
         image:$("#image").val()
     },function(r){
         var d = JSON.parse(r);
-        if (d.error){
-            console.log(d.details);
-        } else {
-            /*if(toShipbooru){
-                var data = new FormData();
-                data.append("upload",new Blob([d.img_url],{type:"image/png"}))
-                data.append("title",$(".card .name").val());
-                data.append("attr",$(".card .attrs").val());
-                data.append("rating","q");
-                data.append("submit","Upload");
-                $.ajax({
-                    url:"http://secretshipfic.booru.org/index.php?page=post&s=list",
-                    type:"POST",
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    complete:function(n,c,d){
-                        console.log(n,c,d)
-                    }
-                })
-            } else {*/
-                open("data:image/png;base64,"+d.img_url);
-            //}
-        }
+        if(mayError(d)) {return;}
+        /*if(toShipbooru){
+            var data = new FormData();
+            data.append("upload",new Blob([d.img_url],{type:"image/png"}))
+            data.append("title",$(".card .name").val());
+            data.append("attr",$(".card .attrs").val());
+            data.append("rating","q");
+            data.append("submit","Upload");
+            $.ajax({
+                url:"http://secretshipfic.booru.org/index.php?page=post&s=list",
+                type:"POST",
+                data: data,
+                processData: false,
+                contentType: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                complete:function(n,c,d){
+                    console.log(n,c,d)
+                }
+            })
+        } else {*/
+        open("data:image/png;base64,"+d.img_url);
+        //}
     })
 }
 
@@ -188,6 +192,19 @@ function cardSetup(){
     $("#new").click(newCard)
     $("#export").click(exportCard)
     //$("#exportTo").click(function(){exportCard(1)})
+
+    //Log number of ajax events for the spinner
+    var AJAX_EVENTS = 0
+
+    $( document ).ajaxSend(function(){
+        AJAX_EVENTS++;
+        $("#working").show();
+        $("#error").hide();
+    }).ajaxComplete(function() {
+        if ( --AJAX_EVENTS == 0 ) {
+            $("#working").hide();
+        }
+    });
 
     //Inital call setup functions
     $(window).resize();

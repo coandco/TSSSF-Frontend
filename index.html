@@ -77,20 +77,25 @@
                         </div>
                         <div class="panel-body">
                             <p>
-                                Feel free to check out and fork the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a>
+                                Feel free to check out and fork the source on <a href="https://github.com/chao-master/TSSSFF-Generator">github</a><br/>
                                 Cards may be lost but I will try not to let that happen.
                             </p>
                             <div class="form-group">
                                 <input class="form-control floating-label" type="text" id="image" placeholder="Card Image" required/>
                             </div>
 
-                            <div class="form-group">
-                                <button id="save" class="btn btn-success">Save</button>
-                                <button id="new" class="btn btn-primary">New</button>
-                                <button id="export" class="btn btn-warning">Export <em> Experimental </em></button>
-                                <!--<button id="exportTo" class="btn btn-warning">Export to shipbooru</button>-->
+                            <button id="save" class="btn btn-success">Save</button>
+                            <button id="new" class="btn btn-primary">New</button>
+                            <button id="export" class="btn btn-warning">Export <em> Experimental </em></button>
+                            <!--<button id="exportTo" class="btn btn-warning">Export to shipbooru</button>-->
+                            <i id="working" class="fa fa-cog fa-spin fa-3x" style="display:none;vertical-align:middle;"></i>
+
+                            <div id="error" class="alert alert-danger" style="display:none">
+                                <strong></strong>
+                                <em></em>
                             </div>
-                                <div class="form-group">
+
+                            <div class="form-group">
                                 <input class="form-control floating-label" type="text" id="editUrl" placeholder="Edit link: (lets you modify this copy of the card, keep secret)"/>
                             </div>
                             <div class="form-group">
