@@ -44,7 +44,7 @@ function load(kind,id){
 }
 
 //Saves a card
-function save(id){
+function save(){
     $.post("dbInterface.php",{
         editkey:EDIT_KEY,
         classes:$(".card").attr("class"),
@@ -67,6 +67,25 @@ function save(id){
         $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
         EDIT_KEY = d["editkey"];
         document.location.hash = "edit:"+d["editkey"]
+    })
+}
+
+function exportCard(){
+    $.post("../CardMachine/TSSSF/ponyimage.php",{
+        classes:$(".card").attr("class"),
+        name:$(".card .name").val(),
+        attr:$(".card .attrs").val(),
+        effect:$(".card .effect").val(),
+        flavour:$(".card .flavour").val(),
+        copyright:$(".card .copyright").val(),
+        image:$("#image").val()
+    },function(r){
+        var d = JSON.parse(r);
+        if (d.error){
+            console.log(d.details);
+        } else {
+            open(d.img_url);
+        }
     })
 }
 
@@ -133,6 +152,9 @@ function cardSetup(){
 
     //Save button
     $("#save").click(save)
+
+    //Export Button
+    $("#export").click(exportCard)
 
     //Inital call setup functions
     $(window).resize();
