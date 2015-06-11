@@ -187,7 +187,7 @@ function cardSetup(){
     $("#save").click(save)
     $("#new").click(newCard)
     $("#export").click(exportCard)
-    <!--$("#exportTo").click(function(){exportCard(1)})-->
+    //$("#exportTo").click(function(){exportCard(1)})
 
     //Inital call setup functions
     $(window).resize();
