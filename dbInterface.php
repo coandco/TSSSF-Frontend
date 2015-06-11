@@ -55,7 +55,8 @@
                     attr = E'$attr',
                     effect = E'$effect',
                     flavour = E'$flavour',
-                    image = E'$image'
+                    image = E'$image',
+                    copyright = E'$copyright'
                 WHERE
                     editKey = E'$editKey'
                 RETURNING editKey,viewKey;";
