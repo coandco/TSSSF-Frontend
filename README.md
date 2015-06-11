@@ -2,7 +2,7 @@ TSSSFF-Generator
 ================
 
 ## Using
-A live example of the *betaStoof* branch can be found on [my website](http://ripppo.me/TSSSFF-Beta/) and is free to use for all Safe for work cards.
+A live example can be found on [my website](http://ripppo.me/TSSSFF-Beta/) and is free to use for all Safe for work cards.
 
 The tool is hopefull self explanatory:
  * Click and type on each field to edit them.
