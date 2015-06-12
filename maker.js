@@ -165,7 +165,7 @@ function cardSetup(){
         "\\replace":"(Replace): While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.",
         "\\swap":"(Swap): You may swap 2 Pony cards on the shipping grid. Neither of their powers activate.",
         "\\draw":"(Draw): You may draw a card from the Ship or Pony deck.",
-        "\\newgoal":"(New Goal): You may put 1 Goal at the bottom of the Goal deck and draw a new one ot replace it.",
+        "\\newgoal":"(New Goal): You may put 1 Goal at the bottom of the Goal deck and draw a new one to replace it.",
         "\\search":"(Search): You may search the Ship or Pony discard pile for a card of your choice and put it into your hand. If it is still in your hand at th end of your turn, discard it.",
         "\\copy":"(Copy): You may copy the power of any Pony card currently on the shipping grid, except for Changelings.",
         "\\changeling":"Gains the name, keywords and symbols of any single [race] of your choice until the end of the turn. If this card is moved to a new place on the grid, the current player must select a new disguise that will last until the end of their turn, even if other cards say its power would not activate."
