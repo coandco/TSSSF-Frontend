@@ -103,6 +103,8 @@ function exportCard(id){
             alert(d.error);
             return;
         }
+        open(d["img_url"]);
+        $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
         $("#editUrl").val(d["img_url"]);
         $("#shareUrl").val(d["card_str"]);
     })
