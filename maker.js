@@ -16,7 +16,7 @@ function mayError(errObj){
 //Blanks the cards
 function newCard(){
     $(".card").attr("class","card pony maleFemale unicorn s0");
-    $(".card .name").val("");
+    $(".card .nameInput").val("");
     $(".card .attrs").val("");
     $(".card .effect").val("").change();
     $(".card .flavour").val("").change();
@@ -68,7 +68,7 @@ function save(){
     $.post("dbInterface.php",{
         editkey:EDIT_KEY,
         classes:$(".card").attr("class"),
-        name:$(".card .name").val(),
+        name:$(".card .nameInput").val(),
         attr:$(".card .attrs").val(),
         effect:$(".card .effect").val(),
         flavour:$(".card .flavour").val(),
@@ -90,7 +90,7 @@ function save(){
 function exportCard(toShipbooru){
     $.post("../CardMachine/TSSSF/ponyimage.php",{
         classes:$(".card").attr("class"),
-        name:$(".card .name").val(),
+        name:$(".card .nameInput").val(),
         attr:$(".card .attrs").val(),
         effect:$(".card .effect").val(),
         flavour:$(".card .flavour").val(),
