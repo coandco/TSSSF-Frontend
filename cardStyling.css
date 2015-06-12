@@ -47,7 +47,7 @@
         width: 688px;
         font-family: Klinic;
         font-size: 28px;
-        line-height: 35px;
+        line-height: 30px;
         white-space: pre-wrap;
         word-wrap: break-word;
         visibility: hidden;
@@ -104,7 +104,7 @@
     }
     .card .attrs {
         position: absolute;
-        bottom: 437px;
+        bottom: 435px;
         right: 66px;
         font-family: Cabin;
         text-align: right;
@@ -114,7 +114,7 @@
     }
     .card .effect {
         position: absolute;
-        top: 679px;
+        top: 673px;
         left: 50px;
         width: 688px;
         font-family: Cabin;
@@ -126,25 +126,25 @@
     }
     .card .flavour {
         position: absolute;
-        bottom: 50px;
+        bottom: 45px;
         left: 50px;
         width: 688px;
         font-family: Klinic;
         text-align: center;
         font-size: 28px;
-        line-height: 35px;
+        line-height: 30px;
         overflow: hidden;
         white-space:pre-line;
     }
     .card .copyright {
         font-family: Cabin;
         color: #eadcec;
-        bottom: 14px;
+        bottom: 9px;
         position: absolute;
         width: 712px;
         font-size: 18px;
         text-align: right;
-        right: 38px;
+        right: 37px;
     }
 
 /* Icon Generics */
