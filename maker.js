@@ -199,7 +199,7 @@ function cardSetup(){
     $(".card .nameInput").on("change keyup paste",function(){
         var t = $(this),
             o = $(".card .name");
-        o.toggleClass("small",t[0].scrollWidth > t.width())
+        o.toggleClass("small",t[0].scrollWidth > t.width()+1)
         o.text(t.val());
     });
 
