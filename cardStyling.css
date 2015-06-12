@@ -245,7 +245,7 @@
         content:"Start";
         color:#3c3538;
     }
-    .card button[value=""]{
+    .card button[value=""], .card button[value=R], .card button[value=G]{
         border: dashed #333;
         border-radius: 50%;
     }
@@ -274,11 +274,11 @@
             color: #edefee;
         }
     /*Race Icon*/
-        .card .iconRace {
-            top: 56px;
-        }
-        .card.pony.male .iconRace, .card.pony.female .iconRace, .card.pony.maleFemale .iconRace{
+        .card.pony .iconRace {
             top: 160px;
+        }
+        .card.pony.G:not(.R) .iconRace {
+            top:86px;
         }
         /*Regular*/
             .card.pony.unicorn .iconRace, .card.start.unicorn .iconRace, button[value=unicorn] {
@@ -308,12 +308,10 @@
             }
     /*Gender Icon*/
         .card .iconGender {
-            top: 160px;
-            z-index:100;
-        }
-        .card.pony.male .iconGender, .card.pony.female .iconGender, .card.pony.maleFemale .iconGender{
             top: 56px;
-            z-index:0;
+        }
+        .card.pony.R:not(.G) .iconGender {
+            top:86px;
         }
         .card.pony.female .iconGender, .card.start.female .iconGender, button[value=female] {
             background-image:url('resources/symbols/Symbol-Female.png');
