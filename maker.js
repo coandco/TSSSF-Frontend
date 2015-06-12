@@ -38,13 +38,12 @@ function load(kind,id){
             $(".card").removeClass($(this).attr("value"))
         })
         $(".card").addClass(d.classes);
-        $(".card .name").val(d.name);
+        $(".card .nameInput").val(d.name).change();
         $(".card .attrs").val(d.attr);
         $(".card .effect").val(d.effect);
         $(".card .flavour").val(d.flavour);
-        $("#image").val(d.image);
+        $("#image").val(d.image).change();
         $(".card .copyright").val(d.copyright);
-        $("#image").change();
         $(".card textarea").change();
 
         document.location.hash = "."
@@ -163,10 +162,10 @@ function cardSetup(){
         "\\alicorn":"\uE003",
         "\\time":"\uE004",
         "\\replace":"(Replace): While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.",
-        "\\swap":"(Swap): You may swap 2 Pony cards on the shipping grid. Neither of their powers activate.",
+        "\\swap":"(Swap): You may swap 2 Pony cards on the shipping grid.",
         "\\draw":"(Draw): You may draw a card from the Ship or Pony deck.",
-        "\\newgoal":"(New Goal): You may put 1 Goal at the bottom of the Goal deck and draw a new one to replace it.",
-        "\\search":"(Search): You may search the Ship or Pony discard pile for a card of your choice and put it into your hand. If it is still in your hand at th end of your turn, discard it.",
+        "\\newgoal":"(New Goal): You may discard a Goal and draw a new one to replace it.",
+        "\\search":"(Search): You may search the Ship or Pony discard pile for a card of your choice and play it.",
         "\\copy":"(Copy): You may copy the power of any Pony card currently on the shipping grid, except for Changelings.",
         "\\changeling":"Gains the name, keywords and symbols of any single [race] of your choice until the end of the turn. If this card is moved to a new place on the grid, the current player must select a new disguise that will last until the end of their turn, even if other cards say its power would not activate."
     }
@@ -193,6 +192,15 @@ function cardSetup(){
             o = $(".cardHelper ." + t.attr("class"));
         o.text(t.val());
         t.height(o.height());
+    });
+
+    //We also use a simular system for the name, but since we dont need manual
+    //line breaks it gets easiers
+    $(".card .nameInput").on("change keyup paste",function(){
+        var t = $(this),
+            o = $(".card .name");
+        o.toggleClass("small",t[0].scrollWidth > t.width())
+        o.text(t.val());
     });
 
     //Update image

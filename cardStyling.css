@@ -4,19 +4,19 @@
     37      Clear After
     44  Card Helpers
     68  Card Generics
-    150 Icon Generics
-    171 Card Type Icon & Buttons
-    235 Pony & Start Cards
-    254     Start Card specifics
-    267     Race Icon
-    274         Regular
-    287         Changelings
-    273     Gender Icon
-    318     Time Icon
-    326 Ship Cards
-    339 Goal Cards
-    356     Score Icons
-    387     Selection Buttons
+    160 Icon Generics
+    181 Card Type Icon & Buttons
+    245 Pony & Start Cards
+    264     Start Card specifics
+    277     Race Icon
+    284         Regular
+    297         Changelings
+    309     Gender Icon
+    328     Time Icon
+    336 Ship Cards
+    349 Goal Cards
+    366     Score Icons
+    397     Selection Buttons
 */
 
 /* Generic */
@@ -65,7 +65,7 @@
         min-height:1em;
     }
 
-/* Card Generics */
+/* Card Generics */ /*+1*/
     .card {
         width: 788px;
         height: 1088px;
@@ -93,7 +93,7 @@
         background-position: center;
         background-repeat: no-repeat;
     }
-    .card .name {
+    .card .nameInput, .card .name {
         position:absolute;
         bottom: 952px;
         right: 66px;
@@ -101,6 +101,16 @@
         text-align: right;
         font-size: 55px;
         width: 555px;
+    }
+    .card .name{
+        pointer-events: none;
+    }
+    .card .name.small {
+        font-size: 45px;
+        line-height: 41px;
+    }
+    .card .nameInput:focus~.name, .card .nameInput:not(:focus){
+        color:transparent!important;
     }
     .card .attrs {
         position: absolute;
@@ -244,7 +254,7 @@
     .card.pony {
         background-image:url('resources/templates/BLEED-Blank-Pony-cropped.png');
     }
-    .card.pony .name,.card.pony .effect {
+    .card.pony .name, .card.pony .nameInput, .card.pony .effect {
         color:#462c89
     }
     .card.pony .flavour {
@@ -326,7 +336,7 @@
     .card.ship {
         background-image:url('resources/templates/BLEED-Blank-Ship-cropped.png');
     }
-    .card.ship .name,.card.ship .effect {
+    .card.ship .name, .card.ship .nameInput, .card.ship .effect {
         color:#ce1b69;
     }
     .card.ship .flavour {
@@ -340,7 +350,7 @@
     .card.goal {
         background-image:url('resources/templates/BLEED-Blank-Goal-cropped.png');
     }
-    .card.goal .name,.card.goal .effect {
+    .card.goal .name, .card.goal .nameInput, .card.goal .effect {
         color:#123962;
     }
     .card.goal .attrs {
