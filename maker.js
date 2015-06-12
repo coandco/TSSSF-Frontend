@@ -1,32 +1,52 @@
 //After a page is updated this stores the edit key so we can modify it again
 var EDIT_KEY = null;
 
+//Display error
+function mayError(errObj){
+    if (errObj.error){
+        $("#error strong").text(errObj.error);
+        $("#error em").text(errObj.details);
+        $("#error").show()
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+//Blanks the cards
+function newCard(){
+    $(".card").attr("class","card pony maleFemale unicorn s0");
+    $(".card .nameInput").val("");
+    $(".card .attrs").val("");
+    $(".card .effect").val("").change();
+    $(".card .flavour").val("").change();
+    $(".card .copyright").val("");
+    EDIT_KEY = null;
+    document.location.hash = "";
+    $("#editUrl,#shareUrl,#image").val("").change().addClass("empty")
+    $("#error").hide();
+}
+
 //Loads a card
 function load(kind,id){
     var o={};o[kind]=id
     $.get("dbInterface.php",o,function(r){
         var d = JSON.parse(r);
         EDIT_KEY = null;
-        if (d.error){
-            alert(d.error);
-            return;
-        }
+        if(mayError(d)) {return;}
         $(".card button").each(function(){
             $(".card").removeClass($(this).attr("value"))
         })
         $(".card").addClass(d.classes);
-        $(".card .name").val(d.name);
+        $(".card .nameInput").val(d.name).change();
         $(".card .attrs").val(d.attr);
         $(".card .effect").val(d.effect);
         $(".card .flavour").val(d.flavour);
-        $("#image").val(d.image);
+        $("#image").val(d.image).change();
         $(".card .copyright").val(d.copyright);
-
-        $("input[type=radio]:checked").change();
-        $("#image").change();
         $(".card textarea").change();
-        document.location.hash = ""
 
+        document.location.hash = "."
         document.location.hash = ""
 
         $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
@@ -48,7 +68,7 @@ function save(){
     $.post("dbInterface.php",{
         editkey:EDIT_KEY,
         classes:$(".card").attr("class"),
-        name:$(".card .name").val(),
+        name:$(".card .nameInput").val(),
         attr:$(".card .attrs").val(),
         effect:$(".card .effect").val(),
         flavour:$(".card .flavour").val(),
@@ -56,10 +76,7 @@ function save(){
         image:$("#image").val()
     },function(r){
         var d = JSON.parse(r);
-        if (d.error){
-            alert(d.error);
-            return;
-        }
+        if(mayError(d)) {return;}
         document.location.hash = "."
         document.location.hash = ""
         $("#editUrl").val(document.location+"edit:"+d["editkey"]);
@@ -111,10 +128,10 @@ function exportCard(id){
 }
 
 /*
-function exportCard(){
+function exportCard(toShipbooru){
     $.post("../CardMachine/TSSSF/ponyimage.php",{
         classes:$(".card").attr("class"),
-        name:$(".card .name").val(),
+        name:$(".card .nameInput").val(),
         attr:$(".card .attrs").val(),
         effect:$(".card .effect").val(),
         flavour:$(".card .flavour").val(),
@@ -122,11 +139,30 @@ function exportCard(){
         image:$("#image").val()
     },function(r){
         var d = JSON.parse(r);
-        if (d.error){
-            console.log(d.details);
-        } else {
-            open(d.img_url);
-        }
+        if(mayError(d)) {return;}
+        /*if(toShipbooru){
+            var data = new FormData();
+            data.append("upload",new Blob([d.img_url],{type:"image/png"}))
+            data.append("title",$(".card .name").val());
+            data.append("attr",$(".card .attrs").val());
+            data.append("rating","q");
+            data.append("submit","Upload");
+            $.ajax({
+                url:"http://secretshipfic.booru.org/index.php?page=post&s=list",
+                type:"POST",
+                data: data,
+                processData: false,
+                contentType: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                complete:function(n,c,d){
+                    console.log(n,c,d)
+                }
+            })
+        } else {*/
+        open("data:image/png;base64,"+d.img_url);
+        //}
     })
 }
 */
@@ -156,7 +192,7 @@ function cardSetup(){
     });
 
     //Constant infomation for special escape code handling.
-    var SPECIAL_REGEX = /\\(malefemale|unicorn|pegasus|earth|alicorn|goal|time|female|male|ship)/g
+    var SPECIAL_REGEX = /\\(malefemale|unicorn|pegasus|earth|alicorn|goal|time|female|male|ship|replace|swap|draw|newgoal|search|copy|changeling)/g
     var SPECIAL_REPLACE = {
         "\\male":"\u2642",
         "\\female":"\u2640",
@@ -166,7 +202,14 @@ function cardSetup(){
         "\\unicorn":"\uE001",
         "\\pegasus":"\uE002",
         "\\alicorn":"\uE003",
-        "\\time":"\uE004"
+        "\\time":"\uE004",
+        "\\replace":"(Replace): While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.",
+        "\\swap":"(Swap): You may swap 2 Pony cards on the shipping grid.",
+        "\\draw":"(Draw): You may draw a card from the Ship or Pony deck.",
+        "\\newgoal":"(New Goal): You may discard a Goal and draw a new one to replace it.",
+        "\\search":"(Search): You may search the Ship or Pony discard pile for a card of your choice and play it.",
+        "\\copy":"(Copy): You may copy the power of any Pony card currently on the shipping grid, except for Changelings.",
+        "\\changeling":"Gains the name, keywords and symbols of any single [race] of your choice until the end of the turn. If this card is moved to a new place on the grid, the current player must select a new disguise that will last until the end of their turn, even if other cards say its power would not activate."
     }
 
     //Replace special escape codes when an input is updated
@@ -178,6 +221,12 @@ function cardSetup(){
         $(this).val(txt)
     })
 
+    //Replace and create tooltip hints
+    $.each(SPECIAL_REPLACE,function(key,replace){
+        console.log([key,replace,"dt[data-original-title='\\"+key+"']",$("dt[data-original-title='\\"+key+"']")]);
+        $("dt[data-original-title='\\"+key+"']").attr("data-original-title",replace).tooltip();
+    })
+
     //When a text editor is updated resize it's helper to clone back the height.
     //This is because CSS Really hates working vertically
     $(".card textarea").on("change keyup paste",function(){
@@ -187,16 +236,38 @@ function cardSetup(){
         t.height(o.height());
     });
 
+    //We also use a simular system for the name, but since we dont need manual
+    //line breaks it gets easiers
+    $(".card .nameInput").on("change keyup paste",function(){
+        var t = $(this),
+            o = $(".card .name");
+        o.toggleClass("small",t[0].scrollWidth > t.width()+1)
+        o.text(t.val());
+    });
+
     //Update image
     $("#image").change(function(){
         $(".card .image").css("background-image","url('"+$(this).val()+"')")
     })
 
-    //Save button
+    //Save, New & Export buttons
     $("#save").click(save)
-
-    //Export Button
+    $("#new").click(newCard)
     $("#export").click(exportCard)
+    //$("#exportTo").click(function(){exportCard(1)})
+
+    //Log number of ajax events for the spinner
+    var AJAX_EVENTS = 0
+
+    $( document ).ajaxSend(function(){
+        AJAX_EVENTS++;
+        $("#working").show();
+        $("#error").hide();
+    }).ajaxComplete(function() {
+        if ( --AJAX_EVENTS == 0 ) {
+            $("#working").hide();
+        }
+    });
 
     //Inital call setup functions
     $(window).resize();

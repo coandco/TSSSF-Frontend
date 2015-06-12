@@ -1,400 +1,410 @@
-/* Old fonts
-@font-face {
-    font-family: Barthowheel;
-    src: url('resources/fonts/Barth_Regular.ttf');
-}
-
-@font-face {
-    font-family: Ubahn_newpony;
-    src: url('resources/fonts/Ubahn_newpony.ttf');
-}
-
-@font-face {
-    font-family: LinLibertine;
-    src: url('resources/fonts/LinLibertine_RI.ttf');
-}
+/* Locations of Things in the file:
+    22  Generic
+    23      Fonts
+    37      Clear After
+    44  Card Helpers
+    68  Card Generics
+    160 Icon Generics
+    181 Card Type Icon & Buttons
+    245 Pony & Start Cards
+    264     Start Card specifics
+    277     Race Icon
+    284         Regular
+    297         Changelings
+    309     Gender Icon
+    328     Time Icon
+    336 Ship Cards
+    349 Goal Cards
+    366     Score Icons
+    397     Selection Buttons
 */
 
-/* New fonts */
-@font-face {
-    font-family: Bartholowmew;
-    src: url('resources/fonts/TSSSFBartholomew-Bold.otf');
-}
+/* Generic */
+    /*Fonts */
+        @font-face {
+            font-family: Bartholowmew;
+            src: url('resources/fonts/TSSSFBartholomew-Bold.otf');
+        }
+        @font-face {
+            font-family: Cabin;
+            src: url('resources/fonts/TSSSFCabin-Medium.ttf');
+        }
+        @font-face {
+            font-family: Klinic;
+            src: url('resources/fonts/KlinicSlabBookIt.otf');
+        }
 
-@font-face {
-    font-family: Cabin;
-    src: url('resources/fonts/TSSSFCabin-Medium.ttf');
-}
+    /* Clear After */
+        .clearAfter::after {
+            content:"";
+            display:block;
+            clear:both;
+        }
 
-@font-face {
-    font-family: Klinic;
-    src: url('resources/fonts/KlinicSlabBookIt.otf');
-}
+/* Card Helpers */
+    .cardHelper .flavour {
+        position:absolute;
+        width: 688px;
+        font-family: Klinic;
+        font-size: 28px;
+        line-height: 30px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        visibility: hidden;
+        min-height:1em;
+    }
+    .cardHelper .effect {
+        position:absolute;
+        width: 688px;
+        font-family: Cabin;
+        font-size: 35px;
+        line-height: 43px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        visibility: hidden;
+        min-height:1em;
+    }
 
-html,body{
-    overflow-x:hidden;
-}
+/* Card Generics */ /*+1*/
+    .card {
+        width: 788px;
+        height: 1088px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        position:relative;
+        -webkit-transform-origin:0 0;
+        -ms-transform-origin:0 0;
+        transform-origin:0 0;
+    }
+    .card input[type=text], .card textarea{
+        margin:0;
+        padding:0;
+        border:none;
+        background:transparent;
+        resize: none;
+    }
+    .card .image {
+        position:absolute;
+        left: 123px;
+        top:  162px;
+        width: 600px;
+        height: 443px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .card .nameInput, .card .name {
+        position:absolute;
+        bottom: 952px;
+        right: 66px;
+        font-family: Bartholowmew;
+        text-align: right;
+        font-size: 55px;
+        width: 555px;
+    }
+    .card .name{
+        pointer-events: none;
+    }
+    .card .name.small {
+        font-size: 45px;
+        line-height: 41px;
+    }
+    .card .nameInput:focus~.name, .card .nameInput:not(:focus){
+        color:transparent!important;
+    }
+    .card .attrs {
+        position: absolute;
+        bottom: 435px;
+        right: 66px;
+        font-family: Cabin;
+        text-align: right;
+        font-size: 38px;
+        color: #eadcec;
+        width:580px;
+    }
+    .card .effect {
+        position: absolute;
+        top: 673px;
+        left: 50px;
+        width: 688px;
+        font-family: Cabin;
+        text-align: center;
+        font-size: 35px;
+        line-height: 43px;
+        overflow:hidden;
+        white-space:pre-line;
+    }
+    .card .flavour {
+        position: absolute;
+        bottom: 45px;
+        left: 50px;
+        width: 688px;
+        font-family: Klinic;
+        text-align: center;
+        font-size: 28px;
+        line-height: 30px;
+        overflow: hidden;
+        white-space:pre-line;
+    }
+    .card .copyright {
+        font-family: Cabin;
+        color: #eadcec;
+        bottom: 9px;
+        position: absolute;
+        width: 712px;
+        font-size: 18px;
+        text-align: right;
+        right: 37px;
+    }
 
-.clearAfter::after {
-    content:"";
-    display:block;
-    clear:both;
-}
+/* Icon Generics */
+    .card .iconGender,.card .iconRace,.card .iconCard,.card .iconGoal,.card .iconTime {
+        position:absolute;
+        left: 58px;
+        width:0;
+        max-width:422px;
+        padding-left:104px;
+        height:0;
+        min-height: 104px;
+        background-size: 104px;
+        background-repeat: no-repeat;
+        overflow:hidden;
+        pointer-events: none;
+    }
+    .card.pony .iconGender, .card.pony .iconRace, .card.pony .iconTime,
+    .card.start .iconGender, .card.start .iconRace, .card.start .iconTime,
+    .card.ship .iconCard, .card.goal .iconGoal{
+        pointer-events: all;
+    }
 
-.card input[type=text], .card textarea{
-    margin:0;
-    padding:0;
-    border:none;
-    background:transparent;
-    resize: none;
-}
+/*Card Type Icon & Buttons*/
+    .card .iconCard{
+        top:86px;
+    }
+    .card button{
+        width:80px;
+        height:80px;
+        margin:12px;
+        padding:0;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-position: center;
+        border:none;
+        cursor:pointer;
+    }
+    .card .type button{
+        height:88px;
+        width:190px;
+        margin:0;
+        position:relative;
+        background-color: rgba(255,255,255,0.4);
+    }
+    .card .type button:first-child{
+        margin-top:75px;
+    }
+    .card .type button::before{
+      font-size: 76px;
+      font-family: Bartholowmew;
+      text-align: center;
+      position:absolute;
+      top:-20px;
+      left:0;
+      right:0;
+    }
+    .card .iconGender:hover,.card .iconRace:hover,.card .iconCard:hover,.card .iconGoal:hover,.card .iconTime:hover{
+        width:auto!important;
+        height:auto!important;
+    }
+    .card .type:hover{
+        height:auto;
+    }
+    .card .type{
+      position: absolute;
+      height: 75px;
+      width: 190px;
+      overflow: hidden;
+      transform: rotate(-90deg);
+      transform-origin: 0 0;
+      top: 485px;
+      left: 45px;
+    }
+    .card button[value=pony]::before{
+        content:"Pony";
+        color:#4b2a83;
+    }
+    .card button[value=ship]::before{
+        content:"Ship";
+        color:#c3136b;
+    }
+    .card button[value=goal]::before{
+        content:"Goal";
+        color:#3d2360;
+    }
+    .card button[value=start]::before{
+        content:"Start";
+        color:#3c3538;
+    }
+    .card button[value=""], .card button[value=R], .card button[value=G]{
+        border: dashed #333;
+        border-radius: 50%;
+    }
 
-.card {
-    width: 788px;
-    height: 1088px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    position:relative;
-    -webkit-transform-origin:0 0;
-    -ms-transform-origin:0 0;
-    transform-origin:0 0;
-}
-
-.card .iconGender,.card .iconRace,.card .iconCard,.card .iconGoal,.card .iconTime {
-    position:absolute;
-    left: 58px;
-    top: 56px;
-    width:0;
-    max-width:422px;
-    padding-left:104px;
-    height:0;
-    min-height: 104px;
-    background-size: 104px;
-    background-repeat: no-repeat;
-    overflow:hidden;
-    pointer-events: none;
-}
-.card.pony .iconGender, .card.pony .iconRace, .card.pony .iconTime,
-.card.start .iconGender, .card.start .iconRace, .card.start .iconTime,
-.card.ship .iconCard, .card.goal .iconGoal{
-    pointer-events: all;
-}
-.card .iconCard{
-    top:86px;
-}
-.card .iconGender:hover,.card .iconRace:hover,.card .iconCard:hover,.card .iconGoal:hover,.card .iconTime:hover{
-    width:auto!important;
-    height:auto!important;
-}
-
-/*Icon Selections*/
-.card button{
-    width:80px;
-    height:80px;
-    margin:12px;
-    padding:0;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    background-position: center;
-    border:none;
-    cursor:pointer;
-}
-
-/*Card Type Selector*/
-.card .type{
-  position: absolute;
-  height: 75px;
-  width: 190px;
-  overflow: hidden;
-  transform: rotate(-90deg);
-  transform-origin: 0 0;
-  top: 485px;
-  left: 45px;
-}
-.card .type:hover{
-    height:auto;
-}
-.card .type button{
-    height:88px;
-    width:190px;
-    margin:0;
-    position:relative;
-    background-color: rgba(255,255,255,0.4);
-}
-.card .type button:first-child{
-    margin-top:75px;
-}
-.card .type button::before{
-  font-size: 76px;
-  font-family: Bartholowmew;
-  text-align: center;
-  position:absolute;
-  top:-20px;
-  left:0;
-  right:0;
-}
-.card button[value=pony]::before{
-    content:"Pony";
-    color:#4b2a83;
-}
-.card button[value=ship]::before{
-    content:"Ship";
-    color:#c3136b;
-}
-.card button[value=goal]::before{
-    content:"Goal";
-    color:#3d2360;
-}
-.card button[value=start]::before{
-    content:"Start";
-    color:#3c3538;
-}
-.card button[value=""]{
-    border: dashed #333;
-    border-radius: 50%;
-}
-
-/*Pony/Start Cards*/
-.card.pony {
-    background-image:url('resources/templates/BLEED-Blank-Pony-cropped.png');
-}
-
-.card.pony.female .iconGender, .card.start.female .iconGender, button[value=female] {
-    background-image:url('resources/symbols/Symbol-Female.png');
-}
-
-.card.pony.male .iconGender, .card.start.male .iconGender, button[value=male] {
-    background-image:url('resources/symbols/Symbol-male.png');
-}
-
-.card.pony.maleFemale .iconGender, .card.start.maleFemale .iconGender, button[value=maleFemale] {
-    background-image:url('resources/symbols/Symbol-MaleFemale.png');
-}
-
-.card .iconRace {
-    top: 160px;
-}
-.card.pony.unicorn .iconRace, .card.start.unicorn .iconRace, button[value=unicorn] {
-    background-image:url('resources/symbols/Symbol-Unicorn.png');
-}
-.card.pony.earthPony .iconRace, .card.start.earthPony .iconRace, button[value=earthPony] {
-    background-image:url('resources/symbols/Symbol-Earth-Pony.png');
-}
-.card.pony.pegasus .iconRace, .card.start.pegasus .iconRace, button[value=pegasus] {
-    background-image:url('resources/symbols/Symbol-Pegasus.png');
-}
-.card.pony.alicorn .iconRace, .card.start.alicorn .iconRace, button[value=alicorn] {
-    background-image:url('resources/symbols/Symbol-Alicorn.png');
-}
-/*Changelings*/
-.card.pony.unicorn.changeling .iconRace, .card.start.unicorn.changeling .iconRace {
-    background-image:url('resources/symbols/Symbol-ChangelingUnicorn.png');
-}
-.card.pony.earthPony.changeling .iconRace, .card.start.earthPony.changeling .iconRace, button[value=changeling] {
-    background-image:url('resources/symbols/Symbol-ChangelingEarthPony.png');
-}
-.card.pony.pegasus.changeling .iconRace, .card.start.pegasus.changeling .iconRace {
-    background-image:url('resources/symbols/Symbol-ChangelingPegasus.png');
-}
-.card.pony.alicorn.changeling .iconRace, .card.start.alicorn.changeling .iconRace {
-    background-image:url('resources/symbols/Symbol-ChangelingAlicorn.png');
-}
-/*Time ponies*/
-.card .iconTime {
-    top: 530px;
-}
-.card.pony.time .iconTime, .card.start.time .iconTime, button[value=time]{
-    background-image:url('resources/symbols/symbol-dystopian-future.png');
-}
-
-.card.pony .name,.card.pony .effect {
-    color:#462c89
-}
-.card.pony .flavour {
-    color: #190233;
-}
-
-/*Start Cards*/
-.card.start {
-    background-image:url('resources/templates/BLEED-Blank-Start-cropped.png');
-}
-.card.start .name,.card.ship .effect {
-    color:#3a3235;
-}
-.card.start .flavour {
-    color: #211b1d;
-}
-.card.start .attrs {
-    color: #edefee;
-}
-
+/*Pony & Start Cards*/
+    .card.pony {
+        background-image:url('resources/templates/BLEED-Blank-Pony-cropped.png');
+    }
+    .card.pony .name, .card.pony .nameInput, .card.pony .effect {
+        color:#462c89
+    }
+    .card.pony .flavour {
+        color: #190233;
+    }
+    /*Start Card specifics (mostly colouring)*/
+        .card.start {
+            background-image:url('resources/templates/BLEED-Blank-Start-cropped.png');
+        }
+        .card.start .name,.card.ship .effect {
+            color:#3a3235;
+        }
+        .card.start .flavour {
+            color: #211b1d;
+        }
+        .card.start .attrs {
+            color: #edefee;
+        }
+    /*Race Icon*/
+        .card.pony .iconRace {
+            top: 160px;
+        }
+        .card.pony.G:not(.R) .iconRace {
+            top:86px;
+        }
+        /*Regular*/
+            .card.pony.unicorn .iconRace, .card.start.unicorn .iconRace, button[value=unicorn] {
+                background-image:url('resources/symbols/Symbol-Unicorn.png');
+            }
+            .card.pony.earthPony .iconRace, .card.start.earthPony .iconRace, button[value=earthPony] {
+                background-image:url('resources/symbols/Symbol-Earth-Pony.png');
+            }
+            .card.pony.pegasus .iconRace, .card.start.pegasus .iconRace, button[value=pegasus] {
+                background-image:url('resources/symbols/Symbol-Pegasus.png');
+            }
+            .card.pony.alicorn .iconRace, .card.start.alicorn .iconRace, button[value=alicorn] {
+                background-image:url('resources/symbols/Symbol-Alicorn.png');
+            }
+        /*Changelings*/
+            .card.pony.unicorn.changeling .iconRace, .card.start.unicorn.changeling .iconRace {
+                background-image:url('resources/symbols/Symbol-ChangelingUnicorn.png');
+            }
+            .card.pony.earthPony.changeling .iconRace, .card.start.earthPony.changeling .iconRace, button[value=changeling] {
+                background-image:url('resources/symbols/Symbol-ChangelingEarthPony.png');
+            }
+            .card.pony.pegasus.changeling .iconRace, .card.start.pegasus.changeling .iconRace {
+                background-image:url('resources/symbols/Symbol-ChangelingPegasus.png');
+            }
+            .card.pony.alicorn.changeling .iconRace, .card.start.alicorn.changeling .iconRace {
+                background-image:url('resources/symbols/Symbol-ChangelingAlicorn.png');
+            }
+    /*Gender Icon*/
+        .card .iconGender {
+            top: 56px;
+        }
+        .card.pony.R:not(.G) .iconGender {
+            top:86px;
+        }
+        .card.pony.female .iconGender, .card.start.female .iconGender, button[value=female] {
+            background-image:url('resources/symbols/Symbol-Female.png');
+        }
+        .card.pony.male .iconGender, .card.start.male .iconGender, button[value=male] {
+            background-image:url('resources/symbols/Symbol-male.png');
+        }
+        .card.pony.maleFemale .iconGender, .card.start.maleFemale .iconGender, button[value=maleFemale] {
+            background-image:url('resources/symbols/Symbol-MaleFemale.png');
+        }
+    /*Time Icon (Toggle)*/
+        .card .iconTime {
+            top: 530px;
+        }
+        .card.pony.time .iconTime, .card.start.time .iconTime, button[value=time]{
+            background-image:url('resources/symbols/symbol-dystopian-future.png');
+        }
 
 /*Ship Cards*/
-.card.ship {
-    background-image:url('resources/templates/BLEED-Blank-Ship-cropped.png');
-}
-.card.ship .name,.card.ship .effect {
-    color:#ce1b69;
-}
-.card.ship .flavour {
-    color: #811935;
-}
-.card.ship .iconCard {
-    background-image:url('resources/symbols/Symbol-Ship.png');
-}
+    .card.ship {
+        background-image:url('resources/templates/BLEED-Blank-Ship-cropped.png');
+    }
+    .card.ship .name, .card.ship .nameInput, .card.ship .effect {
+        color:#ce1b69;
+    }
+    .card.ship .flavour {
+        color: #811935;
+    }
+    .card.ship .iconCard {
+        background-image:url('resources/symbols/Symbol-Ship.png');
+    }
 
 /*Goal Cards*/
-.card.goal {
-    background-image:url('resources/templates/BLEED-Blank-Goal-cropped.png');
-}
-.card.goal .name,.card.goal .effect {
-    color:#123962;
-}
-.card.goal .attrs {
-    display:none;
-}
-.card.goal .flavour {
-    color:#172640;
-}
-.card.goal .iconCard {
-    background-image:url('resources/symbols/Symbol-Goal.png');
-}
-.card.goal.s0 .iconGoal {
-    width:94px;
-    height:115px;
-    background-size:94px 115px;
-    top: 550px;
-    margin-left:13px;
-    background-image:url('resources/symbols/symbol-0.png');
-}
-.card.goal.s1 .iconGoal {
-    width:79px;
-    height:105px;
-    background-size:79px 105px;
-    top: 550px;
-    margin-left:15px;
-    background-image:url('resources/symbols/symbol-1.png');
-}
-.card.goal.s2 .iconGoal {
-    width:120px;
-    height:92px;
-    background-size:120px 92px;
-    top: 550px;
-    background-image:url('resources/symbols/symbol-2.png');
-}
-.card.goal.s3 .iconGoal {
-    width:113px;
-    height:107px;
-    background-size:113px 107px;
-    top: 550px;
-    margin-left:3px;
-    background-image:url('resources/symbols/symbol-3.png');
-}
-.card .iconGoal:not(:hover) button{
-    display:none;
-}
-.card button[value=s0]{
-    background-image:url('resources/symbols/symbol-0.png');
-}
-.card button[value=s1]{
-    background-image:url('resources/symbols/symbol-1.png');
-}
-.card button[value=s2]{
-    background-image:url('resources/symbols/symbol-2.png');
-}
-.card button[value=s3]{
-    background-image:url('resources/symbols/symbol-3.png');
-}
-
-
-
-.card .image {
-    position:absolute;
-    left: 122px;
-    top:  161px;
-    width: 601px;
-    height: 445px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.card .name {
-    position:absolute;
-    bottom: 952px;
-    right: 66px;
-    font-family: Bartholowmew;
-    text-align: right;
-    font-size: 55px;
-    width: 555px;
-}
-
-.card .attrs {
-    position: absolute;
-    bottom: 437px;
-    right: 66px;
-    font-family: Cabin;
-    text-align: right;
-    font-size: 38px;
-    color: #eadcec;
-    width:580px;
-}
-
-.card .effect {
-    position: absolute;
-    top: 679px;
-    left: 50px;
-    width: 688px;
-    font-family: Cabin;
-    text-align: center;
-    font-size: 35px;
-    line-height: 43px;
-    overflow:hidden;
-    white-space:pre-line;
-}
-.cardHelper .effect {
-    position:absolute;
-    width: 688px;
-    font-family: Cabin;
-    font-size: 35px;
-    line-height: 43px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    visibility: hidden;
-    min-height:1em;
-}
-
-.card .flavour {
-    position: absolute;
-    bottom: 50px;
-    left: 50px;
-    width: 688px;
-    font-family: Klinic;
-    text-align: center;
-    font-size: 28px;
-    line-height: 35px;
-    overflow: hidden;
-    white-space:pre-line;
-}
-.cardHelper .flavour {
-    position:absolute;
-    width: 688px;
-    font-family: Klinic;
-    font-size: 28px;
-    line-height: 35px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    visibility: hidden;
-    min-height:1em;
-}
-.card .copyright {
-    font-family: Cabin;
-    color: #eadcec;
-    bottom: 14px;
-    position: absolute;
-    width: 712px;
-    font-size: 18px;
-    text-align: right;
-    right: 38px;
-}
+    .card.goal {
+        background-image:url('resources/templates/BLEED-Blank-Goal-cropped.png');
+    }
+    .card.goal .name, .card.goal .nameInput, .card.goal .effect {
+        color:#123962;
+    }
+    .card.goal .attrs {
+        display:none;
+    }
+    .card.goal .flavour {
+        color:#172640;
+    }
+    .card.goal .iconCard {
+        background-image:url('resources/symbols/Symbol-Goal.png');
+    }
+    /*Score Icons*/
+        .card.goal.s0 .iconGoal {
+            width:94px;
+            height:115px;
+            background-size:94px 115px;
+            top: 550px;
+            margin-left:13px;
+            background-image:url('resources/symbols/symbol-0.png');
+        }
+        .card.goal.s1 .iconGoal {
+            width:79px;
+            height:105px;
+            background-size:79px 105px;
+            top: 550px;
+            margin-left:15px;
+            background-image:url('resources/symbols/symbol-1.png');
+        }
+        .card.goal.s2 .iconGoal {
+            width:120px;
+            height:92px;
+            background-size:120px 92px;
+            top: 550px;
+            background-image:url('resources/symbols/symbol-2.png');
+        }
+        .card.goal.s3 .iconGoal {
+            width:113px;
+            height:107px;
+            background-size:113px 107px;
+            top: 550px;
+            margin-left:3px;
+            background-image:url('resources/symbols/symbol-3.png');
+        }
+    /* Selection Buttons */
+        .card .iconGoal:not(:hover) button{
+            display:none;
+        }
+        .card button[value=s0]{
+            background-image:url('resources/symbols/symbol-0.png');
+        }
+        .card button[value=s1]{
+            background-image:url('resources/symbols/symbol-1.png');
+        }
+        .card button[value=s2]{
+            background-image:url('resources/symbols/symbol-2.png');
+        }
+        .card button[value=s3]{
+            background-image:url('resources/symbols/symbol-3.png');
+        }
