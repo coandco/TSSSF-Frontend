@@ -160,7 +160,7 @@ function exportCard(toShipbooru){
                     console.log(n,c,d)
                 }
             })
-        } else {*/
+        } else {
         open("data:image/png;base64,"+d.img_url);
         //}
     })
