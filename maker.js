@@ -25,11 +25,12 @@ function newCard(){
     $(".card .copyright").val("");
     EDIT_KEY = null;
     document.location.hash = "";
-    $("#editUrl,#shareUrl,#image").val("").change().addClass("empty")
+    $("#shortUrl,#longUrl,#image").val("").change().addClass("empty")
     $("#error").hide();
 }
 
 //Loads a card
+/*
 function load(kind,id){
     var o={};o[kind]=id
     $.get("dbInterface.php",o,function(r){
@@ -51,43 +52,37 @@ function load(kind,id){
         document.location.hash = "."
         document.location.hash = ""
 
-        $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
+        $("#shortUrl,#longUrl").removeClass("empty") //Bodge fix for placeholder overlay
 
-        $("#shareUrl").val(document.location+"view:"+d["viewkey"]);
+        $("#longUrl").val(document.location+"view:"+d["viewkey"]);
         if(d.editkey){
-            $("#editUrl").val(document.location+"edit:"+d["editkey"]);
+            $("#shortUrl").val(document.location+"edit:"+d["editkey"]);
             document.location.hash = "edit:"+d["editkey"]
             EDIT_KEY = d["editkey"];
         } else {
-            $("#editUrl").val("Cannot edit");
+            $("#shortUrl").val("Cannot edit");
             document.location.hash = "view:"+d["viewkey"]
         }
     })
 }
+*/
 
 //Saves a card
 function save(){
-    $.post("dbInterface.php",{
-        editkey:EDIT_KEY,
-        classes:$(".card").attr("class"),
-        name:$(".card .nameInput").val(),
-        attr:$(".card .attrs").val(),
-        effect:$(".card .effect").val(),
-        flavour:$(".card .flavour").val(),
-        copyright:$(".card .copyright").val(),
-        image:$("#image").val()
-    },function(r){
-        var d = JSON.parse(r);
-        if(mayError(d)) {return;}
-        document.location.hash = "."
-        document.location.hash = ""
-        $("#editUrl").val(document.location+"edit:"+d["editkey"]);
-        $("#shareUrl").val(document.location+"view:"+d["viewkey"]);
-        $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
-        EDIT_KEY = d["editkey"];
-        document.location.hash = "edit:"+d["editkey"]
-    })
-}
+    $.ajax({
+        url: "http://v.gd/create.php",
+        type: "POST",
+        dataType: 'text',
+        data: {format:"json", url:window.location.href},
+        success: function(r,s,t) 
+        {
+            var d = JSON.parse(r);
+            $("#shortUrl").val(d["shorturl"]);
+            $("#longUrl").val(document.location.href);
+            $("#shortUrl,#longUrl").removeClass("empty"); //Bodge fix for placeholder overlay
+        }
+    });
+};
 
 function doReplace(repl, str) {
   var regexStr = Object.keys(repl).map(function(s) {
@@ -324,9 +319,9 @@ function exportCard(id){
             return;
         }
         open(d["img_url"]);
-        $("#editUrl,#shareUrl").removeClass("empty") //Bodge fix for placeholder overlay
-        $("#editUrl").val(d["img_url"]);
-        $("#shareUrl").val(d["card_str"]);
+        $("#shortUrl,#longUrl").removeClass("empty") //Bodge fix for placeholder overlay
+        $("#shortUrl").val(d["img_url"]);
+        $("#longUrl").val(d["card_str"]);
     })
 }
 
