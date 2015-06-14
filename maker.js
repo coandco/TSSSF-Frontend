@@ -197,20 +197,20 @@ function pycard_to_html(pycard_str){
         i,
         card_element = $('.card');
     
-    pycard_arr = pycard_str.split("`");
+    pycard_arr = pycard_str.replace("\\n", "\n").split("`");
 
     if (pycard_arr.length < 7)
         return;
     
-    //Remove existing classes
-    $(".card button").removeClass();
+    //Remove existing non-card classes
+    card_element.attr({"class": "card"});
     
     // Card type = [0]
     card_element.addClass(pycard_arr[0].toLowerCase());
     // Card art = [1]
     $("#image").val(pycard_arr[1]).change();
     // Card symbols = [2]
-    pycard_symbols = pycard_arr[2].toLowerCase().split("!");
+    pycard_symbols = pycard_arr[2].toLowerCase().replace(" ", "").split("!");
     for (i = 0; i < pycard_symbols.length; i++) {
         if (pycard_symbols[i].indexOf("changeling") === 0) {
             card_element.addClass("changeling");
