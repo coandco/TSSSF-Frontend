@@ -1,5 +1,7 @@
 //After a page is updated this stores the edit key so we can modify it again
 var EDIT_KEY = null;
+var HASH_TO_LOAD = null;
+var HASH_TYPE = "raw";
 
 //Display error
 function mayError(errObj){
@@ -191,11 +193,75 @@ function html_to_pycard(){
         return outstr;
 }
 
+function cardChanged(){
+    var tmphash;
+    if (typeof(HASH_TO_LOAD) === "string") {
+        tmphash = HASH_TO_LOAD;
+        HASH_TO_LOAD = null;
+        load_with_hash_type(tmphash);
+    } else {
+        switch(HASH_TYPE) {
+            case "raw":
+                tmphash = html_to_pycard();
+                break;
+            case "v1":
+                tmphash = LZString.compressToBase64(html_to_pycard());
+                break;
+            default:
+                HASH_TYPE="v1";
+                tmphash = LZString.compressToBase64(html_to_pycard());
+        }
+        //We don't want this change to trigger our load
+        $(window).off('hashchange', hashChanged);
+        document.location.hash = "#" + HASH_TYPE + ":" + tmphash;
+        $(window).on('hashchange', hashChanged);
+    }
+}
+
+function hashChanged(){
+    var hs, i;
+    hs = document.location.hash.slice(1)
+    i = hs.indexOf(":");
+    if (i != -1) {
+        HASH_TYPE = hs.slice(0,i);
+        load_with_hash_type(hs.slice(i+1));
+    }
+}
+
+function load_with_hash_type(loadstr){
+    switch(HASH_TYPE) {
+        case "rawtov1":
+            HASH_TYPE = "v1";
+            //intentionally falling through here
+        case "raw":
+            pycard_to_html(loadstr);
+            break;
+        case "v1toraw":
+            HASH_TYPE = "raw";
+            //intentionally falling through here
+        case "v1":
+            pycard_to_html(LZString.decompressFromBase64(loadstr));
+            break;
+        default:
+            HASH_TYPE="v1";
+            HASH_TO_LOAD = null;
+    }
+    cardChanged();
+}
+
 function pycard_to_html(pycard_str){
     var pycard_arr, 
         pycard_symbols,
         i,
         card_element = $('.card');
+
+    //If there was a problem decompressing the hash, we may get passed a null
+    if (typeof(pycard_str) != "string")
+        return;
+
+    //Temporarily disable URL updating
+    $(".card input[type=text], .card textarea, #image").off("change paste", 
+                                                            cardChanged);
     
     pycard_arr = pycard_str.replace("\\n", "\n").split("`");
 
@@ -232,11 +298,14 @@ function pycard_to_html(pycard_str){
     // Card title = [3]
     $(".card .nameInput").val(pycard_arr[3]).change();
     // Card keywords = [4]
-    $(".card .attrs").val(pycard_arr[4]);
+    $(".card .attrs").val(pycard_arr[4]).change();
     // Card body = [5]
-    $(".card .effect").val(pycard_arr[5]);
+    $(".card .effect").val(pycard_arr[5]).change();
     // Card flavor = [6]
-    $(".card .flavour").val(pycard_arr[6]);
+    $(".card .flavour").val(pycard_arr[6]).change();
+    //Re-enable URL updating
+    $(".card input[type=text], .card textarea, #image").on("change paste",
+                                                          cardChanged);
 }
 
 function exportCard(id){
@@ -302,9 +371,20 @@ function exportCard(toShipbooru){
 */
 
 function cardSetup(){
+    //Check the hash to see if we are loading something
+    if(document.location.hash){
+        console.log("Document hash is currently " + document.location.hash);
+        hs = document.location.hash.substr(1)
+        i = hs.indexOf(":");
+        if (i != -1) {
+            HASH_TYPE = hs.slice(0,i);
+            HASH_TO_LOAD = hs.slice(i+1);
+        }
+    }
+
     //On card button clicks, remove other classes and add new ones.
     //Unless it is changeling, special case, just toggle.
-    $(".card button").click(function(){
+    $(".card button").on("click", function(){
         if ($(this).attr("value") == "changeling"){
             $(".card").toggleClass($(this).attr("value"));
         } else {
@@ -362,8 +442,8 @@ function cardSetup(){
 
     //Replace and create tooltip hints
     $.each(SPECIAL_REPLACE,function(key,replace){
-        console.log([key,replace,"dt[data-original-title='\\"+key+"']",$("dt[data-original-title='\\"+key+"']")]);
-        $("dt[data-original-title='\\"+key+"']").attr("data-original-title",replace).tooltip();
+        console.log([key,replace,"dt[data-original-title='"+key+"']",$("dt[data-original-title='"+key+"']")]);
+        $("dt[data-original-title='"+key+"']").attr("data-original-title",replace).tooltip();
     })
 
     //When a text editor is updated resize its helper to clone back the height.
@@ -389,6 +469,13 @@ function cardSetup(){
         $(".card .image").css("background-image","url('"+$(this).val()+"')")
     })
 
+    //Trigger URL update
+    $(".card input[type=text], .card textarea, #image").on("change paste",
+                                                           cardChanged);
+    $(".card button").on("click", cardChanged);
+    $(window).on('hashchange', hashChanged);
+
+
     //Save, New & Export buttons
     $("#save").click(save)
     $("#new").click(newCard)
@@ -411,14 +498,4 @@ function cardSetup(){
     //Inital call setup functions
     $(window).resize();
     $(".card textarea").change();
-
-    //Check the hash to see if we are loading something
-    if(document.location.hash){
-        hs = document.location.hash.substr(1).split(":")
-        if (hs.length==2 && (hs[0] == "view" || hs[0] == "edit")){
-            load(hs[0],hs[1]);
-        } else {
-            document.location.hash = ""
-        }
-    }
 };
