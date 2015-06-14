@@ -284,7 +284,7 @@
             .card.pony.unicorn .iconRace, .card.start.unicorn .iconRace, button[value=unicorn] {
                 background-image:url('resources/symbols/Symbol-Unicorn.png');
             }
-            .card.pony.earthPony .iconRace, .card.start.earthPony .iconRace, button[value=earthPony] {
+            .card.pony.earthpony .iconRace, .card.start.earthpony .iconRace, button[value=earthpony] {
                 background-image:url('resources/symbols/Symbol-Earth-Pony.png');
             }
             .card.pony.pegasus .iconRace, .card.start.pegasus .iconRace, button[value=pegasus] {
@@ -297,7 +297,7 @@
             .card.pony.unicorn.changeling .iconRace, .card.start.unicorn.changeling .iconRace {
                 background-image:url('resources/symbols/Symbol-ChangelingUnicorn.png');
             }
-            .card.pony.earthPony.changeling .iconRace, .card.start.earthPony.changeling .iconRace, button[value=changeling] {
+            .card.pony.earthpony.changeling .iconRace, .card.start.earthpony.changeling .iconRace, button[value=changeling] {
                 background-image:url('resources/symbols/Symbol-ChangelingEarthPony.png');
             }
             .card.pony.pegasus.changeling .iconRace, .card.start.pegasus.changeling .iconRace {
@@ -319,7 +319,7 @@
         .card.pony.male .iconGender, .card.start.male .iconGender, button[value=male] {
             background-image:url('resources/symbols/Symbol-male.png');
         }
-        .card.pony.maleFemale .iconGender, .card.start.maleFemale .iconGender, button[value=maleFemale] {
+        .card.pony.malefemale .iconGender, .card.start.malefemale .iconGender, button[value=malefemale] {
             background-image:url('resources/symbols/Symbol-MaleFemale.png');
         }
     /*Time Icon (Toggle)*/

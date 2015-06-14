@@ -15,7 +15,7 @@ function mayError(errObj){
 
 //Blanks the cards
 function newCard(){
-    $(".card").attr("class","card pony maleFemale unicorn s0");
+    $(".card").attr("class","card pony malefemale unicorn s0");
     $(".card .nameInput").val("");
     $(".card .attrs").val("");
     $(".card .effect").val("").change();
@@ -227,7 +227,7 @@ function cardSetup(){
         $("dt[data-original-title='\\"+key+"']").attr("data-original-title",replace).tooltip();
     })
 
-    //When a text editor is updated resize it's helper to clone back the height.
+    //When a text editor is updated resize its helper to clone back the height.
     //This is because CSS Really hates working vertically
     $(".card textarea").on("change keyup paste",function(){
         var t = $(this),
@@ -236,8 +236,8 @@ function cardSetup(){
         t.height(o.height());
     });
 
-    //We also use a simular system for the name, but since we dont need manual
-    //line breaks it gets easiers
+    //We also use a similar system for the name, but since we don't need manual
+    //line breaks it gets easier
     $(".card .nameInput").on("change keyup paste",function(){
         var t = $(this),
             o = $(".card .name");

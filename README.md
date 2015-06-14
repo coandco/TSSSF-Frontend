@@ -76,7 +76,7 @@ here is an example for the SPC-404, refrenced in code.
 INSERT INTO tsssff_savedcards2 VALUES (
     'SPC-404',
     'SPC-404',
-    'card pony female earthPony',
+    'card pony female earthpony',
     'Card Not Found',
     '404 Error, Pinkie Pie, Not a card',
     'Oh Look aint this a fun way to show an error message. Yep your card wasnt found. Unless you wanted this.',
