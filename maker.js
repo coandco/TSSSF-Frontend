@@ -121,17 +121,128 @@ function sanitize(str){
         "\uE001":"{unicorn}",
         "\uE002":"{pegasus}",
         "\uE003":"{alicorn}",
-        "\uE004":"{postapocalypse}"
+        "\uE004":"{postapocalypse}",
+        "`":""
     };
     str = doReplace(SPECIAL_REPLACE, str);
     str = str.replace("\r\n", "\\n");
     return str.replace("\n", "\\n");
 }
 
+
+function search_classes(element, search_array){
+    var i;
+    for (i = 0; i < search_array.length; i++) {
+        if (element.hasClass(search_array[i]))
+            return search_array[i];
+    }
+    return "";
+}
+
+
+function html_to_pycard(){
+    var html_element = $(".card"),
+        html_name = $(".card .nameInput").val(),
+        html_keywords = $(".card .attrs").val(),
+        html_body = $(".card .effect").val(),
+        html_flavor = $(".card .flavour").val(),
+        html_set = $(".card .copyright").val(),
+        html_art = $("#image").val(),
+        pycard_type, pycard_art, pycard_symbols, pycard_name,
+        pycard_keywords, pycard_body, pycard_flavor,
+        race, gender, points, outstr;
+
+        pycard_type = search_classes(html_element, 
+                                     ["pony", "ship", "goal", "start"]);
+        //Types are case-sensitive and must be capitalized
+        pycard_type = pycard_type[0].toUpperCase() + pycard_type.slice(1);
+        pycard_art = sanitize(html_art);
+        pycard_name = sanitize(html_name);
+        pycard_keywords = sanitize(html_keywords);
+        pycard_body = sanitize(html_body);
+        pycard_flavor = sanitize(html_flavor);
+        pycard_symbols = [];
+        race = search_classes(html_element,
+                              ["unicorn", "pegasus", "earthpony", "alicorn"]);
+        if (race != "") {
+            if (html_element.hasClass("changeling"))
+                race = "changeling" + race;
+            pycard_symbols.push(race)
+        }
+        gender = search_classes(html_element, ["male", "female", "malefemale"]);
+        if (gender != "")
+            pycard_symbols.push(gender);
+        if (html_element.hasClass("time"))
+            pycard_symbols.push("dystopian");
+        if (pycard_type === "Ship")
+            pycard_symbols = ["ship"];
+        else if (pycard_type === "Goal"){
+            pycard_symbols = ["goal"];
+            points = search_classes(html_element,
+                                    ["s0", "s1", "s2", "s3", "s2-3", "s3-4"]);
+            if (points != "")
+                pycard_symbols.push(points.slice(1))
+        }
+
+        //Last two are "expansion" and "client", which we don't support yet
+        outstr = pycard_type + "`" + pycard_art + "`" + pycard_symbols.join("!")
+                 + "`" + pycard_name + "`" + pycard_keywords + "`" + pycard_body
+                 + "`" + pycard_flavor + "`";
+        return outstr;
+}
+
+function pycard_to_html(pycard_str){
+    var pycard_arr, 
+        pycard_symbols,
+        i,
+        card_element = $('card');
+    
+    pycard_arr = pycard_str.split("`");
+
+    if (pycard_arr.length < 7)
+        return;
+    
+    //Remove existing classes
+    $(".card button").removeClass();
+    
+    // Card type = [0]
+    card_element.addClass(pycard_arr[0].toLowerCase());
+    // Card art = [1]
+    $("#image").val(pycard_arr[1]).change();
+    // Card symbols = [2]
+    pycard_symbols = pycard_arr[2].toLowerCase().split("!");
+    for (i = 0; i < pycard_symbols.length; i++) {
+        if (pycard_symbols[i].indexOf("changeling") === 0) {
+            card_element.addClass("changeling");
+            card_element.addClass(pycard_symbols[i].substr("changeling".length))
+        } else if (pycard_symbols[i][0] >= '0' && pycard_symbols[i][0] <= '9') {
+            // If it starts with a number, it's a goal symbol
+            card_element.addClass("s" + pycard_symbols[i]);
+        } else if (pycard_symbols[i] === "dystopian") {
+            card_element.addClass("time");
+        } else {
+            card_element.addClass(pycard_symbols[i]);
+        }
+    }
+    // Add in "empty" symbols
+    if ($('.card:not(.male,.female,.malefemale)').length > 0)
+        card_element.addClass("G");
+    if ($('.card:not(.earthpony,.unicorn,.pegasus,.alicorn)').length > 0)
+        card_element.addClass("R");
+    // Card title = [3]
+    $(".card .nameInput").val(pycard_arr[3]).change();
+    // Card keywords = [4]
+    $(".card .attrs").val(pycard_arr[4]);
+    // Card body = [5]
+    $(".card .effect").val(pycard_arr[5]);
+    // Card flavor = [6]
+    $(".card .flavour").val(pycard_arr[5]);
+}
+
 function exportCard(id){
     $.post("/TSSSF/ponyimage.php",{
         classes:$(".card").attr("class"),
-        card_name:sanitize($(".card .name").val()),
+        card_name:sanitize($(".card .nameInput").val()),
         card_keywords:sanitize($(".card .attrs").val()),
         card_body:sanitize($(".card .effect").val()),
         card_flavor:sanitize($(".card .flavour").val()),
