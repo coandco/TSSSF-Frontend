@@ -87,9 +87,32 @@ function save(){
     })
 }
 
+function doReplace(repl, str) {
+  var regexStr = Object.keys(repl).map(function(s) {
+    return s.replace(/([^\w\s])/g, '\\$1');
+  }).join('|');
+  return str.replace(new RegExp(regexStr, 'g'), function(m) {
+    return repl[m]; 
+  });
+}
+
 function sanitize(str){
-    var SPECIAL_REGEX = /(\u2642|\u2640|\u26A4|\u2764|\uE000|\uE001|\uE002|\uE003|\uE004)/g;
     var SPECIAL_REPLACE = {
+        "While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.": "{replace}",
+        "You may swap 2 Pony cards on the shipping grid.": "{swap}",
+        "You may swap up to 3 Pony cards on the grid.": "{3swap}",
+        "You may draw a card from the Ship or Pony deck.": "{draw}",
+        "You may discard a Goal and draw a new one to replace it.": "{goal}",
+        "You may search the Ship or Pony discard pile for a card of your choice and play it.": "{search}",
+        "You may copy the power of any Pony card currently on the shipping grid, except for Changelings.": "{copy}",
+        "May count as either \u2642 or \u2640 for all Goals, Ships, and powers.": "{hermaphrodite}",
+        "This card counts as 2 Ponies.": "{double pony}",
+        "Instead of playing this ship with a Pony card from your hand, or connecting two ponies already on the grid, take a Pony card from the shipping grid and reattach it elsewhere with this Ship. That card's power activates.": "{love poison}",
+        "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as having any one keyword of your choice, except pony names.": "{keyword change}",
+        "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes the opposite gender.": "{gender change}",
+        "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes a race of your choice. This cannot affect Changelings.": "{race change}",
+        "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as {postapocalypse}.": "{timeline change}",
+        "You may choose to play the top card on the Pony discard pile with this Ship, rather than use a Pony card from your hand.": "{play from discard}",
         "\u2642":"{male}",
         "\u2640":"{female}",
         "\u26A4":"{malefemale}",
@@ -100,9 +123,9 @@ function sanitize(str){
         "\uE003":"{alicorn}",
         "\uE004":"{postapocalypse}"
     };
-    return str.replace(SPECIAL_REGEX,function(t){
-        return SPECIAL_REPLACE[t];
-    });
+    str = doReplace(SPECIAL_REPLACE, str);
+    str = str.replace("\r\n", "\\n");
+    return str.replace("\n", "\\n");
 }
 
 function exportCard(id){
@@ -192,32 +215,37 @@ function cardSetup(){
     });
 
     //Constant infomation for special escape code handling.
-    var SPECIAL_REGEX = /\\(malefemale|unicorn|pegasus|earth|alicorn|goal|time|female|male|ship|replace|swap|draw|newgoal|search|copy|changeling)/g
     var SPECIAL_REPLACE = {
-        "\\male":"\u2642",
-        "\\female":"\u2640",
-        "\\malefemale":"\u26A4",
-        "\\ship":"\u2764",
-        "\\earth":"\uE000",
-        "\\unicorn":"\uE001",
-        "\\pegasus":"\uE002",
-        "\\alicorn":"\uE003",
-        "\\time":"\uE004",
-        "\\replace":"(Replace): While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.",
-        "\\swap":"(Swap): You may swap 2 Pony cards on the shipping grid.",
-        "\\draw":"(Draw): You may draw a card from the Ship or Pony deck.",
-        "\\newgoal":"(New Goal): You may discard a Goal and draw a new one to replace it.",
-        "\\search":"(Search): You may search the Ship or Pony discard pile for a card of your choice and play it.",
-        "\\copy":"(Copy): You may copy the power of any Pony card currently on the shipping grid, except for Changelings.",
-        "\\changeling":"Gains the name, keywords and symbols of any single [race] of your choice until the end of the turn. If this card is moved to a new place on the grid, the current player must select a new disguise that will last until the end of their turn, even if other cards say its power would not activate."
+        "{male}":"\u2642",
+        "{female}":"\u2640",
+        "{malefemale}":"\u26A4",
+        "{ship}":"\u2764",
+        "{earth}":"\uE000",
+        "{unicorn}":"\uE001",
+        "{pegasus}":"\uE002",
+        "{alicorn}":"\uE003",
+        "{postapocalypse}":"\uE004",
+        "{replace}": "While in your hand, you may discard a Pony card from the grid and play this card in its place. This power cannot be copied.",
+        "{swap}": "You may swap 2 Pony cards on the shipping grid.",
+        "{3swap}": "You may swap up to 3 Pony cards on the grid.",
+        "{draw}": "You may draw a card from the Ship or Pony deck.",
+        "{goal}": "You may discard a Goal and draw a new one to replace it.",
+        "{search}": "You may search the Ship or Pony discard pile for a card of your choice and play it.",
+        "{copy}": "You may copy the power of any Pony card currently on the shipping grid, except for Changelings.",
+        "{hermaphrodite}": "May count as either \u2642 or \u2640 for all Goals, Ships, and powers.",
+        "{double pony}": "This card counts as 2 Ponies.",
+        "{love poison}": "Instead of playing this ship with a Pony card from your hand, or connecting two ponies already on the grid, take a Pony card from the shipping grid and reattach it elsewhere with this Ship. That card's power activates.",
+        "{keyword change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as having any one keyword of your choice, except pony names.",
+        "{gender change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes the opposite gender.",
+        "{race change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes a race of your choice. This cannot affect Changelings.",
+        "{timeline change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as \uE004.",
+        "{play from discard}": "You may choose to play the top card on the Pony discard pile with this Ship, rather than use a Pony card from your hand."
     }
 
     //Replace special escape codes when an input is updated
     $(".card input[type=text], .card textarea").on("change",function(){
         var txt = $(this).val();
-        txt = txt.replace(SPECIAL_REGEX,function(t){
-            return SPECIAL_REPLACE[t];
-        });
+        txt = doReplace(SPECIAL_REPLACE, txt);
         $(this).val(txt)
     })
 
