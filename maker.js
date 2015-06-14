@@ -111,7 +111,7 @@ function sanitize(str){
         "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as having any one keyword of your choice, except pony names.": "{keyword change}",
         "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes the opposite gender.": "{gender change}",
         "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes a race of your choice. This cannot affect Changelings.": "{race change}",
-        "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as {postapocalypse}.": "{timeline change}",
+        "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as \uE004.": "{timeline change}",
         "You may choose to play the top card on the Pony discard pile with this Ship, rather than use a Pony card from your hand.": "{play from discard}",
         "\u2642":"{male}",
         "\u2640":"{female}",
