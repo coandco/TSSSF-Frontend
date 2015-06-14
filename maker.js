@@ -195,7 +195,7 @@ function pycard_to_html(pycard_str){
     var pycard_arr, 
         pycard_symbols,
         i,
-        card_element = $('card');
+        card_element = $('.card');
     
     pycard_arr = pycard_str.split("`");
 
@@ -236,7 +236,7 @@ function pycard_to_html(pycard_str){
     // Card body = [5]
     $(".card .effect").val(pycard_arr[5]);
     // Card flavor = [6]
-    $(".card .flavour").val(pycard_arr[5]);
+    $(".card .flavour").val(pycard_arr[6]);
 }
 
 function exportCard(id){
