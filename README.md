@@ -25,7 +25,7 @@ The tool is hopefully self explanatory:
 ## Forking
 You are welcome to fork the project and run your own instance in terms with the LICENSE.
 
-It would be nice if improvements are feed back into the main project with Pull requests but it is not necessary to do so.
+It would be nice if improvements are fed back into the main project with pull requests but it is not necessary to do so.
 
 ##Misc
 
