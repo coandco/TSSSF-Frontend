@@ -31,14 +31,34 @@ It would be nice if improvements are feed back into the main project with Pull r
 
 ###Special symbols.
 The following escapes are valid on the editor to create the special symbols:
- * {earth}
- * {unicorn}
- * {pegasus}
- * {alicorn}
- * {male}
- * {female}
- * {malefemale}
- * {postapocalypse}
- * {ship}
+ * Gender
+  * {male}
+  * {female}
+  * {malefemale}
+ * Race
+  * {earth}
+  * {unicorn}
+  * {pegasus}
+  * {alicorn}
+ * Other
+  * {ship}
+  * {postapocalypse}
+ * Rules
+  * {replace}
+  * {swap}
+  * {3swap}
+  * {draw}
+  * {goal}
+  * {search}
+  * {copy}
+  * {hermaphrodite}
+  * {double pony}
+  * {love poison}
+  * {keyword change}
+  * {gender change}
+  * {race change}
+  * {timeline change}
+  * {play from discard}
 
-In the database these are saved as the unicode symbols the modified fonts use.
+In the editor Gender/Race/Other symbols are displayed via the unicode symbols from the modified font.
+The Rules are automatically expanded, and then collapsed back for storage for the saved URL as long as their portion of the text hasn't been changed.
