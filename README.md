@@ -4,7 +4,7 @@ TSSSFF-Generator
 ## Using
 A live example can be found on [my website](http://ripppo.me/TSSSFF-Beta/) and is free to use for all Safe for work cards.
 
-The tool is hopefull self explanatory:
+The tool is hopefully self explanatory:
  * Click and type on each field to edit them.
  * Hover over the Icons to get to change them.
  * Card types can be changed by hovering the card type on the left of the card.
@@ -25,44 +25,40 @@ The tool is hopefull self explanatory:
 ## Forking
 You are welcome to fork the project and run your own instance in terms with the LICENSE.
 
-It would be nice if improvments are feed back into the main project with Pull requests but it is not nessesery to do so.
-
-### Adding Special cards
-The creator can only save cards with hexidecimal editkeys and viewkeys
-this allows for non hexidecimal keys to be used for special cards that are
-impossible for anyone to edit even if they extract the editkey from the code.
-Such a key `SPC-404` is used for the special 404 card.
-
-However such keys must be added manuall to the database,
-here is an example for the SPC-404, refrenced in code.
-
-```
-INSERT INTO tsssff_savedcards2 VALUES (
-    'SPC-404',
-    'SPC-404',
-    'card pony female earthpony',
-    'Card Not Found',
-    '404 Error, Pinkie Pie, Not a card',
-    'Oh Look aint this a fun way to show an error message. Yep your card wasnt found. Unless you wanted this.',
-    '"Argh no no no no! How can we play the game if the cards have all gone missing", "I dont think they are under the... wait pinkie thats the ground how did you"    -Impossible Games night',
-    'https://derpicdn.net/img/view/2013/2/17/246336.jpeg',
-    'Art: sirzi, Card:Ripp_');
-```
-
-Alternatlly a card can be created with the editor when the `UPDATE` command used to modify the editkey and viewkey in the database as nessesery.
+It would be nice if improvements are fed back into the main project with pull requests but it is not necessary to do so.
 
 ##Misc
 
 ###Special symbols.
-The following escapes are valid on the editor to create the spcial symbols:
- * [earth}
- * [unicorn}
- * [pegasus}
- * [alicorn}
- * {male}
- * {female}
- * {malefemale}
- * {postapocalypse}
- * {ship}
+The following escapes are valid on the editor to create the special symbols:
+ * Gender
+  * {male}
+  * {female}
+  * {malefemale}
+ * Race
+  * {earth}
+  * {unicorn}
+  * {pegasus}
+  * {alicorn}
+ * Other
+  * {ship}
+  * {postapocalypse}
+ * Rules
+  * {replace}
+  * {swap}
+  * {3swap}
+  * {draw}
+  * {goal}
+  * {search}
+  * {copy}
+  * {hermaphrodite}
+  * {double pony}
+  * {love poison}
+  * {keyword change}
+  * {gender change}
+  * {race change}
+  * {timeline change}
+  * {play from discard}
 
-In the database these are saved as the unicode symbols the modified fonts use.
+In the editor Gender/Race/Other symbols are displayed via the unicode symbols from the modified font.
+The Rules are automatically expanded, and then collapsed back for storage for the saved URL as long as their portion of the text hasn't been changed.
