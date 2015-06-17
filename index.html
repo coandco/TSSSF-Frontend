@@ -19,6 +19,26 @@
             dd{
                 margin-left: calc(50% + 20px)!important;
             }
+            .featherlight-content {
+                min-width: 300px !important;
+            }
+            .preview-lightbox {
+                display: none;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .preview-lightbox img {
+                clear: both;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .preview-lightbox button {
+                clear: both;
+                width: 100%;
+            }
+            input[readonly].default-cursor {
+                cursor: text;
+            }
         </style>
     </head>
     <body>
@@ -26,6 +46,11 @@
         <div class="cardHelper">
             <div class="effect"></div>
             <div class="flavour"></div>
+        </div>
+
+        <div class="preview-lightbox">
+            <img width="260" class="preview-image"><br />
+            <button id="save_imgur" class="btn btn-warning">Save to imgur</button>
         </div>
 
         <main class="clearAfter container">
@@ -103,10 +128,10 @@
                             </div>
 
                             <div class="form-group">
-                                <input class="form-control floating-label" type="text" id="shortUrl" placeholder="Shortened Link:"/>
+                                <input class="form-control floating-label default-cursor" type="text" readonly id="shortUrl" placeholder="Shortened Link:"/>
                             </div>
                             <div class="form-group">
-                                <input class="form-control floating-label" type="text" id="longUrl" placeholder="Unshortened Link:"/>
+                                <input class="form-control floating-label default-cursor" type="text" readonly id="longUrl" placeholder="Unshortened Link:"/>
                             </div>
                             Symbols and Powers Guide:
                             <div class=row>
