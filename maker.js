@@ -301,29 +301,32 @@ function pycard_to_html(pycard_str){
     //Re-enable URL updating
     $(".card input[type=text], .card textarea, #image").on("change paste",
                                                           cardChanged);
-}
+};
 
 function exportCard(id){
     $.post("/TSSSF/ponyimage.php",{
-        classes:$(".card").attr("class"),
-        card_name:sanitize($(".card .nameInput").val()),
-        card_keywords:sanitize($(".card .attrs").val()),
-        card_body:sanitize($(".card .effect").val()),
-        card_flavor:sanitize($(".card .flavour").val()),
-        card_set:sanitize($(".card .copyright").val()),
-        card_art:$("#image").val()
+        pycard:html_to_pycard(),
+        returntype:"encoded_url",
+        imagetype: "vassal"
     },function(r){
         var d = JSON.parse(r);
-        if (d.error){
-            alert(d.error);
-            return;
-        }
-        open(d["img_url"]);
-        $("#shortUrl,#longUrl").removeClass("empty") //Bodge fix for placeholder overlay
-        $("#shortUrl").val(d["img_url"]);
-        $("#longUrl").val(d["card_str"]);
+        if(mayError(d)) {return;}
+        $('.preview-lightbox img').attr('src', d["image"]);
+        $.featherlight($('.preview-lightbox'));
     })
-}
+};
+
+function saveCardToImgur(id){
+    $.post("/TSSSF/ponyimage.php",{
+        pycard:html_to_pycard(),
+        returntype:"imgur",
+        imagetype: "cropped"
+    }, function(r){
+        var d = JSON.parse(r);
+        if(mayError(d)) {return;}
+        open(d["image"]);
+    })
+};
 
 /*
 function exportCard(toShipbooru){
@@ -475,6 +478,7 @@ function cardSetup(){
     $("#save").click(save)
     $("#new").click(newCard)
     $("#export").click(exportCard)
+    $("#save_imgur").click(saveCardToImgur)
     //$("#exportTo").click(function(){exportCard(1)})
 
     //Log number of ajax events for the spinner
