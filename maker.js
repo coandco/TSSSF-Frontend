@@ -159,6 +159,9 @@ function html_to_pycard(){
         pycard_body = sanitize(html_body);
         pycard_flavor = sanitize(html_flavor);
         pycard_symbols = [];
+        gender = search_classes(html_element, ["male", "female", "malefemale"]);
+        if (gender != "")
+            pycard_symbols.push(gender);
         race = search_classes(html_element,
                               ["unicorn", "pegasus", "earthpony", "alicorn"]);
         if (race != "") {
@@ -166,9 +169,6 @@ function html_to_pycard(){
                 race = "changeling" + race;
             pycard_symbols.push(race)
         }
-        gender = search_classes(html_element, ["male", "female", "malefemale"]);
-        if (gender != "")
-            pycard_symbols.push(gender);
         if (html_element.hasClass("time"))
             pycard_symbols.push("dystopian");
         if (pycard_type === "Ship")
