@@ -1,7 +1,7 @@
 //After a page is updated this stores the edit key so we can modify it again
 var EDIT_KEY = null;
 var HASH_TO_LOAD = null;
-var HASH_TYPE = "raw";
+var HASH_TYPE = "v1";
 
 //Display error
 function mayError(errObj){
