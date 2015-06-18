@@ -90,7 +90,7 @@
         width: 601px;
         height: 444px;
         background-size: cover;
-        background-position: center;
+        background-position: top left;
         background-repeat: no-repeat;
     }
     .card .nameInput, .card .name {
