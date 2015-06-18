@@ -277,7 +277,7 @@
         .card .iconRace {
             top: 160px;
         }
-        .card.pony.G:not(.R) .iconRace {
+        .card.pony.G:not(.R) .iconRace, .card.start.G:not(.R) .iconRace {
             top:86px;
         }
         /*Regular*/
@@ -310,7 +310,7 @@
         .card .iconGender {
             top: 56px;
         }
-        .card.pony.R:not(.G) .iconGender {
+        .card.pony.R:not(.G) .iconGender, .card.start.R:not(.G) .iconGender {
             top:86px;
         }
         .card.pony.female .iconGender, .card.start.female .iconGender, button[value=female] {
