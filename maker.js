@@ -17,7 +17,7 @@ function mayError(errObj){
 
 //Blanks the cards
 function newCard(){
-    $(".card").attr("class","card pony malefemale unicorn s0");
+    $(".card").attr("class","card pony malefemale unicorn");
     $(".card .nameInput").val("");
     $(".card .attrs").val("");
     $(".card .effect").val("").change();
@@ -345,15 +345,27 @@ function cardSetup(){
     //On card button clicks, remove other classes and add new ones.
     //Unless it is changeling, special case, just toggle.
     $(".card button").on("click", function(){
-        if ($(this).attr("value") == "changeling"){
+        var oldClass = "";
+        var newClass = $(this).attr("value");
+        if (newClass == "changeling"){
             $(".card").toggleClass($(this).attr("value"));
         } else {
             $(this).parent().children("button").each(function(){
                 if ($(this).attr("value") != "changeling"){
+                    if ($(".card").hasClass($(this).attr("value"))) {
+                        oldClass = $(this).attr("value");
+                    }
                     $(".card").removeClass($(this).attr("value"));
                 }
-            })
-            $(".card").addClass($(this).attr("value"));
+            });
+            $(".card").addClass(newClass);
+            if ((oldClass == "ship" || oldClass == "goal") &&
+                (newClass == "pony" || newClass == "start")) {
+                $(".card").addClass("malefemale");
+                $(".card").addClass("unicorn");
+            } else if (oldClass != "goal" && newClass == "goal") {
+                $(".card").addClass("s0");
+            }
         }
     })
 
