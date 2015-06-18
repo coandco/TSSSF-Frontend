@@ -440,7 +440,21 @@ function cardSetup(){
 
     //Update image
     $("#image").change(function(){
-        $(".card .image").css("background-image","url('"+$(this).val()+"')")
+        var regex_arr = [/^https?:\/\/i\.imgur\.com\//,
+                         /^https?:\/\/img\.booru\.org\/secretshipfic\//,
+                         /^https?:\/\/derpicdn.net\//],
+            regex_matched = false,
+            i;
+        for (i = 0; i < regex_arr.length; i++) {
+            if (regex_arr[i].test($(this).val())) {
+                regex_matched = true;
+                break;
+            }
+        }
+        if (regex_matched === true)
+            $(".card .image").css("background-image","url('"+$(this).val()+"')")
+        else
+            $(".card .image").css("background-image","url('')")
     })
 
     //Trigger URL update
