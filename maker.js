@@ -326,6 +326,8 @@ function saveCardToImgur(id){
     }, function(r){
         var d = JSON.parse(r);
         if(mayError(d)) {return;}
+        $('.featherlight-content input[type="text"]').removeClass("empty")
+        $('.featherlight-content input[type="text"]').val(d["image"]);
         open(d["image"]);
     })
 };
