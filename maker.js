@@ -178,7 +178,9 @@ function html_to_pycard(){
             points = search_classes(html_element,
                                     ["s0", "s1", "s2", "s3", "s2-3", "s3-4"]);
             if (points != "")
-                pycard_symbols.push(points.slice(1))
+                pycard_symbols.push(points.slice(1));
+            else
+                pycard_symbols.push("0");
         }
 
         //Last two are "expansion" and "client", which we don't support yet
