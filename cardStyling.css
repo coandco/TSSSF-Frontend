@@ -274,7 +274,7 @@
             color: #edefee;
         }
     /*Race Icon*/
-        .card.pony .iconRace {
+        .card .iconRace {
             top: 160px;
         }
         .card.pony.G:not(.R) .iconRace {
