@@ -162,10 +162,11 @@
         position:absolute;
         left: 58px;
         width:0;
-        max-width:422px;
+        max-width:550px;
         padding-left:104px;
         height:0;
         min-height: 104px;
+        border-radius: 40px 40px;
         background-size: 104px;
         background-repeat: no-repeat;
         overflow:hidden;
@@ -215,6 +216,7 @@
     .card .iconGender:hover,.card .iconRace:hover,.card .iconCard:hover,.card .iconGoal:hover,.card .iconTime:hover{
         width:auto!important;
         height:auto!important;
+        background-color: rgba(255, 255, 255, 0.5);
     }
     .card .type:hover{
         height:auto;
@@ -246,7 +248,7 @@
         color:#3c3538;
     }
     .card button[value=""], .card button[value=R], .card button[value=G]{
-        border: dashed #333;
+        border: medium dashed #333;
         border-radius: 50%;
     }
 
@@ -277,8 +279,8 @@
         .card .iconRace {
             top: 160px;
         }
-        .card.pony.G:not(.R) .iconRace, .card.start.G:not(.R) .iconRace {
-            top:86px;
+        .card.pony.R .iconRace, .card.start.R .iconRace {
+            background-image:url('resources/symbols/Symbol-Blank.png');
         }
         /*Regular*/
             .card.pony.unicorn .iconRace, .card.start.unicorn .iconRace, button[value=unicorn] {
@@ -310,8 +312,8 @@
         .card .iconGender {
             top: 56px;
         }
-        .card.pony.R:not(.G) .iconGender, .card.start.R:not(.G) .iconGender {
-            top:86px;
+        .card.pony.G .iconGender, .card.start.G .iconGender {
+            background-image:url('resources/symbols/Symbol-Blank.png');
         }
         .card.pony.female .iconGender, .card.start.female .iconGender, button[value=female] {
             background-image:url('resources/symbols/Symbol-Female.png');
@@ -325,6 +327,9 @@
     /*Time Icon (Toggle)*/
         .card .iconTime {
             top: 530px;
+        }
+        .card.pony:not(.time) .iconTime, .card.start:not(.time) .iconTime {
+            background-image:url('resources/symbols/Symbol-Blank.png');
         }
         .card.pony.time .iconTime, .card.start.time .iconTime, button[value=time]{
             background-image:url('resources/symbols/symbol-dystopian-future.png');
