@@ -397,6 +397,20 @@
             margin-left:3px;
             background-image:url('resources/symbols/symbol-3.png');
         }
+        .card.goal.s2-3 .iconGoal {
+            width:145px;
+            height:98px;
+            background-size:145px 98px;
+            top: 550px;
+            background-image:url('resources/symbols/symbol-23.png');
+        }
+        .card.goal.s3-4 .iconGoal {
+            width:141px;
+            height:87px;
+            background-size:141px 87px;
+            top: 550px;
+            background-image:url('resources/symbols/symbol-34.png');
+        }
     /* Selection Buttons */
         .card .iconGoal:not(:hover) button{
             display:none;
@@ -412,4 +426,10 @@
         }
         .card button[value=s3]{
             background-image:url('resources/symbols/symbol-3.png');
+        }
+        .card button[value=s2-3]{
+            background-image:url('resources/symbols/symbol-23.png');
+        }
+        .card button[value=s3-4]{
+            background-image:url('resources/symbols/symbol-34.png');
         }
