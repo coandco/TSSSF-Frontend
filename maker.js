@@ -143,10 +143,10 @@ function html_to_pycard(){
         html_keywords = $(".card .attrs").val(),
         html_body = $(".card .effect").val(),
         html_flavor = $(".card .flavour").val(),
-        html_set = $(".card .copyright").val(),
+        html_copyright = $(".card .copyright").val(),
         html_art = $("#image").val(),
         pycard_type, pycard_art, pycard_symbols, pycard_name,
-        pycard_keywords, pycard_body, pycard_flavor,
+        pycard_keywords, pycard_body, pycard_flavor, pycard_copyright,
         race, gender, points, outstr;
 
         pycard_type = search_classes(html_element, 
@@ -158,6 +158,7 @@ function html_to_pycard(){
         pycard_keywords = sanitize(html_keywords);
         pycard_body = sanitize(html_body);
         pycard_flavor = sanitize(html_flavor);
+        pycard_copyright = sanitize(html_copyright);
         pycard_symbols = [];
         gender = search_classes(html_element, ["male", "female", "malefemale"]);
         if (gender != "")
@@ -186,7 +187,7 @@ function html_to_pycard(){
         //Last two are "expansion" and "client", which we don't support yet
         outstr = pycard_type + "`" + pycard_art + "`" + pycard_symbols.join("!")
                  + "`" + pycard_name + "`" + pycard_keywords + "`" + pycard_body
-                 + "`" + pycard_flavor + "`";
+                 + "`" + pycard_flavor + "``" + pycard_copyright;
         return outstr;
 }
 
