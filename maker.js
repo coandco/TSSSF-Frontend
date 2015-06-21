@@ -29,44 +29,6 @@ function newCard(){
     $("#error").hide();
 }
 
-//Loads a card
-/*
-function load(kind,id){
-    var o={};o[kind]=id
-    $.get("dbInterface.php",o,function(r){
-        var d = JSON.parse(r);
-        EDIT_KEY = null;
-        if(mayError(d)) {return;}
-        $(".card button").each(function(){
-            $(".card").removeClass($(this).attr("value"))
-        })
-        $(".card").addClass(d.classes);
-        $(".card .nameInput").val(d.name).change();
-        $(".card .attrs").val(d.attr);
-        $(".card .effect").val(d.effect);
-        $(".card .flavour").val(d.flavour);
-        $("#image").val(d.image).change();
-        $(".card .copyright").val(d.copyright);
-        $(".card textarea").change();
-
-        document.location.hash = "."
-        document.location.hash = ""
-
-        $("#shortUrl,#longUrl").removeClass("empty") //Bodge fix for placeholder overlay
-
-        $("#longUrl").val(document.location+"view:"+d["viewkey"]);
-        if(d.editkey){
-            $("#shortUrl").val(document.location+"edit:"+d["editkey"]);
-            document.location.hash = "edit:"+d["editkey"]
-            EDIT_KEY = d["editkey"];
-        } else {
-            $("#shortUrl").val("Cannot edit");
-            document.location.hash = "view:"+d["viewkey"]
-        }
-    })
-}
-*/
-
 //Saves a card
 function save(){
     $.ajax({
@@ -308,7 +270,7 @@ function pycard_to_html(pycard_str){
     //Re-enable URL updating
     $(".card input[type=text], .card textarea, #image").on("change paste",
                                                           cardChanged);
-};
+}
 
 function exportCard(id){
     $.post("/TSSSF/ponyimage.php",{
@@ -320,22 +282,22 @@ function exportCard(id){
         if(mayError(d)) {return;}
         $('.preview-lightbox img').attr('src', d["image"]);
         $.featherlight($('.preview-lightbox'));
-    })
-};
+    });
+}
 
 function saveCardToImgur(id){
     $.post("/TSSSF/ponyimage.php",{
         pycard:html_to_pycard(),
         returntype:"imgur",
-        imagetype: "cropped"
+        imagetype:"cropped",
     }, function(r){
         var d = JSON.parse(r);
         if(mayError(d)) {return;}
         $('.featherlight-content input[type="text"]').removeClass("empty")
         $('.featherlight-content input[type="text"]').val(d["image"]);
         open(d["image"]);
-    })
-};
+    });
+}
 
 function cardSetup(){
     //Check the hash to see if we are loading something
@@ -374,7 +336,7 @@ function cardSetup(){
                 $(".card").addClass("s0");
             }
         }
-    })
+    });
 
     //On Window resize we use css transformation to scale the card to fix
     //Yes it seems horrible but the alternative was somehting even more horrible!
@@ -410,20 +372,20 @@ function cardSetup(){
         "{race change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes a race of your choice. This cannot affect Changelings.",
         "{timeline change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as \uE004.",
         "{play from discard}": "You may choose to play the top card on the Pony discard pile with this Ship, rather than use a Pony card from your hand."
-    }
+    };
 
     //Replace special escape codes when an input is updated
     $(".card input[type=text], .card textarea").on("change",function(){
         var txt = $(this).val();
         txt = doReplace(SPECIAL_REPLACE, txt);
         $(this).val(txt)
-    })
+    });
 
     //Replace and create tooltip hints
     $.each(SPECIAL_REPLACE,function(key,replace){
         console.log([key,replace,"dt[data-original-title='"+key+"']",$("dt[data-original-title='"+key+"']")]);
         $("dt[data-original-title='"+key+"']").attr("data-original-title",replace).tooltip();
-    })
+    });
 
     //When a text editor is updated resize its helper to clone back the height.
     //This is because CSS Really hates working vertically
@@ -460,7 +422,7 @@ function cardSetup(){
             $(".card .image").css("background-image","url('"+$(this).val()+"')")
         else
             $(".card .image").css("background-image","url('')")
-    })
+    });
 
     //Trigger URL update
     $(".card input[type=text], .card textarea, #image").on("change paste",
@@ -470,14 +432,14 @@ function cardSetup(){
 
 
     //Save, New & Export buttons
-    $("#save").click(save)
-    $("#new").click(newCard)
-    $("#export").click(exportCard)
-    $("#save_imgur").click(saveCardToImgur)
+    $("#save").click(save);
+    $("#new").click(newCard);
+    $("#export").click(exportCard);
+    $("#save_imgur").click(saveCardToImgur);
     //$("#exportTo").click(function(){exportCard(1)})
 
     //Log number of ajax events for the spinner
-    var AJAX_EVENTS = 0
+    var AJAX_EVENTS = 0;
 
     $( document ).ajaxSend(function(){
         AJAX_EVENTS++;
@@ -492,4 +454,4 @@ function cardSetup(){
     //Inital call setup functions
     $(window).resize();
     $(".card textarea").change();
-};
+}
