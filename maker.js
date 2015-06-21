@@ -29,8 +29,7 @@ function newCard(){
     $("#error").hide();
 }
 
-//Saves a card
-function save(){
+function shorten_url(url, callback){
     $.ajax({
         url: "http://v.gd/create.php",
         type: "POST",
@@ -39,12 +38,19 @@ function save(){
         success: function(r,s,t) 
         {
             var d = JSON.parse(r);
-            $("#shortUrl").val(d["shorturl"]);
-            $("#longUrl").val(document.location.href);
-            $("#shortUrl,#longUrl").removeClass("empty"); //Bodge fix for placeholder overlay
+            callback(d["shorturl"]);
         }
     });
-};
+}
+
+//Saves a card
+function save(){
+    shorten_url(location.href, function(shorturl){
+        $("#shortUrl").val(shorturl);
+        $("#longUrl").val(document.location.href);
+        $("#shortUrl,#longUrl").removeClass("empty"); //Bodge fix for placeholder overlay
+    });
+}
 
 function doReplace(repl, str) {
   var regexStr = Object.keys(repl).map(function(s) {
@@ -153,6 +159,22 @@ function html_to_pycard(){
         return outstr;
 }
 
+function generate_hash(hashtype){
+    var tmphash = '';
+    switch(hashtype) {
+        case "raw":
+            tmphash = html_to_pycard();
+            break;
+        case "v1":
+            tmphash = LZString.compressToBase64(html_to_pycard());
+            break;
+        default:
+            hashtype = "v1";
+            tmphash = LZString.compressToBase64(html_to_pycard());
+    }
+    return "#" + hashtype + ":" + tmphash;
+}
+
 function cardChanged(){
     var tmphash;
     if (typeof(HASH_TO_LOAD) === "string") {
@@ -160,22 +182,13 @@ function cardChanged(){
         HASH_TO_LOAD = null;
         load_with_hash_type(tmphash);
     } else {
-        switch(HASH_TYPE) {
-            case "raw":
-                tmphash = html_to_pycard();
-                break;
-            case "v1":
-                tmphash = LZString.compressToBase64(html_to_pycard());
-                break;
-            default:
-                HASH_TYPE="v1";
-                tmphash = LZString.compressToBase64(html_to_pycard());
-        }
         //We don't want this change to trigger our load
         $(window).off('hashchange', hashChanged);
-        document.location.hash = "#" + HASH_TYPE + ":" + tmphash;
+        document.location.hash = generate_hash(HASH_TYPE);
         $(window).on('hashchange', hashChanged);
     }
+    $("#shortUrl").val();
+    $("#longUrl").val();
 }
 
 function hashChanged(){
