@@ -301,6 +301,10 @@ function pycard_to_html(pycard_str){
     $(".card .effect").val(pycard_arr[5]).change();
     // Card flavor = [6]
     $(".card .flavour").val(pycard_arr[6]).change();
+    // Card expansion symbol = [7]
+    // Unused
+    // Card copyright string = [8]
+    $(".card .copyright").val(pycard_arr[8]).change();
     //Re-enable URL updating
     $(".card input[type=text], .card textarea, #image").on("change paste",
                                                           cardChanged);
