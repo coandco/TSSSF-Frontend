@@ -50,7 +50,14 @@
 
         <div class="preview-lightbox">
             <img width="260" class="preview-image"><br />
-            <input class="form-control floating-label" type="text" id="imgur-link" placeholder="Imgur Link" required/>
+            <div class="form-group">
+                <input class="form-control floating-label" type="text" id="imgur-link" placeholder="Imgur Link" required/>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="linkthis" checked/>Link to this page in the description
+                </label>
+            </div>
             <button id="save_imgur" class="btn btn-primary">Save to imgur</button>
         </div>
 

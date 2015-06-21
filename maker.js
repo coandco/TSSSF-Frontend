@@ -298,15 +298,28 @@ function exportCard(id){
     });
 }
 
-function saveCardToImgur(id){
-    $.post("/TSSSF/ponyimage.php",{
+function imgurWrapper(){
+    if ($('.featherlight-content input[value="linkthis"]').is(":checked")) {
+        shorten_url(generate_hash("v1"), function(s_url){
+            saveCardToImgur(s_url);
+        });
+    } else {
+        saveCardToImgur();
+    }
+}
+
+function saveCardToImgur(my_url){
+    if (typeof my_url === "undefined")
+        my_url = "";
+    $.post("/TSSSF/ponyimage.php", {
         pycard:html_to_pycard(),
         returntype:"imgur",
         imagetype:"cropped",
+        my_url: my_url
     }, function(r){
         var d = JSON.parse(r);
         if(mayError(d)) {return;}
-        $('.featherlight-content input[type="text"]').removeClass("empty")
+        $('.featherlight-content input[type="text"]').removeClass("empty");
         $('.featherlight-content input[type="text"]').val(d["image"]);
         open(d["image"]);
     });
@@ -448,7 +461,7 @@ function cardSetup(){
     $("#save").click(save);
     $("#new").click(newCard);
     $("#export").click(exportCard);
-    $("#save_imgur").click(saveCardToImgur);
+    $("#save_imgur").click(imgurWrapper);
     //$("#exportTo").click(function(){exportCard(1)})
 
     //Log number of ajax events for the spinner
