@@ -33,12 +33,11 @@ function shorten_url(url, callback){
     $.ajax({
         url: "http://v.gd/create.php",
         type: "POST",
-        dataType: 'text',
+        dataType: 'json',
         data: {format:"json", url:window.location.href},
         success: function(r,s,t) 
         {
-            var d = JSON.parse(r);
-            callback(d["shorturl"]);
+            callback(r["shorturl"]);
         }
     });
 }
