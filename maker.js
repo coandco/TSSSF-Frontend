@@ -114,7 +114,7 @@ function html_to_pycard(){
         html_art = $("#image").val(),
         pycard_type, pycard_art, pycard_symbols, pycard_name,
         pycard_keywords, pycard_body, pycard_flavor, pycard_copyright,
-        race, gender, points, outstr;
+        pycard_expansion, race, gender, points, outstr;
 
         pycard_type = search_classes(html_element, 
                                      ["pony", "ship", "goal", "start"]);
@@ -150,11 +150,16 @@ function html_to_pycard(){
             else
                 pycard_symbols.push("0");
         }
+        if (html_element.hasClass("exp-web"))
+            pycard_expansion = "Web";
+        else
+            pycard_expansion = "";
 
         //Last two are "expansion" and "client", which we don't support yet
         outstr = pycard_type + "`" + pycard_art + "`" + pycard_symbols.join("!")
                  + "`" + pycard_name + "`" + pycard_keywords + "`" + pycard_body
-                 + "`" + pycard_flavor + "``" + pycard_copyright;
+                 + "`" + pycard_flavor + "`" + pycard_expansion
+                 + "`" + pycard_copyright;
         return outstr;
 }
 
@@ -276,7 +281,8 @@ function pycard_to_html(pycard_str){
     // Card flavor = [6]
     $(".card .flavour").val(pycard_arr[6]).change();
     // Card expansion symbol = [7]
-    // Unused
+    if (pycard_arr[7] === "Web")
+        card_element.addClass("exp-web");
     // Card copyright string = [8]
     $(".card .copyright").val(pycard_arr[8]).change();
     //Re-enable URL updating

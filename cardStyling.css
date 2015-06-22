@@ -158,6 +158,7 @@
     }
 
 /* Icon Generics */
+    /* Icons that fly out to the right */
     .card .iconGender,.card .iconRace,.card .iconCard,.card .iconGoal,.card .iconTime {
         position:absolute;
         left: 58px;
@@ -172,9 +173,27 @@
         overflow:hidden;
         pointer-events: none;
     }
+    /* Icons that fly out to the left */
+    .card .iconExpansion{
+        position:absolute;
+        /*right: 744px;*/
+        right: 60px;
+        width:0;
+        max-width:550px;
+        padding-right:104px;
+        padding-top: 104px;
+        height:0;
+        min-height: 104px;
+        border-radius: 40px 40px;
+        background-size: 104px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        overflow:hidden;
+        pointer-events: none;
+    }
     .card.pony .iconGender, .card.pony .iconRace, .card.pony .iconTime,
     .card.start .iconGender, .card.start .iconRace, .card.start .iconTime,
-    .card.ship .iconCard, .card.goal .iconGoal{
+    .card.ship .iconCard, .card.goal .iconGoal, .card .iconExpansion{
         pointer-events: all;
     }
 
@@ -213,10 +232,17 @@
       left:0;
       right:0;
     }
-    .card .iconGender:hover,.card .iconRace:hover,.card .iconCard:hover,.card .iconGoal:hover,.card .iconTime:hover{
+    .card .iconGender:hover,.card .iconRace:hover,.card .iconCard:hover,
+    .card .iconGoal:hover,.card .iconTime:hover{
         width:auto!important;
         height:auto!important;
         background-color: rgba(255, 255, 255, 0.5);
+    }
+    .card .iconExpansion:hover {
+        width:auto!important;
+        height:auto!important;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding-top: 0;
     }
     .card .type:hover{
         height:auto;
@@ -250,6 +276,19 @@
     .card button[value=""], .card button[value=R], .card button[value=G]{
         border: medium dashed #333;
         border-radius: 50%;
+    }
+
+    .card .iconExpansion {
+        top: 500px;
+    }
+    .card .iconExpansion:hover {
+        padding-top: 0;
+    }
+    .card:not(.exp-web) .iconExpansion {
+        background-image:url('resources/symbols/Symbol-Blank.png');
+    }
+    .card.exp-web .iconExpansion, button[value=exp-web]{
+        background-image:url('resources/symbols/Symbol-Earth-Pony.png');
     }
 
 /*Pony & Start Cards*/
