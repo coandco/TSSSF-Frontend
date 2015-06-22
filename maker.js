@@ -186,8 +186,8 @@ function cardChanged(){
         document.location.hash = generate_hash(HASH_TYPE);
         $(window).on('hashchange', hashChanged);
     }
-    $("#shortUrl").val();
-    $("#longUrl").val();
+    $("#shortUrl").val("");
+    $("#longUrl").val("");
 }
 
 function hashChanged(){
