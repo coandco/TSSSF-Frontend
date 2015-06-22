@@ -286,14 +286,20 @@ function pycard_to_html(pycard_str){
 }
 
 function exportCard(id){
-    $.post("/TSSSF/ponyimage.php",{
-        pycard:html_to_pycard(),
-        returntype:"encoded_url",
-        imagetype: "vassal"
-    },function(r){
-        var d = JSON.parse(r);
-        if(mayError(d)) {return;}
-        $('.preview-lightbox img').attr('src', d["image"]);
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/TSSSF/ponyimage.php",
+        dataType: "json",
+        data: JSON.stringify({
+            pycard:html_to_pycard(),
+            returntype:"encoded_url",
+            imagetype: "vassal"
+        })
+    }).done(function(r){
+        console.log(r);
+        if(mayError(r)) {return;}
+        $('.preview-lightbox img').attr('src', r["image"]);
         $.featherlight($('.preview-lightbox'));
     });
 }
@@ -309,19 +315,22 @@ function imgurWrapper(){
 }
 
 function saveCardToImgur(my_url){
-    if (typeof my_url === "undefined")
-        my_url = "";
-    $.post("/TSSSF/ponyimage.php", {
-        pycard:html_to_pycard(),
-        returntype:"imgur",
-        imagetype:"cropped",
-        my_url: my_url
-    }, function(r){
-        var d = JSON.parse(r);
-        if(mayError(d)) {return;}
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/TSSSF/ponyimage.php",
+        dataType: "json",
+        data: JSON.stringify({
+            pycard:html_to_pycard(),
+            returntype:"imgur",
+            imagetype:"cropped",
+            my_url: my_url
+        })
+    }).done(function(r){
+        if(mayError(r)) {return;}
         $('.featherlight-content input[type="text"]').removeClass("empty");
-        $('.featherlight-content input[type="text"]').val(d["image"]);
-        open(d["image"]);
+        $('.featherlight-content input[type="text"]').val(r["image"]);
+        open(r["image"]);
     });
 }
 
