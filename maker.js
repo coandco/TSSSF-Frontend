@@ -328,7 +328,7 @@ function saveCardToImgur(my_url){
         data: JSON.stringify({
             pycard:html_to_pycard(),
             returntype:"imgur",
-            imagetype:"cropped",
+            imagetype:$('.featherlight-content input[name=exportType]:checked').val(),
             my_url: my_url
         })
     }).done(function(r){
