@@ -417,7 +417,7 @@ function cardSetup(){
 
     //Replace and create tooltip hints
     $.each(SPECIAL_REPLACE,function(key,replace){
-        console.log([key,replace,"dt[data-original-title='"+key+"']",$("dt[data-original-title='"+key+"']")]);
+        //console.log([key,replace,"dt[data-original-title='"+key+"']",$("dt[data-original-title='"+key+"']")]);
         $("dt[data-original-title='"+key+"']").attr("data-original-title",replace).tooltip();
     });
 
