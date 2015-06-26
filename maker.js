@@ -150,10 +150,8 @@ function html_to_pycard(){
             else
                 pycard_symbols.push("0");
         }
-        if (html_element.hasClass("exp-web"))
-            pycard_expansion = "Web";
-        else
-            pycard_expansion = "";
+        pycard_expansion = search_classes(html_element,
+                                          ["web-outline", "web-white", "web-grey"]);
 
         //Last two are "expansion" and "client", which we don't support yet
         outstr = pycard_type + "`" + pycard_art + "`" + pycard_symbols.join("!")
@@ -281,8 +279,8 @@ function pycard_to_html(pycard_str){
     // Card flavor = [6]
     $(".card .flavour").val(pycard_arr[6]).change();
     // Card expansion symbol = [7]
-    if (pycard_arr[7] === "Web")
-        card_element.addClass("exp-web");
+    if (["web-outline", "web-grey", "web-white"].indexOf(pycard_arr[7]) != -1)
+        card_element.addClass(pycard_arr[7]);
     // Card copyright string = [8]
     $(".card .copyright").val(pycard_arr[8]).change();
     //Re-enable URL updating

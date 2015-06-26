@@ -283,11 +283,17 @@
     .card .iconExpansion:hover {
         padding-top: 0;
     }
-    .card:not(.exp-web) .iconExpansion {
+    .card:not(.web-outline):not(.web-grey):not(.web-white) .iconExpansion {
         background-image:url('resources/symbols/Symbol-Blank.png');
     }
-    .card.exp-web .iconExpansion, button[value=exp-web]{
+    .card.web-outline .iconExpansion, button[value=web-outline]{
         background-image:url('resources/symbols/symbol-web-circledark.png');
+    }
+    .card.web-grey .iconExpansion, button[value=web-grey]{
+        background-image:url('resources/symbols/symbol-web-circlegrey.png');
+    }
+    .card.web-white .iconExpansion, button[value=web-white]{
+        background-image:url('resources/symbols/symbol-www.png');
     }
 
 /*Pony & Start Cards*/
