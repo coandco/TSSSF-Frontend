@@ -89,8 +89,8 @@ function sanitize(str){
         "`":""
     };
     str = doReplace(SPECIAL_REPLACE, str);
-    str = str.replace("\r\n", "\\n");
-    return str.replace("\n", "\\n");
+    str = str.replace(/\r\n/g, "\\n");
+    return str.replace(/\n/g, "\\n");
 }
 
 
@@ -238,7 +238,7 @@ function pycard_to_html(pycard_str){
     $(".card input[type=text], .card textarea, #image").off("change paste", 
                                                             cardChanged);
     
-    pycard_arr = pycard_str.replace("\\n", "\n").split("`");
+    pycard_arr = pycard_str.replace(/\\n/g, "\n").split("`");
 
     if (pycard_arr.length < 7)
         return;
@@ -251,7 +251,7 @@ function pycard_to_html(pycard_str){
     // Card art = [1]
     $("#image").val(pycard_arr[1]).change();
     // Card symbols = [2]
-    pycard_symbols = pycard_arr[2].toLowerCase().replace(" ", "").split("!");
+    pycard_symbols = pycard_arr[2].toLowerCase().replace(/ /g, "").split("!");
     for (i = 0; i < pycard_symbols.length; i++) {
         if (pycard_symbols[i].indexOf("changeling") === 0) {
             card_element.addClass("changeling");
