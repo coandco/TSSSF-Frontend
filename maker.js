@@ -17,7 +17,7 @@ function mayError(errObj){
 
 //Blanks the cards
 function newCard(){
-    $(".card").attr("class","card pony malefemale unicorn");
+    $(".card").attr("class","card pony malefemale unicorn web-grey");
     $(".card .nameInput").val("");
     $(".card .attrs").val("");
     $(".card .effect").val("").change();
