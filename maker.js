@@ -445,21 +445,41 @@ function cardSetup(){
 
     //Update image
     $("#image").change(function(){
-        var regex_arr = [/^https?:\/\/i\.imgur\.com\//,
-                         /^https?:\/\/img\.booru\.org\/secretshipfic\//,
-                         /^https?:\/\/derpicdn.net\//],
+        var image_sites = [/^https?:\/\/i\.imgur\.com\//,
+                           /^https?:\/\/img\.booru\.org\/secretshipfic\//,
+                           /^https?:\/\/derpicdn.net\//],
+            html_sites = [/^https?:\/\/(www\.)?imgur\.com\//,
+                          /^https?:\/\/secretshipfic\.booru\.org\//,
+                          /^https?:\/\/(www\.)?derpiboo\..ru\//],
             regex_matched = false,
             i;
-        for (i = 0; i < regex_arr.length; i++) {
-            if (regex_arr[i].test($(this).val())) {
+        $("#error").hide();
+        for (i = 0; i < image_sites.length; i++) {
+            if (image_sites[i].test($(this).val())) {
                 regex_matched = true;
                 break;
             }
         }
-        if (regex_matched === true)
-            $(".card .image").css("background-image","url('"+$(this).val()+"')")
-        else
-            $(".card .image").css("background-image","url('')")
+        if (regex_matched === true) {
+            $(".card .image").css("background-image","url('"+$(this).val()+"')");
+        } else {
+            $(".card .image").css("background-image","url('')");
+            for (i = 0; i < html_sites.length; i++) {
+                if (html_sites[i].test($(this).val())) {
+                    regex_matched = true;
+                    break;
+                }
+            }
+            if (regex_matched === true) {
+                mayError({error: "Image URL Not Allowed",
+                      details: "Reminder: you have to link the image itself," +
+                               " not the HTML page it comes from."});
+            } else {
+                mayError({error: "Image URL Not Allowed",
+                      details: "Reminder: the image must be from one of the" +
+                               " allowed imagehosts"});
+            }
+        }
     });
 
     //Trigger URL update
