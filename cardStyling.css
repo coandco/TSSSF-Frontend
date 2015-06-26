@@ -217,7 +217,7 @@
         width:190px;
         margin:0;
         position:relative;
-        background-color: rgba(255,255,255,0.4);
+        background-color: rgba(255,255,255,0.75);
     }
     .card .type button:first-child{
         margin-top:75px;
@@ -235,12 +235,12 @@
     .card .iconGoal:hover,.card .iconTime:hover{
         width:auto!important;
         height:auto!important;
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.75);
     }
     .card .iconExpansion:hover {
         width:auto!important;
         height:auto!important;
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(200, 200, 200, 0.75);
         padding-top: 0;
     }
     .card .type:hover{
