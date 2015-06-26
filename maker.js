@@ -22,7 +22,7 @@ function newCard(){
     $(".card .attrs").val("");
     $(".card .effect").val("").change();
     $(".card .flavour").val("").change();
-    $(".card .copyright").val("");
+    $(".card .copyright").val("WEB CARD; TSSSF by Horrible People Games.  Art by Unknown.");
     EDIT_KEY = null;
     document.location.hash = "";
     $("#shortUrl,#longUrl,#image").val("").change().addClass("empty")
