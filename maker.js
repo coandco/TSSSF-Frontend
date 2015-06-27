@@ -18,7 +18,7 @@ function mayError(errObj){
 //Blanks the cards
 function newCard(){
     $(".card").attr("class","card pony malefemale unicorn web-grey");
-    $(".card .nameInput").val("");
+    $(".card .name").val("");
     $(".card .attrs").val("");
     $(".card .effect").val("").change();
     $(".card .flavour").val("").change();
@@ -106,7 +106,7 @@ function search_classes(element, search_array){
 
 function html_to_pycard(){
     var html_element = $(".card"),
-        html_name = $(".card .nameInput").val(),
+        html_name = $(".card .name").val(),
         html_keywords = $(".card .attrs").val(),
         html_body = $(".card .effect").val(),
         html_flavor = $(".card .flavour").val(),
@@ -271,7 +271,7 @@ function pycard_to_html(pycard_str){
     if ($('.card:not(.earthpony,.unicorn,.pegasus,.alicorn)').length > 0)
         card_element.addClass("R");
     // Card title = [3]
-    $(".card .nameInput").val(pycard_arr[3]).change();
+    $(".card .name").val(pycard_arr[3]).change();
     // Card keywords = [4]
     $(".card .attrs").val(pycard_arr[4]).change();
     // Card body = [5]
@@ -425,22 +425,20 @@ function cardSetup(){
         $("dt[data-original-title='"+key+"']").attr("data-original-title",replace).tooltip();
     });
 
+    $(".card .name").on("change keyup paste",function(){
+        var t = $(this),
+            o = $(".cardHelper .name");
+        t.toggleClass("small", (t.val().match(/\n/g)||[]).length > 0);
+        o.toggleClass("small", (t.val().match(/\n/g)||[]).length > 0);
+    });
+
     //When a text editor is updated resize its helper to clone back the height.
     //This is because CSS Really hates working vertically
     $(".card textarea").on("change keyup paste",function(){
         var t = $(this),
-            o = $(".cardHelper ." + t.attr("class"));
-        o.text(t.val());
+            o = $(".cardHelper ." + t.attr("class").replace(/ /g, "."));
+        o.text(t.val() + " ");
         t.height(o.height());
-    });
-
-    //We also use a similar system for the name, but since we don't need manual
-    //line breaks it gets easier
-    $(".card .nameInput").on("change keyup paste",function(){
-        var t = $(this),
-            o = $(".card .name");
-        o.toggleClass("small",t[0].scrollWidth > t.width()+1)
-        o.text(t.val());
     });
 
     //Update image
@@ -460,7 +458,7 @@ function cardSetup(){
                 break;
             }
         }
-        if (regex_matched === true) {
+        if (regex_matched === true || $(this).val() === "") {
             $(".card .image").css("background-image","url('"+$(this).val()+"')");
         } else {
             $(".card .image").css("background-image","url('')");
