@@ -454,6 +454,14 @@
             margin-left:3px;
             background-image:url('resources/symbols/symbol-3.png');
         }
+        .card.goal.s4 .iconGoal {
+            width:96px;
+            height:109px;
+            background-size:96px 109px;
+            top: 550px;
+            margin-left:3px;
+            background-image:url('resources/symbols/symbol-4.png');
+        }
         .card.goal.s2-3 .iconGoal {
             width:145px;
             height:98px;
@@ -483,6 +491,9 @@
         }
         .card button[value=s3]{
             background-image:url('resources/symbols/symbol-3.png');
+        }
+        .card button[value=s4]{
+            background-image:url('resources/symbols/symbol-4.png');
         }
         .card button[value=s2-3]{
             background-image:url('resources/symbols/symbol-23.png');

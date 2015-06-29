@@ -144,7 +144,8 @@ function html_to_pycard(){
         else if (pycard_type === "Goal"){
             pycard_symbols = ["goal"];
             points = search_classes(html_element,
-                                    ["s0", "s1", "s2", "s3", "s2-3", "s3-4"]);
+                                    ["s0", "s1", "s2", "s3",
+                                     "s4", "s2-3", "s3-4"]);
             if (points != "")
                 pycard_symbols.push(points.slice(1));
             else
