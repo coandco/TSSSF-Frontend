@@ -3,4 +3,4 @@
 	url = https://github.com/HorriblePeople/TSSSFTemplates
 [submodule "CardMachine"]
 	path = CardMachine
-	url = git@github.com:coandco/CardMachine.git
+	url = git@github.com:chao-master/CardMachine.git
