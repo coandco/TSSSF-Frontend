@@ -22,6 +22,21 @@ You are welcome to fork the project and run your own instance in terms with the 
 
 It would be nice if improvements are fed back into the main project with pull requests, but it is not necessary to do so.
 
+### Requriments
+ * Python 2
+   * Requests Libary
+   * Python Image Libary
+ * PHP server
+
+### Setup
+Simply Clone the project and update the submodules, eg:
+```
+  git clone https://github.com/chao-master/TSSSF-Frontend.git
+  cd TSSSF-Frontend
+  git submodule init
+  git submodule update
+```
+
 ##Misc
 
 ###Special symbols.
