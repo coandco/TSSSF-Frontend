@@ -35,7 +35,7 @@ function shorten_url(url, callback){
         type: "POST",
         dataType: 'json',
         data: {format:"json", url:window.location.href},
-        success: function(r,s,t) 
+        success: function(r,s,t)
         {
             callback(r["shorturl"]);
         }
@@ -56,7 +56,7 @@ function doReplace(repl, str) {
     return s.replace(/([^\w\s])/g, '\\$1');
   }).join('|');
   return str.replace(new RegExp(regexStr, 'g'), function(m) {
-    return repl[m]; 
+    return repl[m];
   });
 }
 
@@ -116,7 +116,7 @@ function html_to_pycard(){
         pycard_keywords, pycard_body, pycard_flavor, pycard_copyright,
         pycard_expansion, race, gender, points, outstr;
 
-        pycard_type = search_classes(html_element, 
+        pycard_type = search_classes(html_element,
                                      ["pony", "ship", "goal", "start"]);
         //Types are case-sensitive and must be capitalized
         pycard_type = pycard_type[0].toUpperCase() + pycard_type.slice(1);
@@ -226,7 +226,7 @@ function load_with_hash_type(loadstr){
 }
 
 function pycard_to_html(pycard_str){
-    var pycard_arr, 
+    var pycard_arr,
         pycard_symbols,
         i,
         card_element = $('.card');
@@ -236,17 +236,17 @@ function pycard_to_html(pycard_str){
         return;
 
     //Temporarily disable URL updating
-    $(".card input[type=text], .card textarea, #image").off("change paste", 
+    $(".card input[type=text], .card textarea, #image").off("change paste",
                                                             cardChanged);
-    
+
     pycard_arr = pycard_str.replace(/\\n/g, "\n").split("`");
 
     if (pycard_arr.length < 7)
         return;
-    
+
     //Remove existing non-card classes
     card_element.attr({"class": "card"});
-    
+
     // Card type = [0]
     card_element.addClass(pycard_arr[0].toLowerCase());
     // Card art = [1]
@@ -293,7 +293,7 @@ function exportCard(id){
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/TSSSF/ponyimage.php",
+        url: "CardMachine/TSSSF/ponyimage.php",
         dataType: "json",
         data: JSON.stringify({
             pycard:html_to_pycard(),
@@ -322,7 +322,7 @@ function saveCardToImgur(my_url){
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/TSSSF/ponyimage.php",
+        url: "CardMachine/TSSSF/ponyimage.php",
         dataType: "json",
         data: JSON.stringify({
             pycard:html_to_pycard(),
