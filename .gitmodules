@@ -1,3 +1,6 @@
 [submodule "resources"]
 	path = resources
 	url = https://github.com/HorriblePeople/TSSSFTemplates
+[submodule "CardMachine"]
+	path = CardMachine
+	url = git@github.com:coandco/CardMachine.git
