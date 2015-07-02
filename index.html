@@ -28,13 +28,12 @@
                 margin-right: auto;
             }
             .preview-lightbox img {
-                clear: both;
                 margin-left: auto;
                 margin-right: auto;
             }
             .preview-lightbox button {
                 clear: both;
-                width: 100%;
+                width: 260px;
             }
             input[readonly].default-cursor {
                 cursor: text;
@@ -50,34 +49,51 @@
         </div>
 
         <div class="preview-lightbox">
-            <img width="260" class="preview-image"><br />
-            <div class="form-group">
-                <input class="form-control floating-label" type="text" id="imgur-link" placeholder="Imgur Link" required/>
+            <div class="row">
+                <div class="col-md-6">
+                    <img width="260" class="preview-image">
+                </div>
+                <div class="col-md-6">
+                    <ul class="nav nav-pills nav-justified" style="margin-bottom: 15px;">
+                        <li class="active"><a href="#output-download" data-toggle="tab">Download</a></li>
+                        <li><a href="#output-imgur" data-toggle="tab">Save to Imgur</a></li>
+                    </ul>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input name="exportType" id="exportTypeBleed" value="bleed" type="radio">
+                            Output bleed
+                        </label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input name="exportType" id="exportTypeCropped" value="cropped" checked="" type="radio">
+                            Output cropped
+                        </label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input name="exportType" id="exportTypeVassal" value="vassal" type="radio">
+                            Output vassal
+                        </label>
+                    </div>
+                    <div id="output-tabs" class="tab-content">
+                        <div class="tab-pane fade in active" data-tabname="output-download">
+                            <button id="save_download" class="btn btn-primary">Download image</button>
+                        </div>
+                        <div class="tab-pane fade" data-tabname="output-imgur">
+                            <div class="form-group">
+                                <input class="form-control floating-label" type="text" id="imgur-link" placeholder="Imgur Link" required/>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="linkthis" checked/>Link to this page in the description
+                                </label>
+                            </div>
+                            <button id="save_imgur" class="btn btn-primary">Save to imgur</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="radio radio-primary">
-                <label>
-                    <input name="exportType" id="exportTypeBleed" value="bleed" type="radio">
-                    Output bleed
-                </label>
-            </div>
-            <div class="radio radio-primary">
-                <label>
-                    <input name="exportType" id="exportTypeCropped" value="cropped" checked="" type="radio">
-                    Output cropped
-                </label>
-            </div>
-            <div class="radio radio-primary">
-                <label>
-                    <input name="exportType" id="exportTypeVassal" value="vassal" type="radio">
-                    Output vassal
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="linkthis" checked/>Link to this page in the description
-                </label>
-            </div>
-            <button id="save_imgur" class="btn btn-primary">Save to imgur</button>
         </div>
 
         <main class="clearAfter container">

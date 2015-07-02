@@ -305,6 +305,9 @@ function exportCard(id){
         if(mayError(r)) {return;}
         $('.preview-lightbox img').attr('src', r["image"]);
         $.featherlight($('.preview-lightbox'));
+        $('.featherlight-content div[data-tabname]').each(function(){
+            $(this).attr('id', $(this).attr("data-tabname"));
+        });
     });
 }
 
@@ -316,6 +319,42 @@ function imgurWrapper(){
     } else {
         saveCardToImgur();
     }
+}
+
+function downloadDataUrl(url, filename){
+    var tmplink = document.createElement('a'),
+        clickEvent = new MouseEvent("click", {
+            "view": window,
+            "bubbles": true,
+            "cancelable": false
+        });
+    if (!url.match(/^data:/))
+        console.log("downloadDataUrl is only designed to " +
+                    "download 'data:' URLs, not " + url);
+    if (filename != "")
+        tmplink.download = filename + ".png";
+    else
+        tmplink.download = "card.png";
+    tmplink.href = url;
+    tmplink.dispatchEvent(clickEvent);
+}
+
+function saveCardToDownload(){
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/TSSSF/ponyimage.php",
+        dataType: "json",
+        data: JSON.stringify({
+            pycard:html_to_pycard(),
+            returntype:"encoded_url",
+            imagetype:$('.featherlight-content input[name=exportType]:checked').val()
+        })
+    }).done(function(r){
+        if(mayError(r)) {return;}
+        downloadDataUrl(r["image"],
+            $('.card .name').val().replace(/[^a-z0-9]/gi, "_").toLowerCase());
+    });
 }
 
 function saveCardToImgur(my_url){
@@ -493,7 +532,7 @@ function cardSetup(){
     $("#new").click(newCard);
     $("#export").click(exportCard);
     $("#save_imgur").click(imgurWrapper);
-    //$("#exportTo").click(function(){exportCard(1)})
+    $("#save_download").click(saveCardToDownload);
 
     //Log number of ajax events for the spinner
     var AJAX_EVENTS = 0;
