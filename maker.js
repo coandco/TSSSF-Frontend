@@ -485,7 +485,8 @@ function cardSetup(){
     $("#image").change(function(){
         var image_sites = [/^https?:\/\/i\.imgur\.com\//,
                            /^https?:\/\/img\.booru\.org\/secretshipfic\//,
-                           /^https?:\/\/derpicdn.net\//],
+                           /^https?:\/\/derpicdn.net\//,
+                           /^https?:\/\/(localhost|127\.[\d.]+|\[[0:]+1\])(:\d+)?\//],
             html_sites = [/^https?:\/\/(www\.)?imgur\.com\//,
                           /^https?:\/\/secretshipfic\.booru\.org\//,
                           /^https?:\/\/(www\.)?derpiboo\.ru\//],
