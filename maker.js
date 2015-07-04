@@ -488,7 +488,7 @@ function cardSetup(){
                            /^https?:\/\/derpicdn.net\//],
             html_sites = [/^https?:\/\/(www\.)?imgur\.com\//,
                           /^https?:\/\/secretshipfic\.booru\.org\//,
-                          /^https?:\/\/(www\.)?derpiboo\..ru\//],
+                          /^https?:\/\/(www\.)?derpiboo\.ru\//],
             regex_matched = false,
             i;
         $("#error").hide();
