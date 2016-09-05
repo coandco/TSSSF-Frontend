@@ -81,7 +81,7 @@ function sanitize(str){
         "\u2640":"{female}",
         "\u26A4":"{malefemale}",
         "\u2764":"{ship}",
-        "\uE000":"{earthpony}",
+        "\uE000":"{earth}",
         "\uE001":"{unicorn}",
         "\uE002":"{pegasus}",
         "\uE003":"{alicorn}",
