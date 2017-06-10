@@ -449,7 +449,7 @@ function cardSetup(){
         "{keyword change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card gains one keyword of your choice, except for Pony names.",
         "{gender change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes the opposite gender.",
         "{race change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card becomes the race of your choice. This cannot affect Pony cards with the Changeling keyword.",
-        "{timeline change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card's timeline becomes {postapocalypse}.",
+        "{timeline change}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card's timeline becomes \uE004.",
         "{play from discard}": "You may choose to play the top card of the Pony discard pile with this Ship, rather than play a Pony card from your hand.",
         "{clone}": "When you attach this card to the grid, you may choose one Pony card attached to this Ship. Until the end of your turn, that Pony card counts as 2 Ponies."
     };
